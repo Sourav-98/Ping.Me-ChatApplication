@@ -1,0 +1,33 @@
+.chat-group-list-box{
+    box-sizing: border-box;
+    height: 100%;
+    min-height: 200px;
+    /* height: 100%; */
+    padding: 10px;
+    display: block;
+    overflow: scroll;
+    border: 0.5px solid #BBBBBB;
+}
+
+.chat-group-list-item{
+    box-sizing: border-box;
+    height: 60px;
+    /* margin-top: 1px; */
+    /* margin-bottom: 1px; */
+    background-color: #FFFFFF;
+    border: 0.5px solid #FFFFFF;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    -webkit-transition: 0.1s;
+    transition: 0.1s;
+}
+
+.chat-group-list-item:hover{
+    border: 0.5px solid #BBBBBB;
+}
+
+.chat-group-list-item:active{
+    background-color: #DDDDDD;
+}
