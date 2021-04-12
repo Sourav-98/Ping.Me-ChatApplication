@@ -8,36 +8,15 @@
 
 .chat-side-panel-items-list{
     height: 100%;
-    padding: 10px;
-    overflow-y: scroll;
+    padding: 5px;
+    overflow-y: hidden;
     box-sizing: border-box;
-    /* border: 0.5px solid #BBBBBB; */
     display: flex;
     flex-direction: column;
 }
 
-.chat-side-panel-item{
-    height: 80px;
-    /* margin-top: 1px; */
-    /* margin-bottom: 1px; */
-    background-color: #FFFFFF;
-    border: 0.5px solid #FFFFFF;
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    -webkit-transition: 0.1s;
-    transition: 0.1s;
+.chat-side-panel-items-list>div{
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
-/* .chat-side-panel-item:nth-child(2n){
-    background-color: #EEEEEE;
-} */
-
-.chat-side-panel-item:hover{
-    border: 0.5px solid #BBBBBB;
-}
-
-.chat-side-panel-item:active{
-    background-color: #DDDDDD;
-}

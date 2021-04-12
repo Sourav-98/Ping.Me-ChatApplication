@@ -1,16 +1,14 @@
 .chat-container{
-    /* background-color: #DDDDDD; */
     display: flex;
     flex-direction: row;
-    /* justify-content:center; */
     box-sizing: border-box;
     height: 100%;
     padding: 2px;
 }
 
 .chat-side-panel{
-    min-width: 240px;
-    width: 240px;
+    min-width: 300px;
+    width: 300px;
     box-sizing: border-box;
 }
 

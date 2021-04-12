@@ -2,10 +2,10 @@
     box-sizing: border-box;
     min-height: 200px;
     height: 100%;
-    padding: 10px;
+    padding: 5px;
     display: block;
     overflow: scroll;
-    border: 0.5px solid #BBBBBB;
+    /* border: 0.5px solid #BBBBBB; */
 }
 
 
@@ -22,6 +22,7 @@
     justify-content: center;
     -webkit-transition: 0.1s;
     transition: 0.1s;
+    cursor: pointer;
 }
 
 .chat-friends-list-item:hover{

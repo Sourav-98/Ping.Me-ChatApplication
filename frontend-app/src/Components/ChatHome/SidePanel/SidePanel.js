@@ -13,11 +13,11 @@ export default function SidePanel(){
             <div className="chat-side-panel-items-list">
                 <SidePanelChatOptions></SidePanelChatOptions>
                 <div>
-                    My Groups
+                    My Groups <i className="fas fa-caret-down"></i>
                 </div>
                 <SidePanelGroupList></SidePanelGroupList>
                 <div>
-                    My Friends
+                    My Friends <i className="fas fa-caret-down"></i>
                 </div>
                 <SidePanelFriendsList></SidePanelFriendsList>
             </div>

@@ -5,26 +5,26 @@
     height: 100%;
 }
 
-.text-area-item{
+.chat-area-container>div{
+    box-sizing: border-box;
     min-height: 100px;
     height: 100%;
-    margin-left: 1px;
+    margin: 0px;
     /* border: 0.5px solid #999999; */
 }
 
+.text-messages-area{
+    /* margin: 10px!important; */
+}
+
 .user-info-area{
-    min-height: 70px;
-    height: 70px;
-    margin-bottom: 1px;
-    /* background-color: #BBBBBB; */
-    box-sizing: border-box;
-    border: 0.5px solid #CCCCCC;
+    min-height: 70px!important;
+    height: 70px!important;
 }
 
 .input-area{
-    min-height: 50px;
-    height: 50px;
-    margin-top: 1px;
+    min-height: 50px!important;
+    height: 50px!important;
 }
 
 
