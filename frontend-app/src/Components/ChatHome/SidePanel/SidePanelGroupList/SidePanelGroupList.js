@@ -6,21 +6,30 @@ import './SidePanelGroupList.css';
 export default function SidePanelGroupList(props){
     // the real Groups List would be available via the props/redux store
 
-    // dummy groups listing
-    let groupsList = [];
-    let groupCount = 25;
+    const [groupList, setGroupList] = useState([]);
+    const [groupCount, setGroupCount] = useState(0);
 
-    for(let i=1; i<=groupCount; i++){
-        groupsList.push("Group " + i.toString());
+    function increaseGroupCountByOne(){
+        setGroupCount(groupCount+1);
     }
+
+    useEffect(()=>{
+        let tempGroupList = [];
+        for (let i = 1; i <= groupCount; i++){
+            tempGroupList.push("Group " + i.toString());
+        }
+        setGroupList(tempGroupList);
+    }, [groupCount]);
 
     return(
         <div className="chat-group-list-box">
-        {groupsList.map((groupName) => 
-            <div className="chat-group-list-item">
-                { groupName }
-            </div>
-        )}
+            <button onClick={increaseGroupCountByOne}>Add new group (BETA)</button>
+            <span>Total Groups : {groupCount}</span>
+            {groupList.map((groupName) => 
+                <div key={groupName} className="chat-group-list-item">
+                    { groupName }
+                </div>
+            )}
         </div>
     )
 }

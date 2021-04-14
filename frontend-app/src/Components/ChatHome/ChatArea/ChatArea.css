@@ -15,6 +15,8 @@
 
 .text-messages-area{
     /* margin: 10px!important; */
+    margin-top: 10px!important;
+    margin-bottom: 10px!important;
 }
 
 .user-info-area{

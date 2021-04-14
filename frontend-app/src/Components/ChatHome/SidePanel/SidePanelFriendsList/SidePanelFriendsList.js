@@ -1,21 +1,32 @@
 
 import './SidePanelFriendsList.css';
 
+import { useState, useEffect } from 'react';
+
 export default function SidePanelFriendsList(){
     // the real Friends List will be available via props/redux store
 
-    // dummy friends listing
-    let friendsList = [];
-    let friendsCount = 93;
+    const [friendsList, setFriendsList] = useState([]);
+    const [friendsCount, setFriendsCount] = useState(0);
 
-    for(let i=1; i<=friendsCount; i++){
-        friendsList.push("Friend " + i.toString());
+    function updateFriendsCountByOne(){
+        setFriendsCount(friendsCount+1);
     }
-    
+
+    useEffect(()=>{
+        let tempFriendsList = [];
+        for (let i = 1; i <= friendsCount; i++){
+            tempFriendsList.push("Friend" + i.toString());
+        }
+        setFriendsList(tempFriendsList);
+    }, [friendsCount]);
+
     return(
         <div className="chat-friends-list-box">
+        <button onClick={updateFriendsCountByOne}>Add One More Friend (BETA)</button><br/>
+        <span>Total Friends : {friendsCount}</span>
         {friendsList.map((friend) => 
-            <div className="chat-friends-list-item">
+            <div key={friend} className="chat-friends-list-item">
                 {friend}
             </div>
         )}

@@ -1,7 +1,7 @@
 // import logo from './logo.svg';
 import './App.css';
 
-import {BrowserRouter as Router, Link, Switch, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 // import ChatArea from './ChatArea/ChatArea';
 // import SidePanel from './Components/ChatHome/SidePanel/SidePanel';
