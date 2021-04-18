@@ -3,9 +3,6 @@ import './App.css';
 
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
-// import ChatArea from './ChatArea/ChatArea';
-// import SidePanel from './Components/ChatHome/SidePanel/SidePanel';
-
 import LoginPage from './Components/Auth/Login/LoginPage';
 import RegisterPage from './Components/Auth/Register/RegisterPage';
 import ChatHome from './Components/ChatHome/ChatHome';
