@@ -1,14 +1,17 @@
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUserPlus, faUsers } from '@fortawesome/free-solid-svg-icons';
+
 import './SidePanelChatOptions.css';
 
 export default function SidePanelChatOptions(){
     return(
         <div className="chat-options-box">
             <div className="chat-options-item">
-                <i className="fal fa-user-plus"></i>
+                <FontAwesomeIcon icon={faUserPlus}></FontAwesomeIcon>
             </div>
             <div className="chat-options-item">
-                <i className="fal fa-users"></i>
+                <FontAwesomeIcon icon={faUsers}></FontAwesomeIcon>
             </div>
         </div>
     )
