@@ -29,12 +29,8 @@ export default function LoginPage(){
                         <h1>Ping.Me</h1>
                     </div>
                     <div className="brand-subtitle">
-                        <h4> Chat Anywhere, Anytime, and with Anyone!</h4>
+                        <span> Chat Anywhere, Anytime, and with Anyone!</span>
                     </div>
-                    {/* <img src={brandLogo}></img>
-                    
-                    <h4> Chat Anywhere, Anytime, and with Anyone!</h4> */}
-                    
                 </div>
                 <div className="login-panel">
                     <div className="login-title">
