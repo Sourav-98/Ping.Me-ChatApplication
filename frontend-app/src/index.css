@@ -12,9 +12,7 @@
 
 html, body, #root, #root>div{
   height: 100%;
-  overflow: scroll;
   font-size: 20px;
-  /* background-color: bisque; */
 }
 body {
   margin: 0;
