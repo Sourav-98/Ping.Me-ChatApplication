@@ -1,8 +1,11 @@
 
 import { useState} from 'react';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import GoogleSvg from './../../../assets/google-color.svg';
+import FacebookSvg from './../../../assets/facebook-color.svg';
+import TwitterSvg from './../../../assets/twitter-color.svg';
+
+import { IoEyeOutline, IoEyeOffOutline } from 'react-icons/io5';
 
 import './LoginPage.css';
 
@@ -22,7 +25,7 @@ export default function LoginPage(){
         <div className="login-page-container">
             <div className="brand-panel">
                 <div className="brand-logo">
-                    <img src={brandLogo}></img>
+                    <img src={brandLogo} alt="Ping.Me Logo"></img>
                 </div>
                 <div className="brand-title">
                     <h1>Ping.Me</h1>
@@ -40,7 +43,7 @@ export default function LoginPage(){
                     <div className="password-input-box">
                         <input type={ passwordVisible ? "text" : "password" } name="password" className="login-form-input" placeholder="Password"/>
                         <div className="password-visible-box" onClick={togglePasswordVisibility}>
-                            { passwordVisible ? <FontAwesomeIcon icon={faEye}></FontAwesomeIcon> : <FontAwesomeIcon icon={faEyeSlash}></FontAwesomeIcon> }
+                            { passwordVisible ? <IoEyeOutline></IoEyeOutline> : <IoEyeOffOutline></IoEyeOffOutline> }
                         </div>
                     </div>
                     <div className="remember-me-box">
@@ -48,6 +51,17 @@ export default function LoginPage(){
                         <label for="rememberMeCheck"> &nbsp; Remember Me</label>
                     </div>
                     <button className="login-button">Login</button>
+                    <div className="passport-login">
+                        <div className='passport-login-option'>
+                            <img src={GoogleSvg} alt="Google Login"></img>
+                        </div>
+                        <div className='passport-login-option'>
+                            <img src={FacebookSvg} alt="Facebook Login"></img>
+                        </div>
+                        <div className='passport-login-option'>
+                            <img src={TwitterSvg} alt="Twitter Login"></img>
+                        </div>
+                    </div>
                 </div>
                 <div className="login-options">
                     <div className="forgot-password-option">
