@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 
 import './ChatHome.css';
 
-import SideMenuPanel from './SideMenuPanel/SideMenuPanel';
+import SideNavPanel from './SideNavPanel/SideNavPanel';
 
 import ChatDisplay from './ChatDisplay/ChatDisplay';
 
@@ -35,8 +35,8 @@ export default function ChatHome(){
     
     return (
         <div className="chat-home-container">
-            <div className="side-menu-panel">
-                <SideMenuPanel optionSelector={optionSelect} selectedOption={getSelectedOption} notifCountList={notifCountList}></SideMenuPanel>
+            <div className="side-menu-panel expand">
+                <SideNavPanel optionSelector={optionSelect} selectedOption={getSelectedOption} notifCountList={notifCountList}></SideNavPanel>
             </div>
             <div className="display-panel">
                 {

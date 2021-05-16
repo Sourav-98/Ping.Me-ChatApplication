@@ -34,7 +34,6 @@
     width: 100%;
     padding: 0px;
     box-sizing: border-box;
-    /* border: 0.5px solid #A0A0A0; */
 }
 
 .brand-logo{
@@ -90,7 +89,7 @@
 .login-form-input{
     width: 100%;
     max-width: 500px;
-    height: 45px;
+    height: 46px;
     margin: 10px 0px 10px 0px;
     padding: 0px 22px 0px 22px;
     box-sizing: border-box;
@@ -128,16 +127,17 @@
 
 .password-visible-box{
     display: flex;
-    flex-direction: row;
+    flex-direction: row;    
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
     position: absolute;
-    top: 15px;
-    right: 5px;
-    height: 35px;
-    width: 35px;
-    font-size: 22px;
+    top: 13px;
+    right: 3px;
+    height: 40px;
+    width: 40px;
+    padding: 0px;
+    font-size: 18px;
     border-radius: 50%;
     background-color: #FFFFFF;
     cursor: pointer;
@@ -215,32 +215,36 @@
 
 .passport-login-option{
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     margin: 0px 20px 0px 20px;
-    width: 80px;
+    padding: 0px;
+    width: 60px;
     height: 60px;
-    border-radius: 10px;
+    /* border-radius: 10px; */
     border: none;
+    border-radius: 50%;
     cursor: pointer;
     box-shadow: 0px 0px 2px #FFFFFF;
-    -webkit-transition: 0.2s ease;
-    transition: 0.2s ease;
+    -webkit-transition: 0.15s ease-in-out;
+    transition: 0.15s ease-in-out;
 }
 
 .passport-login-option>img{
-    height: 80%;
-    width: auto;
+    height: 40px;
+    width: 40px;
 }
 
 .passport-login-option:hover{
-    /* transform: scale(1.02); */
-    box-shadow: 0px 0px 5px #999999;
+    -webkit-transform: scale(1.05);
+    transform: scale(1.05);
+    box-shadow: 0px 0px 6px #999999;
 }
 
 .passport-login-option:active{
     transform: scale(1.0);
-    box-shadow: 0px 0px 2px #999999;
+    box-shadow: 0px 0px 2px #FFFFFF;
 }
 
 .login-options{
