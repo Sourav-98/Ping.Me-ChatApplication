@@ -1,39 +1,20 @@
 
 .login-page-container{
+    min-width: 1064px;
+    width: 100%;
+    min-height: 720px;
     height: 100%;
     display: flex;
     flex-direction: row;
-    width: 100%;
-    min-width: 900px;
-    height: 100%;
-    min-height: 500px;
     overflow: scroll;
 }
 
-.login-page-container>div{
+.brand-panel{
+    width: 80%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    height: 100%;
-    width: 100%;
-    min-width: 400px;
-    box-sizing: border-box;
-    padding: 30px;
-}
-
-.brand-panel{
-    width: 80%!important;
     background-color: #202020;
-}
-
-.brand-panel>div, .login-panel>div{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    padding: 0px;
-    box-sizing: border-box;
 }
 
 .brand-logo{
@@ -68,6 +49,23 @@
     color: #FFFFFF;
 }
 
+.login-panel{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.login-panel>div{
+    display: flex!important;
+    flex-direction: row!important;
+    justify-content: center!important;
+    align-items: center!important;
+    width: 100%;
+    max-width: 450px;
+}
+
 .login-title{
     min-height: 70px;
     height: 70px;
@@ -81,76 +79,50 @@
 .login-form{
     box-sizing: border-box;
     width: 100%;
-    min-height: 360px;
-    height: 360px;
-    padding: 30px 20px 0px 20px!important;
-}
-
-.login-form-input{
-    width: 100%;
-    max-width: 500px;
-    height: 46px;
-    margin: 10px 0px 10px 0px;
-    padding: 0px 22px 0px 22px;
-    box-sizing: border-box;
-    border: 1px solid #A0A0A0;
-    box-shadow: none;
-    outline: none;
-    border-radius: 25px;
-    font-family: inherit;
-    font-size: 18px;
-    -webkit-transformation: 0.15s ease-in-out;
-    transition: 0.15s ease-in-out;
-}
-
-.login-form-input:hover{
-    border: 1px solid #888888;
-}
-.login-form-input:focus{
-    border: 1px solid #555555;
-    box-shadow: 2px 2px 5px #CCCCCC;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 20px 0px 20px;
 }
 
 .password-input-box{
     width: inherit;
-    max-width: 500px;
     position: relative;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
 }
 
 .password-input-box>input{
-    padding: 0px 42px 0px 22px!important;
+    padding-right: 40px!important;
 }
 
-.password-visible-box{
+.password-visible-button{
+    box-sizing: border-box;
+    position: absolute;
+    top: 7px;
+    right: 2px;
     display: flex;
     flex-direction: row;    
     justify-content: center;
     align-items: center;
-    box-sizing: border-box;
-    position: absolute;
-    top: 13px;
-    right: 3px;
-    height: 40px;
-    width: 40px;
+    height: 36px;
+    width: 36px;
     padding: 0px;
     font-size: 18px;
-    border-radius: 50%;
-    background-color: #FFFFFF;
+    border: none;
+    outline: none;
+    border-radius: 999px;
+    background-color: rgba(0, 0, 0, 0);
     cursor: pointer;
-    -webkit-transition: 0.15s ease-in-out;
-    transition: 0.15s ease-in-out;
+    -webkit-transition: 0.12s ease-in-out;
+    transition: 0.12s ease-in-out;
 }
 
-.password-visible-box:hover{
-    background-color: #DDDDDD;
+.password-visible-button:hover{
+    background-color: rgba(0, 0, 0, 0.09);
 }
 
-.password-visible-box:active{
-    background-color: #BFBFBF;
+.password-visible-button:active{
+    background-color: rgba(0, 0, 0, 0.2);
 }
 
 .remember-me-box{
@@ -161,7 +133,6 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    /* border: 1px solid #202020; */
 }
 
 .remember-me-box>input{
@@ -175,41 +146,15 @@
 }
 
 .login-button{
-    box-shadow: border-box;
-    width: 200px;
+    margin: 5px 0px 5px 0px;
+    padding: 0px 50px 0px 50px;
     height: 45px;
-    border: none;
-    outline: none;
-    border-radius: 24px;
-    font-family: inherit;
-    font-size: 20px;
     font-weight: bold;
-    margin: 10px 0px 10px 0px;
-    padding: 10px 0px 10px 0px;
-    color: #FFFFFF;
-    background-color: rgb(0, 90, 255);
-    cursor: pointer;
-    -webkit-transition: 0.15s ease-in-out;
-    transition: 0.15s ease-in-out;
-}
-
-.login-button:hover{
-    background-color: rgb(33, 108, 248);
-}   
-
-.login-button:active{
-    background-color: rgb(0, 75, 214);
 }
 
 .passport-login{
-    margin-top:10px;
+    margin-top: 16px;
     padding-top: 10px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    max-width: 500px;
     border-top: 0.5px solid #999999;
 }
 
@@ -218,50 +163,44 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin: 0px 20px 0px 20px;
+    margin: 20px 20px 10px 20px;
     padding: 0px;
     width: 60px;
     height: 60px;
-    /* border-radius: 10px; */
-    border: none;
-    border-radius: 50%;
+    border: 0.5px solid rgb(220, 220, 220);
+    background-color: rgb(255, 255, 255);
+    border-radius: 999px;
     cursor: pointer;
     box-shadow: 0px 0px 2px #FFFFFF;
-    -webkit-transition: 0.15s ease-in-out;
-    transition: 0.15s ease-in-out;
+    -webkit-transition: 0.12s ease-in-out;
+    transition: 0.12s ease-in-out;
 }
 
 .passport-login-option>img{
-    height: 40px;
-    width: 40px;
+    height: 36px;
+    width: 36px;
 }
 
 .passport-login-option:hover{
     -webkit-transform: scale(1.05);
     transform: scale(1.05);
-    box-shadow: 0px 0px 6px #999999;
+    box-shadow: 0px 0px 4px #999999;
 }
 
 .passport-login-option:active{
     transform: scale(1.0);
-    box-shadow: 0px 0px 2px #FFFFFF;
+    box-shadow: none;
 }
 
 .login-options{
-    display: flex!important;
-    flex-direction: row!important;
-    max-width: 500px;
-    min-width: 440px;
     width: 100%;
-    min-height: 30px;
-    height: 30px;
-    align-items: flex-end!important;
-    /* padding: 10px 50px 0px 50px!important; */
+    min-height: 50px;
+    height: 50px;
+    align-items: flex-end;
 }
 
 .login-options>div{
-    display: flex!important;
-    flex-direction: row!important;
+    display: flex;
     width: 100%;
     font-size: 17px;
 }
@@ -273,4 +212,3 @@
 .create-account-option{
     justify-content: flex-end;
 }
-

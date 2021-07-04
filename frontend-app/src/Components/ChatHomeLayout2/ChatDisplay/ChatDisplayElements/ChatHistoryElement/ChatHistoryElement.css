@@ -13,6 +13,17 @@
     cursor: pointer;
     -webkit-transition: 0.2s ease-in-out;
     transition: 0.15s ease-in-out;
+    animation: fade-in 0.15s ease-in-out forwards;
+    z-index: 3;
+}
+
+@keyframes fade-in {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
 }
 
 .chat-history-element-container:hover{
@@ -21,9 +32,14 @@
 
 .chat-history-element-container:active{
     background-color: #202020;
-    -webkit-transform: scale(1.05) translate(7px);
-    transform: scale(1.05) translate(7px);
+    -webkit-transform: scale(1.058) translate(8.5px);
+    transform: scale(1.058) translate(8.5px);
+}
 
+.chat-history-element-container.selected{
+    background-color: #202020;
+    -webkit-transform: scale(1.058) translate(8.5px);
+    transform: scale(1.058) translate(8.5px);
 }
 
 .chat-user-avatar-box{

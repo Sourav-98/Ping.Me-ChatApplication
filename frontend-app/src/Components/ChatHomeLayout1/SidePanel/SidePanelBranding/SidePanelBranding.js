@@ -1,7 +1,7 @@
 
 import './SidePanelBranding.css';
 
-import pingMeBrand from './../../../../assets/ping.Me [Full Brand] SD.png';
+import pingMeBrand from './../../../../assets/ping.Me Logo NEW 3.png';
 
 export default function SidePanelBranding(){
     return(

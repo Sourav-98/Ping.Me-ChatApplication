@@ -1,0 +1,185 @@
+
+/* ################## Custom Input CSS ############## */
+
+.cm-input{
+    box-sizing: border-box;
+    outline: none;
+    width: 100%;
+    font-family: inherit;
+    margin: 5px 0px 5px 0px;
+    border: 0.5px solid rgb(190, 190, 190);
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0);
+    color: rgb(0, 0, 0);
+    -webkit-transition: 0.12s ease-in-out;
+    transition: 0.12s ease-in-out;
+}
+
+.cm-input.round{
+    border-radius: 999px;
+}
+
+.cm-input.dark{
+    color: rgb(255, 255, 255);
+    border: 0.5px solid rgb(150, 150, 150);
+}
+
+.cm-input::placeholder{
+    font-family: inherit;
+}
+
+.cm-input:focus{
+    border: 0.5px solid rgb(100, 100, 100);
+}
+
+.cm-input.sm{
+    height: 32px;
+    font-size: 13px;
+    padding: 0px 9px 0px 9px;
+}
+
+.cm-input, .cm-input.md{
+    height: 40px;
+    font-size: 17px;
+    padding: 0px 11px 0px 11px;
+}
+
+.cm-input.lg{
+    height: 50px;
+    font-size: 21px;
+    padding: 0px 14px 0px 14px;
+}
+
+/* applying round borders to inputs with the round classname */
+
+/*  Custom CSS Buttons */
+
+/* Default CSS Button-> cm-button outlined or just cm-button */
+
+.cm-button{
+    box-sizing: border-box;
+    outline: none;
+    font-family: inherit;
+    /* font-weight: bold; */
+    cursor: pointer;
+    margin: 2px;
+    border-radius: 5px;
+    -webkit-transition: 0.12s ease-in-out;
+    transition: 0.12s ease-in-out;
+}
+
+.cm-button:disabled{
+    cursor: not-allowed;
+    opacity: 0.65;
+}
+
+.cm-button.block{
+    width: 100%;
+}
+
+.cm-button.round{
+    border-radius: 999px;
+}
+
+.cm-button.sm{
+    font-size: 14px;
+    height: 32px;
+    padding: 0px 12px 2px 12px;
+}
+
+.cm-button, .cm-button.md{
+    font-size: 17px;
+    height: 40px;
+    padding: 0px 15px 0px 15px;
+}
+
+.cm-button.lg{
+    font-size: 21px;
+    height: 50px;
+    padding: 0px 18px 0px 18px;
+}
+
+.cm-button.outlined{
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.cm-button.outlined:disabled{
+    color: rgb(116, 116, 116)!important;
+    border: 0.5px solid rgb(116, 116, 116)!important;
+    background-color: rgba(116, 116, 116, 0.12)!important;
+    /* cursor:not-allowed!important; */
+}
+
+.cm-button.outlined:active{
+    color: rgb(255, 255, 255)!important;
+}
+
+/* PRIMARY */
+.cm-button.outlined.primary{
+    color: rgb(0, 90, 255);
+    border: 0.5px solid rgb(0, 90, 255);
+}
+
+.cm-button.outlined.primary:hover{
+    background-color: rgba(0, 90, 255, 0.2);
+}
+
+.cm-button.outlined.primary:active{
+    background-color: rgba(0, 90, 255, 0.8);
+}
+
+/* SECONDARY */
+.cm-button.outlined.secondary{
+    color: rgb(110, 110, 110);
+    border: 0.5px solid rgb(110, 110, 110);
+}
+
+.cm-button.outlined.secondary:hover{
+    background-color: rgba(110, 110, 110, 0.2);
+}
+
+.cm-button.outlined.secondary:active{
+    background-color: rgba(110, 110, 110, 0.8);
+}
+
+/* SUCCESS */
+.cm-button.outlined.success{
+    color: rgb(0, 166, 0);
+    border: 0.5px solid rgb(0, 166, 0);
+}
+
+.cm-button.outlined.success:hover{
+    background-color: rgba(0, 166, 0, 0.2);
+}
+
+.cm-button.outlined.success:active{
+    background-color: rgba(0, 166, 0, 0.8);
+}
+
+/* DANGER */
+.cm-button.outlined.danger{
+    color: rgb(226, 0, 0);
+    border: 0.5px solid rgb(226, 0, 0);
+}
+
+.cm-button.outlined.danger:hover{
+    background-color: rgba(226, 0, 0, 0.2);
+}
+
+.cm-button.outlined.danger:active{
+    background-color: rgba(226, 0, 0, 0.8);
+}
+
+/* ALERT */
+.cm-button.outlined.alert{
+    color: rgb(240, 147, 8);
+    border: 0.5px solid rgb(240, 147, 8);
+}
+
+.cm-button.outlined.alert:hover{
+    background-color: rgba(240, 147, 8, 0.2);
+}
+
+.cm-button.outlined.alert:active{
+    background-color: rgba(240, 147, 8, 0.8);
+}

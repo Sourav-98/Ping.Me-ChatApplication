@@ -1,5 +1,5 @@
 
-import UserAvatarStatusElement2 from './../../UtilComponents/UserAvatarStatusElement2/UserAvatarStatusElement2';
+import UserAvatarStatusElement2 from '../../../UtilComponents/UserAvatarStatusElement2/UserAvatarStatusElement2';
 
 import './ChatHistoryElement.css';
 
