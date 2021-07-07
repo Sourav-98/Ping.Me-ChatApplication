@@ -12,7 +12,7 @@ function App() {
     return(
         <Router>
             <Switch>
-                <Route exact path='/home'>
+                <Route exact path='/'>
                     <ChatHome></ChatHome>
                 </Route>
                 <Route exact path='/register'>
@@ -21,7 +21,7 @@ function App() {
                 <Route exact path='/password-reset'>
                     <PasswordResetPage></PasswordResetPage>
                 </Route>
-                <Route exact path='/'>
+                <Route exact path='/login'>
                     <LoginPage></LoginPage>
                 </Route>
             </Switch>

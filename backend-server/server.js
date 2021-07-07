@@ -11,4 +11,4 @@ const appRoutes = require('./routes/defaultRoutes');
 
 app.use(appRoutes);
 
-module.exports = app;
+module.exports = { app };
