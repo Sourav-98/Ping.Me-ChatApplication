@@ -1,5 +1,5 @@
 const http = require('http')
-const app = require('./server');
+const { app } = require('./server');
 
 const dotenv = require('dotenv');
 const path = require('path');

@@ -7,8 +7,10 @@ const app = express();
 
 const appLogger = require('./logger/logger');
 
-const appRoutes = require('./routes/defaultRoutes');
+const { loginController } = require('./controller/auth/login.controller');
+const { defaultController } = require('./controller/default.controller');
 
-app.use(appRoutes);
+app.use('/auth', loginController);
+app.use(defaultController);
 
 module.exports = { app };

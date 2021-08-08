@@ -1,4 +1,6 @@
 
+import { BrowserRouter as Router, Switch, Link, Route, useRouteMatch, Redirect } from 'react-router-dom';
+
 import { useState, useEffect } from 'react';
 
 import './ChatHome.css';
@@ -11,6 +13,8 @@ import ChatDisplay from './ChatDisplay/ChatDisplay';
 // import TextAreaPanel from '';
 
 export default function ChatHome(){
+
+    let { path, url } = useRouteMatch();
 
     const [selectedOption, setSelectedOption] = useState('chatOption');     // chatOption, notifOption, settingsOption
 
@@ -31,22 +35,47 @@ export default function ChatHome(){
 
     useEffect(()=>{
         setSelectedOption(defaultOption);
+        console.log(path + "  " + url);
     }, []);
+
+    function Dummy(){
+        return(
+            <div>
+                <p>Notifications</p>
+            </div>
+        )
+    }
+
+    function Settings(){
+        return(
+            <div>
+                <p>Settings</p>
+            </div>
+        )
+    }
     
     return (
-        <div className="chat-home-container">
-            <div className="side-menu-panel expand">
-                <SideNavPanel optionSelector={optionSelect} selectedOption={getSelectedOption} notifCountList={notifCountList}></SideNavPanel>
+<div className="chat-home-container">
+            <div className="side-menu-panel">
+                <SideNavPanel path={path} url={url} optionSelector={optionSelect} selectedOption={getSelectedOption} notifCountList={notifCountList}></SideNavPanel>
             </div>
             <div className="display-panel">
-                {
-                    {
-                        'chatOption' : <ChatDisplay></ChatDisplay>,
-                        'notifOption' : <p>Notification Option</p>,
-                        'settingOption' : <p>Setting Option</p>
-                    }[selectedOption]
-                }
+                <Switch>
+                    <Route exact path={`${path}`}>
+                        <ChatDisplay></ChatDisplay>
+                    </Route>
+                    <Route exact path={`${path}/notifs`}>
+                        <Dummy></Dummy>
+                    </Route>
+                    <Route path={`${path}/settings`}>
+                        <Settings></Settings>
+                    </Route>
+                    {/* <Route exact path={path}>
+                        <Redirect to={`${path}/chat-landing`}></Redirect>
+                    </Route> */}
+                </Switch>
             </div>
         </div>
+        
     );
 }

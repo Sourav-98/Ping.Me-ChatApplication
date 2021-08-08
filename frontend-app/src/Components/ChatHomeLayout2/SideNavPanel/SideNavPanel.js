@@ -1,4 +1,6 @@
 
+
+import { Link, NavLink } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 import { IoIosChatboxes } from 'react-icons/io';
@@ -40,21 +42,23 @@ export default function SideNavPanel(props){
 
     return (
         <div className="side-nav-panel-container">
-            <div className="logo-branding">
+            <div className="side-nav-branding">
                 <img src={logo} alt="Ping.Me Logo"></img>
             </div>
-            <div className={`side-nav-item ${selectedOption === 'chatOption' ? 'selected' : ''}`} onClick={()=>{onOptionSelect('chatOption')}}>
-                <IoIosChatboxes></IoIosChatboxes>
-                <NotifCountItem count={unreadChatCount} currentOption={selectedOption} actualOption={'chatOption'}></NotifCountItem>
-            </div>
-            <div className={`side-nav-item ${selectedOption === 'notifOption' ? 'selected' : ''}`} onClick={()=>{onOptionSelect('notifOption')}}>
-                <IoNotificationsSharp></IoNotificationsSharp>
-                <NotifCountItem count={notifCount} currentOption={selectedOption} actualOption={'notifOption'}></NotifCountItem>
-            </div>
-            <div className={`side-nav-item settings ${selectedOption === 'settingOption' ? 'selected' : ''}`} onClick={()=>{onOptionSelect('settingOption')}}>
-                <IoCogSharp></IoCogSharp>
-            </div>
-            <div className="side-nav-item">
+            <nav className="side-nav-link-container">
+                <NavLink className="side-nav-link-item" activeClassName="selected" exact to={`${props.path}`}>
+                    <IoIosChatboxes></IoIosChatboxes>
+                    <NotifCountItem count={unreadChatCount} currentOption={selectedOption} actualOption={'chatOption'}></NotifCountItem>
+                </NavLink>
+                <NavLink className="side-nav-link-item" activeClassName="selected" to={`${props.path}/notifs`}>
+                    <IoNotificationsSharp></IoNotificationsSharp>
+                    <NotifCountItem count={notifCount} currentOption={selectedOption} actualOption={'notifOption'}></NotifCountItem>
+                </NavLink>
+                <NavLink className="side-nav-link-item pan-bottom" activeClassName="selected" to={`${props.path}/settings`}>
+                    <IoCogSharp></IoCogSharp>
+                </NavLink>
+            </nav>
+            <div className="side-nav-user-profile">
                 <UserAvatarStatusElement2 userStatus="online" userImage={avatar}></UserAvatarStatusElement2>
             </div>
         </div>
