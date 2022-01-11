@@ -55,7 +55,7 @@ export default function ChatHome(){
     }
     
     return (
-<div className="chat-home-container">
+        <div className="chat-home-container">
             <div className="side-menu-panel">
                 <SideNavPanel path={path} url={url} optionSelector={optionSelect} selectedOption={getSelectedOption} notifCountList={notifCountList}></SideNavPanel>
             </div>

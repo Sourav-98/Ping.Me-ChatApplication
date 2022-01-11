@@ -1,4 +1,63 @@
 
+/* .chat-history-element-enter{
+    opacity: 0;
+}
+
+.chat-history-element-enter-active{
+    -webkit-transition: 0.2s ease-in-out;
+    transition: 0.15s ease-in-out;
+    opacity: 1;
+}
+
+.chat-history-element-exit{
+    opacity: 1;
+}
+
+.chat-history-element-exit-active{
+    -webkit-transition: 0.2s ease-in-out;
+    transition: 0.15s ease-in-out;
+    opacity: 0;
+} */
+
+@keyframes zoomIn {
+    from{
+        -webkit-transform: scale(0);
+        transform: scale(0);
+    }
+    to{
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+}
+
+@keyframes zoomOut {
+    from{
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+    to{
+        -webkit-transform: scale(0);
+        transform: scale(0);
+    }
+}
+
+.chat-history-element-enter{
+    -webkit-transform: scale(0);
+    transform: scale(0);
+}
+.chat-history-element-enter-active{
+    -webkit-animation: zoomIn 0.1s ease-in-out forwards;
+    animation: zoomIn 0.1s ease-in-out forwards;
+}
+.chat-history-element-exit{
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+.chat-history-element-exit-active{
+    -webkit-animation: zoomOut 0.1s ease-in-out forwards;
+    animation: zoomOut 0.1s ease-in-out forwards;
+}
+
 .chat-history-element-container{
     display: flex;
     flex-direction: row;
@@ -11,9 +70,9 @@
     padding: 0px;
     background-color: #F5F5F5;
     cursor: pointer;
-    -webkit-transition: 0.2s ease-in-out;
+    /* -webkit-transition: 0.2s ease-in-out;
     transition: 0.15s ease-in-out;
-    animation: fade-in 0.15s ease-in-out forwards;
+    animation: fade-in 0.15s ease-in-out forwards; */
     z-index: 3;
 }
 
@@ -30,11 +89,11 @@
     background-color: #E8E8E8;
 }
 
-.chat-history-element-container:active{
+/* .chat-history-element-container:active{
     background-color: #202020;
     -webkit-transform: scale(1.058) translate(8.5px);
     transform: scale(1.058) translate(8.5px);
-}
+} */
 
 .chat-history-element-container.selected{
     background-color: #202020;

@@ -29,13 +29,13 @@ export default function LoginPage(){
         }, 50);
     }
 
-    function usernameInputHandler(event){
-        setUsername(event.target.value);
-    }
+    // function usernameInputHandler(event){
+    //     setUsername(event.target.value);
+    // }
 
-    function passwordInputHandler(event){
-        setPassword(event.target.value);
-    }
+    // function passwordInputHandler(event){
+    //     setPassword(event.target.value);
+    // }
 
     function rememberCheckHandler(event){
         setUserRememberCheck(!userRememberCheck);

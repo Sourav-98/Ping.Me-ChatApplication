@@ -1,0 +1,278 @@
+
+/* ################## Custom Input CSS ############## */
+
+.cm-input-div{
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.cm-input-div > .cm-input{
+    box-sizing: border-box;
+    outline: none;
+    width: 100%;
+    font-family: inherit;
+    margin: 5px 0px 5px 0px;
+    border: 1px solid rgb(190, 190, 190);
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0);
+    color: rgb(0, 0, 0);
+    -webkit-transition: 0.12s ease-in-out;
+    transition: 0.12s ease-in-out;
+}
+
+.cm-input-div > .cm-input.danger{
+    border-color: rgb(226, 0, 0);
+}
+
+.cm-input-div > .cm-input.round{
+    border-radius: 999px;
+}
+
+.cm-input-div > .cm-input.dark{
+    color: rgb(255, 255, 255);
+    border: 0.5px solid rgb(150, 150, 150);
+}
+
+.cm-input-div > .cm-input::placeholder{
+    font-family: inherit;
+}
+
+.cm-input-div > .cm-input:focus{
+    border: 1px solid rgb(90, 90, 90);
+}
+
+.cm-input-div > .cm-input.danger:focus{
+    border: 1px solid rgb(226, 0, 0);
+}
+
+.cm-input-div > .cm-input.sm{
+    height: 32px;
+    font-size: 13px;
+    padding: 0px 9px 0px 9px;
+}
+
+.cm-input-div > .cm-input, .cm-input-div > .cm-input.md{
+    height: 40px;
+    font-size: 17px;
+    padding: 0px 11px 0px 11px;
+}
+
+.cm-input-div > .cm-input.lg{
+    height: 50px;
+    font-size: 21px;
+    padding: 0px 14px 0px 14px;
+}
+
+.cm-input-div > .sub-label{
+    height: 18px;
+    font-size: 14px;
+    padding-left: 8px;
+}
+
+
+/* ######################  Custom CSS Buttons ###############*/
+
+.cm-button{
+    box-sizing: border-box;
+    outline: none;
+    opacity: 1.0;
+    font-family: inherit;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    margin: 2px;
+    border-radius: 5px;
+    -webkit-transition: 0.12s ease-in-out;
+    transition: 0.12s ease-in-out;
+}
+
+.cm-button.block{
+    width: 100%;
+}
+
+.cm-button:disabled{
+    pointer-events: none;
+    opacity: 0.55;
+}
+
+.cm-button.round{
+    border-radius: 999px;
+}
+
+.cm-button.sm{
+    font-size: 14px;
+    height: 32px;
+    padding: 0px 12px 2px 12px;
+}
+
+.cm-button, .cm-button.md{
+    font-size: 17px;
+    height: 40px;
+    padding: 0px 15px 0px 15px;
+}
+
+.cm-button.lg{
+    font-size: 21px;
+    height: 50px;
+    padding: 0px 18px 0px 18px;
+}
+
+/* CM-BUTTON DEFAULT */
+
+/* PRIMARY */
+.cm-button.primary{
+    background-color: rgb(38, 125, 255);
+    border: 0.5px solid rgb(38, 125, 255);
+}
+
+.cm-button.primary:hover{
+    background-color: rgb(23, 110, 250);
+}
+
+.cm-button.primary:active{
+    background-color: rgb(8, 95, 245);
+}
+
+/* SECONDARY */
+.cm-button.secondary{
+    background-color: rgb(110, 110, 110);
+    border: 0.5px solid rgb(110, 110, 110);
+}
+
+.cm-button.secondary:hover{
+    background-color: rgb(95, 95, 95);
+}
+
+.cm-button.secondary:active{
+    background-color: rgb(80, 80, 80);
+}
+
+/* SUCCESS */
+.cm-button.success{
+    background-color: rgb(0, 166, 0);
+    border: 0.5px solid rgb(0, 166, 0);
+}
+
+.cm-button.success:hover{
+    background-color: rgb(0, 151, 0);
+}
+
+.cm-button.success:active{
+    background-color: rgb(0, 136, 0);
+}
+
+/* DANGER */
+.cm-button.danger{
+    background-color: rgb(226, 0, 0);
+    border: 0.5px solid rgb(226, 0, 0);
+}
+
+.cm-button.danger:hover{
+    background-color: rgb(211, 0, 0);
+}
+
+.cm-button.danger:active{
+    background-color: rgb(196, 0, 0);
+}
+
+/* ALERT */
+.cm-button.alert{
+    background-color: rgb(240, 147, 8);
+    border: 0.5px solid rgb(240, 147, 8);
+}
+
+.cm-button.alert:hover{
+    background-color: rgb(225, 132, 8);
+}
+
+.cm-button.alert:active{
+    background-color: rgb(210, 117, 8);
+}
+
+
+
+/* CM-BUTTON OUTLINED */
+
+.cm-button.outlined{
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.cm-button.outlined:active{
+    color: rgb(255, 255, 255);
+}
+
+/* PRIMARY */
+.cm-button.outlined.primary{
+    color: rgb(38, 125, 255);
+    border: 0.5px solid rgb(38, 125, 255);
+}
+
+.cm-button.outlined.primary:hover{
+    background-color: rgba(38, 125, 255, 0.2);
+}
+
+.cm-button.outlined.primary:active{
+    color: rgb(255, 255, 255);
+    background-color: rgb(38, 125, 255);
+}
+
+/* SECONDARY */
+.cm-button.outlined.secondary{
+    color: rgb(110, 110, 110);
+    border: 0.5px solid rgb(110, 110, 110);
+}
+
+.cm-button.outlined.secondary:hover{
+    background-color: rgba(110, 110, 110, 0.2);
+}
+
+.cm-button.outlined.secondary:active{
+    color: rgb(255, 255, 255);
+    background-color: rgb(110, 110, 110);
+}
+
+/* SUCCESS */
+.cm-button.outlined.success{
+    color: rgb(0, 166, 0);
+    border: 0.5px solid rgb(0, 166, 0);
+}
+
+.cm-button.outlined.success:hover{
+    background-color: rgba(0, 166, 0, 0.2);
+}
+
+.cm-button.outlined.success:active{
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 166, 0);
+}
+
+/* DANGER */
+.cm-button.outlined.danger{
+    color: rgb(226, 0, 0);
+    border: 0.5px solid rgb(226, 0, 0);
+}
+
+.cm-button.outlined.danger:hover{
+    background-color: rgba(226, 0, 0, 0.2);
+}
+
+.cm-button.outlined.danger:active{
+    color: rgb(255, 255, 255);
+    background-color: rgb(226, 0, 0);
+}
+
+/* ALERT */
+.cm-button.outlined.alert{
+    color: rgb(240, 147, 8);
+    border: 0.5px solid rgb(240, 147, 8);
+}
+
+.cm-button.outlined.alert:hover{
+    background-color: rgba(240, 147, 8, 0.2);
+}
+
+.cm-button.outlined.alert:active{
+    color: rgb(255, 255, 255);
+    background-color: rgb(240, 147, 8);
+}

@@ -89,6 +89,16 @@
     overflow-y:scroll;
 }
 
+.chat-history-list::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Hide scrollbar for IE, Edge add Firefox */
+.chat-history {
+    -ms-overflow-style: none;
+    scrollbar-width: none; /* Firefox */
+  }
+
 .chat-text-area{
     min-width: 450px;
     width: 100%;
