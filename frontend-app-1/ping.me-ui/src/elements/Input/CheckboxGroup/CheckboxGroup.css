@@ -1,0 +1,39 @@
+
+.checkbox-input-group{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 6px;
+}
+
+.checkbox-input-group > .checkbox-input-item{
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+    margin-bottom: 6px;
+}
+
+.checkbox-input-item > .checkbox-input-icon-div{
+    width: 22px;
+    height: 22px;
+    margin-right: 4px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    color: rgb(0, 86, 216);
+    transform: scale(1.0);
+    -wedkit-transition: 0.08s ease-in-out;
+    transition: 0.08s ease-in-out;
+}
+
+.checkbox-input-icon-div:active{
+    transform: scale(0.9);
+}
+
+.checkbox-input-item > .checkbox-input-text{
+    height: 22px;
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

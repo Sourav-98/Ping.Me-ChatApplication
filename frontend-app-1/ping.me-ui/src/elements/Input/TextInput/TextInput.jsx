@@ -1,13 +1,13 @@
 
+import { useState } from 'react';
 import './TextInput.css';
 
-export function TextInput({type, placeholder, subLabelMessage, round, sm, md, lg, errorMark, ...props}){
+export function TextInput({type, placeholder, onChange, onFocus, subLabelMessage, round, sm, md, lg, errorMark, ...props}){
 
     return(
         <div className='cm-input-div'>
-            <input type={type} placeholder={placeholder} className={`cm-input ${ round == true ? 'round' : ''} ${errorMark == true ? 'danger' : ''} ${ sm === true ? 'sm' : lg === true ? 'lg' : ''}`}></input>
-            {/* { subLabelMessage && <span className='sub-label'>{subLabelMessage}</span>} */}
-            <span className='sub-label'>{subLabelMessage}</span>
+            <input type={type} placeholder={placeholder} onChange={onChange} onFocus={onFocus} className={`cm-input ${ round == true ? 'round' : ''} ${errorMark == true ? 'danger' : ''} ${ sm === true ? 'sm' : lg === true ? 'lg' : ''}`}></input>
+            <span className='sub-error-label'>{subLabelMessage}</span>
         </div>
     )
 }

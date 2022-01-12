@@ -3,6 +3,7 @@
     width: 100%;
     display: flex;
     flex-direction: column;
+    margin-bottom: 6px;
 }
 
 .cm-input-div > .cm-input{
@@ -10,7 +11,7 @@
     outline: none;
     width: 100%;
     font-family: inherit;
-    margin: 5px 0px 5px 0px;
+    margin-top: 4px;
     border: 1px solid rgb(190, 190, 190);
     border-radius: 5px;
     background-color: rgba(255, 255, 255, 0);
@@ -62,8 +63,9 @@
     padding: 0px 14px 0px 14px;
 }
 
-.cm-input-div > .sub-label{
+.cm-input-div > .sub-error-label{
     height: 18px;
     font-size: 14px;
     padding-left: 8px;
+    color:rgb(226, 0, 0);
 }

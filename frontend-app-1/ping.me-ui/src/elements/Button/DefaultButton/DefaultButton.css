@@ -17,6 +17,10 @@
     width: 100%;
 }
 
+.cm-button.wide{
+    width: 48%;
+}
+
 .cm-button:disabled{
     pointer-events: none;
     opacity: 0.55;

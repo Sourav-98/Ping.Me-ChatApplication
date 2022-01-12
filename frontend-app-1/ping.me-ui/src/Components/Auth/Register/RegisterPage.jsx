@@ -1,25 +1,30 @@
 
 import { useState } from 'react';
-import { IoEyeOutline, IoEyeOffOutline } from 'react-icons/io5';
 
 import AuthPageTemplate from "Components/Auth/templates/AuthPage.template";
 import './RegisterPage.css';
 
 import { TextInput } from 'elements/Input/TextInput/TextInput';
 import { PasswordInput } from 'elements/Input/PasswordInput/PasswordInput';
+import { CheckboxGroup } from 'elements/Input/CheckboxGroup/CheckboxGroup';
+import { DefaultButton } from 'elements/Button/DefaultButton/DefaultButton';
 
 export default function RegisterPage(){
 
-    const [passwordVisible, setPasswordVisible] = useState(false);
-    const [passwordConfirmVisible, setPasswordConfirmVisible] = useState(false);
+    const[registerSelectorOptions, setLoginSelectorOptions] = useState(() => [
+        {
+            text: 'Agree with the Terms and Conditions',
+            isSelected: false
+        },
+        {
+            text: 'Subscrible to Email Notifications',
+            isSelected: false
+        },
+    ]);
 
-    const togglePasswordVisibility = ()=>{
-        setPasswordVisible(passwordVisible => !passwordVisible);
-    };
-
-    const togglePasswordConfirmVisibility = ()=>{
-        setPasswordConfirmVisible(passwordConfirmVisible => !passwordConfirmVisible);
-    };
+    const registerSelectorOptionsHandler = (updatedLoginOptions)=>{
+        setLoginSelectorOptions(() => updatedLoginOptions);
+    }
 
     const RegisterForm = (
         <div className="register-form-main-div">
@@ -29,6 +34,8 @@ export default function RegisterPage(){
             <TextInput type={'email'} round placeholder={'Email Id'}></TextInput>
             <PasswordInput round placeholder={'Password'}></PasswordInput>
             <PasswordInput round placeholder={'Confirm Password'}></PasswordInput>
+            <CheckboxGroup optionsList={registerSelectorOptions} onChange={registerSelectorOptionsHandler}></CheckboxGroup>
+            <DefaultButton round primary text={'Register'}></DefaultButton>
         </div>
     )
 
