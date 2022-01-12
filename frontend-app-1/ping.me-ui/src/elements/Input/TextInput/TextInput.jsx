@@ -1,5 +1,5 @@
 
-import 'custom.css';
+import './TextInput.css';
 
 export function TextInput({type, placeholder, subLabelMessage, round, sm, md, lg, errorMark, ...props}){
 

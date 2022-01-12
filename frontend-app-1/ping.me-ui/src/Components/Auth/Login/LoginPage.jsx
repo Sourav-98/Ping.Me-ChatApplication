@@ -15,12 +15,6 @@ import './LoginPage.css';
 
 export default function LoginPage({breakpoints, windowWidth, ...props}){
 
-    const [passwordVisible, setPasswordVisible] = useState(false);
-
-    const togglePasswordVisibility = ()=>{
-        setPasswordVisible(passwordVisible => !passwordVisible);
-    };
-
     const LoginForm = (
         <div className='login-form-main-div'>
             <TextInput round type={'text'} placeholder={'Username or Email Id'}></TextInput>
@@ -43,7 +37,7 @@ export default function LoginPage({breakpoints, windowWidth, ...props}){
                     <a href="#">Forgot Password?</a>
                 </div>
                 <div className="create-account-option">
-                    <a href="#">New User? Sign Up</a>
+                    <a href="#">Sign Up</a>
                 </div>
             </div>
         </div>
