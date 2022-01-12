@@ -9,6 +9,7 @@ import TwitterSvg from 'assets/twitter-color.svg';
 
 import { TextInput } from 'elements/Input/TextInput/TextInput';
 import { PasswordInput } from 'elements/Input/PasswordInput/PasswordInput';
+import { DefaultButton } from 'elements/Button/DefaultButton/DefaultButton';
 
 import { IoEyeOutline, IoEyeOffOutline } from 'react-icons/io5';
 import './LoginPage.css';
@@ -19,7 +20,7 @@ export default function LoginPage({breakpoints, windowWidth, ...props}){
         <div className='login-form-main-div'>
             <TextInput round type={'text'} placeholder={'Username or Email Id'}></TextInput>
             <PasswordInput round placeholder={'Password'}></PasswordInput>
-            <button type='button' className='cm-button round primary'>Login</button>
+            <DefaultButton round primary text={'Login'}></DefaultButton>
             <hr></hr>
             <div className='passport-login-options-div'>
                 <button className="passport-login-option">
