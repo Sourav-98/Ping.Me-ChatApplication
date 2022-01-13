@@ -1,7 +1,6 @@
 
 import { useState, useEffect} from 'react';
 
-import { MdCheckBox, MdCheckBoxOutlineBlank } from 'react-icons/md';
 import { IoCheckmarkCircleSharp, IoEllipseOutline} from 'react-icons/io5';
 import './CheckboxGroup.css';
 

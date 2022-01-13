@@ -28,15 +28,30 @@ export default function LoginPage({breakpoints, windowWidth, ...props}){
         setUsernameErrorStatus({text : '', status : false});    // disable error messages
     }
 
-    const usernameFocusHandler = () => {
-        resetUsernameErrorStatus();
+    const isUsernameInputValid = () => {
+        if(!usernameInput){
+            setUsernameErrorStatus({text : 'Username or Email Id should not be empty', status: true});
+            return false;
+        }
+        else{
+            // Email Regex
+            let emailRegex = /[a-zA-Z0-9\._]+@[a-z]{3,10}\.[a-z]{2,5}/s;
+            if(!emailRegex.test(usernameInput)){
+                setUsernameErrorStatus({text : 'Please enter a valid Email Id', status: true});
+                return false;
+            }
+            else{
+                resetUserPasswordErrorStatus();
+            }
+        }
+        return true;
     }
 
     //--------------------------------------Password-------------------------------------------------------
     const [userPasswordInput, setUserPasswordInput] = useState(() => undefined);
     const [userPasswordErrorStatus, setUserPasswordErrorStatus] = useState({text : '', status : false});
 
-    const userPasswordInputHandler = (event)=>{
+    const userPasswordInputHandler = (event) => {
         setUserPasswordInput(() => event.target.value)
     }
 
@@ -44,12 +59,19 @@ export default function LoginPage({breakpoints, windowWidth, ...props}){
         setUserPasswordErrorStatus({text : '', status: false});
     }
 
-    const userPasswordFocusHandler = () => {
-        resetUserPasswordErrorStatus();
+    const isUserPasswordInputValid = () => {
+        if(!userPasswordInput){
+            setUserPasswordErrorStatus({text : 'Password should not be empty', status: true});
+            return false;
+        }
+        else{
+            resetUserPasswordErrorStatus();
+
+        }
+        return true;
     }
 
-
-    //--------------------------------------Checkbox-------------------------------------------------------
+    //--------------------------------------Login Checkbox----------------------------------------------
     const[loginCheckboxOptions, setLoginCheckboxOptions] = useState(() => [
         {
             text: 'Remember Me',
@@ -64,31 +86,21 @@ export default function LoginPage({breakpoints, windowWidth, ...props}){
 
     //---------------------------------------------------------------------------------------------------
     const preSubmissionCheck = () => {
-        if(!usernameInput){
-            setUsernameErrorStatus({text : 'Username or Email Id should not be empty', status: true})
-        }
-        else{
-            resetUsernameErrorStatus();
-        }
-        if(!userPasswordInput){
-            setUserPasswordErrorStatus({text : 'Password should not be empty', status: true})
-        }
-        else{
-            resetUserPasswordErrorStatus();
-        }
+        isUsernameInputValid();
+        isUserPasswordInputValid();
     }
 
     const loginFormSubmit = () => {
         preSubmissionCheck();
-        console.log(loginCheckboxOptions);
     }
 
     const LoginForm = (
         <div className='login-form-main-div'>
-            <TextInput round type={'text'} onChange={usernameInputHandler} onFocus={resetUsernameErrorStatus} subLabelMessage={usernameErrorStatus.text} errorMark={usernameErrorStatus.status} placeholder={'Username or Email Id'}></TextInput>
+            <h3>Login</h3>
+            <TextInput round  type={'text'} placeholder={'Username or Email Id'} onChange={usernameInputHandler} onFocus={resetUsernameErrorStatus} subLabelMessage={usernameErrorStatus.text} errorMark={usernameErrorStatus.status}></TextInput>
             <PasswordInput round placeholder={'Password'} onChange={userPasswordInputHandler} onFocus={resetUserPasswordErrorStatus} subLabelMessage={userPasswordErrorStatus.text} errorMark={userPasswordErrorStatus.status}></PasswordInput>
             <CheckboxGroup optionsList={loginCheckboxOptions} onChange={loginCheckboxOptionsHandler}></CheckboxGroup>
-            <DefaultButton wide round primary text={'Login'} onClick={loginFormSubmit}></DefaultButton>
+            <DefaultButton wide round outlined primary onClick={loginFormSubmit}>Login</DefaultButton>
             <hr></hr>
             <div className='passport-login-options-div'>
                 <button className="passport-login-option">

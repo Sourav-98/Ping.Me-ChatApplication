@@ -64,7 +64,7 @@
 }
 
 .cm-input-div > .sub-error-label{
-    height: 18px;
+    min-height: 18px;
     font-size: 14px;
     padding-left: 8px;
     color:rgb(226, 0, 0);

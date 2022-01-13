@@ -7,7 +7,6 @@
     font-weight: bold;
     color: rgb(255, 255, 255);
     cursor: pointer;
-    /* margin: 2px; */
     border-radius: 5px;
     -webkit-transition: 0.12s ease-in-out;
     transition: 0.12s ease-in-out;
@@ -53,7 +52,7 @@
 /* PRIMARY */
 .cm-button.primary{
     background-color: rgb(38, 125, 255);
-    border: 0.5px solid rgb(38, 125, 255);
+    border: 1px solid rgb(38, 125, 255);
 }
 
 .cm-button.primary:hover{
@@ -67,7 +66,7 @@
 /* SECONDARY */
 .cm-button.secondary{
     background-color: rgb(110, 110, 110);
-    border: 0.5px solid rgb(110, 110, 110);
+    border: 1px solid rgb(110, 110, 110);
 }
 
 .cm-button.secondary:hover{
@@ -81,7 +80,7 @@
 /* SUCCESS */
 .cm-button.success{
     background-color: rgb(0, 166, 0);
-    border: 0.5px solid rgb(0, 166, 0);
+    border: 1px solid rgb(0, 166, 0);
 }
 
 .cm-button.success:hover{
@@ -95,7 +94,7 @@
 /* DANGER */
 .cm-button.danger{
     background-color: rgb(226, 0, 0);
-    border: 0.5px solid rgb(226, 0, 0);
+    border: 1px solid rgb(226, 0, 0);
 }
 
 .cm-button.danger:hover{
@@ -109,7 +108,7 @@
 /* ALERT */
 .cm-button.alert{
     background-color: rgb(240, 147, 8);
-    border: 0.5px solid rgb(240, 147, 8);
+    border: 1px solid rgb(240, 147, 8);
 }
 
 .cm-button.alert:hover{
@@ -135,7 +134,7 @@
 /* PRIMARY */
 .cm-button.outlined.primary{
     color: rgb(38, 125, 255);
-    border: 0.5px solid rgb(38, 125, 255);
+    border: 1px solid rgb(38, 125, 255);
 }
 
 .cm-button.outlined.primary:hover{
@@ -150,7 +149,7 @@
 /* SECONDARY */
 .cm-button.outlined.secondary{
     color: rgb(110, 110, 110);
-    border: 0.5px solid rgb(110, 110, 110);
+    border: 1px solid rgb(110, 110, 110);
 }
 
 .cm-button.outlined.secondary:hover{
@@ -165,7 +164,7 @@
 /* SUCCESS */
 .cm-button.outlined.success{
     color: rgb(0, 166, 0);
-    border: 0.5px solid rgb(0, 166, 0);
+    border: 1px solid rgb(0, 166, 0);
 }
 
 .cm-button.outlined.success:hover{
@@ -180,7 +179,7 @@
 /* DANGER */
 .cm-button.outlined.danger{
     color: rgb(226, 0, 0);
-    border: 0.5px solid rgb(226, 0, 0);
+    border: 1px solid rgb(226, 0, 0);
 }
 
 .cm-button.outlined.danger:hover{
@@ -195,7 +194,7 @@
 /* ALERT */
 .cm-button.outlined.alert{
     color: rgb(240, 147, 8);
-    border: 0.5px solid rgb(240, 147, 8);
+    border: 1px solid rgb(240, 147, 8);
 }
 
 .cm-button.outlined.alert:hover{
