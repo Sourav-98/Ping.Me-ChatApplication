@@ -1,13 +1,15 @@
 const http = require('http')
 const { app } = require('./server');
+const { Connection } = require('./util/db/dbConn.util');
 
-const dotenv = require('dotenv');
+// const dotenv = require('dotenv');
 const path = require('path');
 
-dotenv.config({path: path.join(__dirname, '.env')});
+// dotenv.config({path: path.join(__dirname, '.env')});
+Connection.connect();
 
-const host = process.env['HOST'];
-const port = process.env['PORT'];
+const host = 'localhost';
+const port = 8080;
 
 const httpServer = http.createServer(app);
 

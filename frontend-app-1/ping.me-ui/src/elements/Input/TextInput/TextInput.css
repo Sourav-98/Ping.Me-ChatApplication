@@ -63,7 +63,7 @@
     padding: 0px 14px 0px 14px;
 }
 
-.cm-input-div > .sub-error-label{
+.cm-input-div > .sub-error-label-span{
     min-height: 18px;
     font-size: 14px;
     padding-left: 8px;

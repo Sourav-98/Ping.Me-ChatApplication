@@ -2,6 +2,7 @@
 import { useState } from 'react';
 
 import AuthPageTemplate from '../templates/AuthPage.template';
+import warningMessages from '../AuthWarningMessages';
 
 import GoogleSvg from 'assets/google-color.svg';
 import FacebookSvg from 'assets/facebook-color.svg';
@@ -13,46 +14,47 @@ import { DefaultButton } from 'elements/Button/DefaultButton/DefaultButton';
 import { CheckboxGroup } from 'elements/Input/CheckboxGroup/CheckboxGroup';
 
 import './LoginPage.css';
+import { faLessThanEqual, faSleigh } from '@fortawesome/free-solid-svg-icons';
 
 export default function LoginPage({breakpoints, windowWidth, ...props}){
 
     //--------------------------------------Username-------------------------------------------------------
-    const [usernameInput, setUsernameInput] = useState(() => undefined);
-    const [usernameErrorStatus, setUsernameErrorStatus] = useState({text : '', status : false});
+    const [userEmailId, setUserEmailId] = useState(() => undefined);
+    const [userEmailIdErrorStatus, setUserEmailIdErrorStatus] = useState({ text: '', status: false });
 
-    const usernameInputHandler = (event)=>{
-        setUsernameInput((usernameInput) => event.target.value);
+    const userEmailIdInputHandler = (event) => {
+        setUserEmailId(() => event.target.value);
     }
 
-    const resetUsernameErrorStatus = () => {
-        setUsernameErrorStatus({text : '', status : false});    // disable error messages
+    const resetUserEmailIdErrorStatus = () => {
+        setUserEmailIdErrorStatus({ text: '', status: false });
     }
 
-    const isUsernameInputValid = () => {
-        if(!usernameInput){
-            setUsernameErrorStatus({text : 'Username or Email Id should not be empty', status: true});
+    const isUserEmailIdValid = () => {
+        if(!userEmailId){
+            setUserEmailIdErrorStatus({text : warningMessages.EMAIL_ID_EMPTY, status: true});
             return false;
         }
         else{
             // Email Regex
             let emailRegex = /[a-zA-Z0-9\._]+@[a-z]{3,10}\.[a-z]{2,5}/s;
-            if(!emailRegex.test(usernameInput)){
-                setUsernameErrorStatus({text : 'Please enter a valid Email Id', status: true});
+            if(!emailRegex.test(userEmailId)){
+                setUserEmailIdErrorStatus({text : warningMessages.EMAIL_ID_INVALID, status: true});
                 return false;
             }
             else{
-                resetUserPasswordErrorStatus();
+                resetUserEmailIdErrorStatus();
             }
         }
         return true;
     }
 
     //--------------------------------------Password-------------------------------------------------------
-    const [userPasswordInput, setUserPasswordInput] = useState(() => undefined);
+    const [userPassword, setUserPassword] = useState(() => undefined);
     const [userPasswordErrorStatus, setUserPasswordErrorStatus] = useState({text : '', status : false});
 
     const userPasswordInputHandler = (event) => {
-        setUserPasswordInput(() => event.target.value)
+        setUserPassword(() => event.target.value)
     }
 
     const resetUserPasswordErrorStatus = () => {
@@ -60,13 +62,12 @@ export default function LoginPage({breakpoints, windowWidth, ...props}){
     }
 
     const isUserPasswordInputValid = () => {
-        if(!userPasswordInput){
-            setUserPasswordErrorStatus({text : 'Password should not be empty', status: true});
+        if(!userPassword){
+            setUserPasswordErrorStatus({text : warningMessages.PASSWORD_EMPTY, status: true});
             return false;
         }
         else{
             resetUserPasswordErrorStatus();
-
         }
         return true;
     }
@@ -83,21 +84,54 @@ export default function LoginPage({breakpoints, windowWidth, ...props}){
         setLoginCheckboxOptions(() => updatedLoginOptions);
     }
 
+    //----------------------------------BACKEND CALLS---------------------------------------------------
+
+    async function getUrlEncoded(formData){
+        let formBody = [];
+        for(let element in formData){
+            let key = encodeURIComponent(element);
+            let value = encodeURIComponent(formData[element]);
+            formBody.push(key + "=" + value);
+        }
+        formBody = formBody.join('&');
+        return formBody;
+    }
+
 
     //---------------------------------------------------------------------------------------------------
     const preSubmissionCheck = () => {
-        isUsernameInputValid();
-        isUserPasswordInputValid();
+        let emailIdValid = isUserEmailIdValid();
+        let passwordValid = isUserPasswordInputValid();
+        if(!emailIdValid || !passwordValid){
+            return false;
+        }
+        return true;
     }
 
-    const loginFormSubmit = () => {
-        preSubmissionCheck();
+    const loginFormSubmit = async() => {
+        if(preSubmissionCheck()){
+            let loginFormBody = await getUrlEncoded({ emailId: userEmailId, password: userPassword });
+            let loginUrl = "http://localhost:5000/login";
+            fetch(loginUrl, {
+                method: 'POST',
+                mode: 'cors',
+                headers: {
+                    'Content-Type' : 'application/x-www-form-urlencoded'
+                },
+                body: loginFormBody
+            }).then(response => response.JSON)
+            .then(response => {
+                console.log(response);
+            })
+        }
     }
+
+    
 
     const LoginForm = (
         <div className='login-form-main-div'>
             <h3>Login</h3>
-            <TextInput round  type={'text'} placeholder={'Username or Email Id'} onChange={usernameInputHandler} onFocus={resetUsernameErrorStatus} subLabelMessage={usernameErrorStatus.text} errorMark={usernameErrorStatus.status}></TextInput>
+            <TextInput round type={'text'} placeholder={'Email Id'} onChange={userEmailIdInputHandler} onFocus={resetUserEmailIdErrorStatus} subLabelMessage={userEmailIdErrorStatus.text} errorMark={userEmailIdErrorStatus.status}></TextInput>
             <PasswordInput round placeholder={'Password'} onChange={userPasswordInputHandler} onFocus={resetUserPasswordErrorStatus} subLabelMessage={userPasswordErrorStatus.text} errorMark={userPasswordErrorStatus.status}></PasswordInput>
             <CheckboxGroup optionsList={loginCheckboxOptions} onChange={loginCheckboxOptionsHandler}></CheckboxGroup>
             <DefaultButton wide round outlined primary onClick={loginFormSubmit}>Login</DefaultButton>
