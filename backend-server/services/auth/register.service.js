@@ -1,5 +1,8 @@
 const { ChatUserDAO } = require('./../../repository/ChatUserDAO');
 const { ChatUserDTO } = require('./../../models/ChatUserDTO');
+const { Errors } = require('../../util/errorCodes/errorCodes');
+
+const bcrypt = require('bcrypt');
 
 const chatUserDAO = new ChatUserDAO();
 
@@ -8,22 +11,44 @@ let defaultMessage = {
     message: "The service responsible for creating new users"
 }
 
+let asyncDelay = async(time) => {
+    return new Promise(resolve => {
+        setTimeout(() => {
+            return resolve;
+        }, time);
+    })
+}
+
 exports.defaultRegisterService = async function(){
+    await asyncDelay(5000);
     return defaultMessage;
 }
 
 exports.newUserRegistration = async function(userData){
-    let user = new ChatUserDTO(userData.firstName, userData.lastName, userData.emailId, userData.password);
+    let user = new ChatUserDTO();
+    user.setFirstName(userData.firstName);
+    user.setLastName(userData.lastName);
+    user.setEmailId(userData.emailId);
+    user.setPassword(userData.password);
+    // check if the user already exists
     try{
-        return await ChatUserDAO.insertNewUser(user);
+        let searchUser = await ChatUserDAO.findUserById(user.getEmailId());
+        if(searchUser){ // if there exists a user with the given email id
+            throw Errors.USER_EMAIL_ID_EXISTS_ERR;
+        }
+        else{
+            try{
+                // change the password to a hash and store in the db
+                user.setPassword(await bcrypt.hash(user.getPassword(), 10));
+                return await ChatUserDAO.insertNewUser(user);
+            }
+            catch(err){
+                console.log("Error at newUserRegistration() service -> " + err);
+            }
+        }
     }
     catch(err){
-        switch(err.code){
-            case 11000: throw { // mongodb error 11000 - entry with the same primary key already exists
-                err_code: err.code, 
-                err_message: "Error - User with an email id: " + userData.email + " already exists!"
-            };
-            default: throw err;
-        }
+        console.log("Error at newUserRegistration() service -> " + JSON.stringify(err));
+        throw err;
     }
 }

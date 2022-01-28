@@ -6,6 +6,10 @@ exports.userExistsMiddleware = async(req, res, next)=>{
     // else, go to the next execution, next()
 }
 
+exports.authJwtMiddleware = async(req, res, next) => {
+    
+}
+
 exports.delayAsync = async(msDelay)=>{
     return new Promise((resolve, reject)=>{
         setTimeout(resolve, msDelay);

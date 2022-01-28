@@ -2,6 +2,8 @@
 const { ChatUserDTO } = require('./../models/ChatUserDTO');
 const { Connection } = require('./../util/db/dbConn.util');
 
+const { Errors } = require('../util/errorCodes/errorCodes');
+
 // Basic Chat User CRUD Operation + Additional user fetches operations
 class ChatUserDAO{
     
@@ -30,32 +32,48 @@ class ChatUserDAO{
         }
         catch(err){
             console.log("Error at findAll() -> " + err);
-            throw err;
+            throw Errors.SERVER_DB_CONNECTION_ERR;
         }
     }
     
     // Find a Chat User by the given unique Email Id
+    // return null if no users found
+    // return the user object if the user exists
+    // throw error if any
     static async findUserById(chatUserEmailId){
         try{
-            let chatUserDB = await Connection.getDb().collection(this._collectionName).find({emailId : chatUserEmailId});
-            return new ChatUserDTO(chatUserDB.firstName, chatUserDB.lastName, chatUserDB.emailId, chatUserDB.password, chatUserDB.lastLogin, chatUserDB.lastPasswordChange, chatUserDB.isVerified, chatUserDB.rolesList);
+            console.log('findUserById DAO -------------');
+            let chatUserDB = await Connection.getDb().collection(this._collectionName).findOne({emailId : chatUserEmailId});    // returns a single object
+            if(!chatUserDB){
+                return null;      
+            }
+            let chatUserDTO = new ChatUserDTO();
+            chatUserDTO.setFirstName(chatUserDB.firstName);
+            chatUserDTO.setLastName(chatUserDB.lastName);
+            chatUserDTO.setEmailId(chatUserDB.emailId);
+            chatUserDTO.setPassword(chatUserDB.password);
+            return chatUserDTO;
         }
         catch(err){
             console.log("Error at findUserById() -> " + err);
-            throw err;
+            throw Errors.SERVER_DB_CONNECTION_ERR;
         }
     }
 
     // Insert a new Chat User given the user details
+    // return true if user successfully entered
+    // throw error if any
     static async insertNewUser(chatUserData){
         try{
-            let chatUserDTO = new ChatUserDTO(chatUserData.firstName, chatUserData.lastName, chatUserData.emailId, chatUserData.password, chatUserData.lastLogin, chatUserData.lastPasswordChange, chatUserData.isVerified, chatUserData.rolesList);
-            await Connection.getDb().collection(this._collectionName).insertOne(chatUserDTO);
+            console.log('insertNewUser DAO -------------');
+            let result = await Connection.getDb().collection(this._collectionName).insertOne(chatUserData);
+            console.log(result);
             return true;
         }
         catch(err){
             console.log("Error at insertNewUser() -> " + err);
-            throw err;
+            throw Errors.SERVER_DB_CONNECTION_ERR;
+            // throw err;
         }
     }
 
@@ -67,7 +85,7 @@ class ChatUserDAO{
         }
         catch(err){
             console.log("Error at deleteUserAccount() -> " + err);
-            throw err;
+            throw Errors.SERVER_DB_CONNECTION_ERR;
         }
     }
     

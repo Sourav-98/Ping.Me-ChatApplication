@@ -12,7 +12,7 @@ const { registerController } = require('./controller/auth/register.controller');
 const { defaultController } = require('./controller/default.controller');
 
 app.use(bodyParser.urlencoded({extended: false}));
-app.use('/auth', loginController);
+app.use(loginController);
 app.use(registerController);
 app.use(defaultController);
 

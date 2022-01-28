@@ -1,7 +1,7 @@
 
 const defaultController = require('express').Router();
 
-defaultController.get('/', async(req, res)=>{
+defaultController.get('/', async(req, res) => {
     let defaultData = {
         message: "Default Route"
     };

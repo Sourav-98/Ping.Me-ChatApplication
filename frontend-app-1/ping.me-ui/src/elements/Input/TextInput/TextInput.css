@@ -3,7 +3,6 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    margin-bottom: 6px;
 }
 
 .cm-input-div > .cm-input{
@@ -11,7 +10,6 @@
     outline: none;
     width: 100%;
     font-family: inherit;
-    margin-top: 4px;
     border: 1px solid rgb(190, 190, 190);
     border-radius: 5px;
     background-color: rgba(255, 255, 255, 0);
@@ -24,13 +22,12 @@
     border-color: rgb(226, 0, 0);
 }
 
-.cm-input-div > .cm-input.round{
-    border-radius: 999px;
+.cm-input-div > .cm-input.success{
+    border-color: rgb(0, 161, 22);
 }
 
-.cm-input-div > .cm-input.dark{
-    color: rgb(255, 255, 255);
-    border: 0.5px solid rgb(150, 150, 150);
+.cm-input-div > .cm-input.round{
+    border-radius: 999px;
 }
 
 .cm-input-div > .cm-input::placeholder{
@@ -45,27 +42,39 @@
     border: 1px solid rgb(226, 0, 0);
 }
 
+.cm-input-div > .cm-input.success:focus{
+    border: 1px solid rgb(0, 161, 22);
+}
+
 .cm-input-div > .cm-input.sm{
     height: 32px;
-    font-size: 13px;
-    padding: 0px 9px 0px 9px;
+    font-size: 12px;
+    padding: 0px 10px 0px 10px;
 }
 
 .cm-input-div > .cm-input, .cm-input-div > .cm-input.md{
     height: 40px;
-    font-size: 17px;
-    padding: 0px 11px 0px 11px;
+    font-size: 16px;
+    padding: 0px 12px 0px 12px;
 }
 
 .cm-input-div > .cm-input.lg{
     height: 50px;
-    font-size: 21px;
-    padding: 0px 14px 0px 14px;
+    font-size: 20px;
+    padding: 0px 15px 0px 15px;
 }
 
-.cm-input-div > .sub-error-label-span{
+.cm-input-div > .sub-label-span{
     min-height: 18px;
     font-size: 14px;
     padding-left: 8px;
+    padding-bottom: 8px;
+}
+
+.sub-label-span.success{
+    color: rgb(0, 143, 19);
+}
+
+.sub-label-span.danger{
     color:rgb(226, 0, 0);
 }

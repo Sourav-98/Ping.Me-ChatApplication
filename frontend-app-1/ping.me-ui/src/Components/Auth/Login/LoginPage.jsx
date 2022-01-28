@@ -2,7 +2,8 @@
 import { useState } from 'react';
 
 import AuthPageTemplate from '../templates/AuthPage.template';
-import warningMessages from '../AuthWarningMessages';
+import { AuthWarningMessageConstants as warningMessages } from '../AuthUtils/AuthWarningMessages';
+import  * as AuthUtils from './../AuthUtils/AuthUtilities';
 
 import GoogleSvg from 'assets/google-color.svg';
 import FacebookSvg from 'assets/facebook-color.svg';
@@ -84,21 +85,8 @@ export default function LoginPage({breakpoints, windowWidth, ...props}){
         setLoginCheckboxOptions(() => updatedLoginOptions);
     }
 
-    //----------------------------------BACKEND CALLS---------------------------------------------------
+    //-------------------------------------FORM SUBMIT------------------------------------------------
 
-    async function getUrlEncoded(formData){
-        let formBody = [];
-        for(let element in formData){
-            let key = encodeURIComponent(element);
-            let value = encodeURIComponent(formData[element]);
-            formBody.push(key + "=" + value);
-        }
-        formBody = formBody.join('&');
-        return formBody;
-    }
-
-
-    //---------------------------------------------------------------------------------------------------
     const preSubmissionCheck = () => {
         let emailIdValid = isUserEmailIdValid();
         let passwordValid = isUserPasswordInputValid();
@@ -110,19 +98,23 @@ export default function LoginPage({breakpoints, windowWidth, ...props}){
 
     const loginFormSubmit = async() => {
         if(preSubmissionCheck()){
-            let loginFormBody = await getUrlEncoded({ emailId: userEmailId, password: userPassword });
-            let loginUrl = "http://localhost:5000/login";
-            fetch(loginUrl, {
-                method: 'POST',
-                mode: 'cors',
-                headers: {
-                    'Content-Type' : 'application/x-www-form-urlencoded'
-                },
-                body: loginFormBody
-            }).then(response => response.JSON)
-            .then(response => {
-                console.log(response);
-            })
+            let loginFormData = { emailId: userEmailId, password: userPassword };
+            try{
+                let response = await AuthUtils.formSubmit("/login", loginFormData);
+                if(response.status >= 400){
+                    console.log('Error in Reponse --> ');
+                    throw new Error("Response Error -> Status : " + response.status);
+                }
+                else{
+                    let responseJson = response.json();
+                    console.log(responseJson);
+                }
+
+            }
+            catch(err){
+                console.log(err);
+            }
+            
         }
     }
 

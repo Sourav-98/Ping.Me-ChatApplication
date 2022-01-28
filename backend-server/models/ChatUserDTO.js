@@ -2,11 +2,11 @@
 
 class ChatUserDTO {
 
-    constructor(userDetails, emailId, password, isVerified, lastLogin, lastPasswordChange, userRolesList) {
-        this.firstName = userDetails.firstName;
-        this.lastName = userDetails.lastName;
-        this.phoneNo = userDetails.phoneNo;
-        this.dateOfBirth = userDetails.dateOfBirth;
+    constructor(firstName, lastName, phoneNo, dateOfBirth, emailId, password, isVerified, lastLogin, lastPasswordChange, userRolesList) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNo = phoneNo;
+        this.dateOfBirth = dateOfBirth;
         this.emailId = emailId;
         this.password = password;
         this.isVerified = isVerified;

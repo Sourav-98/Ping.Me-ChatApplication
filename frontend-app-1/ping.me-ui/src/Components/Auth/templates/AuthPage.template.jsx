@@ -2,7 +2,7 @@
 import logo from 'assets/ping.Me Logo NEW 3.png';
 import './AuthStyles.css';
 
-export default function AuthPageTemplate({AuthForm, ...props}){
+export default function AuthPageTemplate({...props}){
     return(
         <div className='auth-page-container'>
             <div className='auth-page-app-branding-container'>
@@ -17,7 +17,7 @@ export default function AuthPageTemplate({AuthForm, ...props}){
                 </div>
             </div>
             <div className='auth-form-container'>
-                {AuthForm}
+                {props.children}
             </div>
         </div>
     )

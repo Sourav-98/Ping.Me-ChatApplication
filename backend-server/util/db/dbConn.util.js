@@ -9,10 +9,10 @@ class Connection{
 
     static async connect(){
         MongoClient.connect(this._dbConfig.uri, this._dbConfig.options)
-        .then( client =>{
+        .then( client => {
             console.log("--------Connected to MongoDB database--------");
             this._client = client;
-            this._db = client.db(dbConfig.dbName);
+            this._db = client.db(dbConfig.db);
         })
         .catch( err =>{
             console.log(err);

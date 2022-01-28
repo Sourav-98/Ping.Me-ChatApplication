@@ -1,16 +1,17 @@
 
 import { useState, useEffect } from 'react';
 
-import warningMessages from './../AuthWarningMessages';
+import * as AuthServices from 'Services/AuthServices/Auth.service';
+import { AuthWarningMessageConstants as warningMessages } from '../AuthUtils/AuthWarningMessages';
 import AuthPageTemplate from "Components/Auth/templates/AuthPage.template";
 import './RegisterPage.css';
 
+import Spinner1 from 'elements/PreLoaders/Spinner1/Spinner1';
 
 import { TextInput } from 'elements/Input/TextInput/TextInput';
 import { PasswordInput } from 'elements/Input/PasswordInput/PasswordInput';
 import { CheckboxGroup } from 'elements/Input/CheckboxGroup/CheckboxGroup';
 import { DefaultButton } from 'elements/Button/DefaultButton/DefaultButton';
-import { IoEllipseSharp } from 'react-icons/io5';
 
 export default function RegisterPage(){
 
@@ -136,8 +137,8 @@ export default function RegisterPage(){
         setUserConfirmPassword(() => event.target.value);
     }
 
-    const resetUserConfirmPasswordErrorStatus = () => {
-        setUserConfirmPasswordErrorStatus({ text: undefined, status: false });
+    const resetUserConfirmPasswordErrorStatus = (text = undefined) => {
+        setUserConfirmPasswordErrorStatus({ text: text, status: false });
     }
 
     const isUserConfirmPasswordValid = () => {
@@ -151,7 +152,7 @@ export default function RegisterPage(){
                 return false;
             }
             else{
-                resetUserConfirmPasswordErrorStatus();
+                resetUserConfirmPasswordErrorStatus(warningMessages.CONFIRM_PASSWORD_VALID);
             }
         }
         return true;
@@ -166,7 +167,7 @@ export default function RegisterPage(){
             setUserConfirmPasswordErrorStatus({ text: warningMessages.CONFIRM_PASSWORD_INVALID, status: true });
         }
         else{
-            resetUserConfirmPasswordErrorStatus();
+            resetUserConfirmPasswordErrorStatus(warningMessages.CONFIRM_PASSWORD_VALID);
         }
     }
 
@@ -176,10 +177,7 @@ export default function RegisterPage(){
     }, [userConfirmPassword, userPassword]);
 
 
-
-    //---------------------------------------------------------------------------------------------
-
-    //-----------------------------------------REGISTER CHECKBOX-----------------------------------
+    //--------------------------------------REGISTER CHECKBOX--------------------------------------
     const[registerCheckboxOptions, setRegisterCheckboxOptions] = useState(() => [
         {
             text: 'Agree with the Terms and Conditions',
@@ -189,7 +187,7 @@ export default function RegisterPage(){
         {
             text: 'Subscrible to Email Notifications',
             isSelected: false,
-        },
+        }
     ]);
 
     const registerCheckboxOptionsHandler = (updatedRegisterOptions)=>{
@@ -203,43 +201,38 @@ export default function RegisterPage(){
     }, [registerCheckboxOptions]);
 
 
-    useEffect(() => {
-        resetUserFirstNameErrorStatus();
-        resetUserLastNameErrorStatus();
-    }, []);
+    //-------------------------------FORM SUBMIT HANDLER------------------------------
+    const [registerFormSubmitLock, setRegisterFormSubmitLock] = useState(() => false);
 
-    const getUrlEncoded = (formData) => {
-        let formBody = [];
-        for(let element in formData){
-            let key = encodeURIComponent(element);
-            let value = encodeURIComponent(formData[element]);
-            formBody.push(key + "=" + value);
-        }
-        formBody = formBody.join('&');
-        return formBody;
-    }
-
-    const formSubmit = async(url, formBody) => {
-            let response = await fetch(url, {
-                method: 'POST',
-                headers:{
-                    'Content-type' : 'application/x-www-form-urlencoded; charset=UTF-8'
-                },
-                body: formBody
-            });
-            console.log(await response.json());
-    }
-
-    const onRegisterSubmit = () => {
+    const preSubmissionCheck = ()=>{
         let firstNameValid = isUserFirstNameValid();
         let lastNameValid = isUserLastNameValid();
         let emailIdValid = isUserEmailIdValid();
         let passwordValid = isUserPasswordValid();
         let confirmPasswordValid = isUserConfirmPasswordValid();
-        if(firstNameValid && lastNameValid && emailIdValid && passwordValid && confirmPasswordValid){
-            let registerFormBody = getUrlEncoded({ firstName: userFirstName, lastName: userLastName, emailId: userEmailId, password: userPassword });
-            console.log(registerFormBody);
-            formSubmit("/register", registerFormBody);
+        if(!firstNameValid || !lastNameValid || !emailIdValid || !passwordValid || !confirmPasswordValid){
+            return false;
+        }
+        return true;
+    }
+
+    const onRegisterSubmit = async() => {
+        if(!registerFormSubmitLock){
+            if(preSubmissionCheck()){
+                setRegisterFormSubmitLock(true);
+                let registerFormData = { firstName: userFirstName, lastName: userLastName, emailId: userEmailId, password: userPassword };
+                let res = await AuthServices.registerFormSubmit(registerFormData);
+                switch(res.status_code){
+                    case 202100: break;
+                    case 202101: setUserEmailIdErrorStatus({ text : warningMessages.EMAIL_ID_EXISTS, status: true }); break;
+                    case 202111: break;
+                    case 999999: break;
+                    default: break;
+                }
+                setTimeout(() => {
+                    setRegisterFormSubmitLock(false);
+                }, 300)
+            }
         }
     }
 
@@ -251,11 +244,12 @@ export default function RegisterPage(){
             <PasswordInput round placeholder={'Password'} onChange={userPasswordInputHandler} onFocus={resetUserPasswordErrorStatus} onBlur={isUserPasswordValid} subLabelMessage={userPasswordErrorStatus.text} errorMark={userPasswordErrorStatus.status}/>
             <PasswordInput round placeholder={'Confirm Password'} onChange={userConfirmPasswordInputHandler} onBlur={isUserConfirmPasswordValid} subLabelMessage={userConfirmPasswordErrorStatus.text} errorMark={userConfirmPasswordErrorStatus.status}/>
             <CheckboxGroup optionsList={registerCheckboxOptions} onChange={registerCheckboxOptionsHandler}></CheckboxGroup>
-            <DefaultButton round primary wide disabled={isRegisterButtonDisabled} onClick={onRegisterSubmit}>Register</DefaultButton>
+
+            <DefaultButton round primary wide disabled={isRegisterButtonDisabled} onMouseUp={onRegisterSubmit}>{ registerFormSubmitLock ? <Spinner1 light></Spinner1> : `Register`}</DefaultButton>
         </div>
     )
 
     return(
-        <AuthPageTemplate AuthForm={RegisterForm}></AuthPageTemplate>
+        <AuthPageTemplate>{RegisterForm}</AuthPageTemplate>
     )
 }
