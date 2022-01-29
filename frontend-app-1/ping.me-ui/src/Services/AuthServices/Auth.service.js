@@ -12,6 +12,10 @@ const responseStatusMessages = {
         status_code: 102121,
         status_message: "Login Failed! Invalid Password"
     },
+    LOGIN_FAIL_OTHER: {
+        status_code: 102111,
+        status_message: "Login Failed! Other issue occured"
+    },
     REGISTER_SUCCESS: {
         status_code: 202100,
         status_message: "Successful Registration!"
@@ -62,11 +66,11 @@ export async function registerFormSubmit(registerFormObject){
         let backendResponse = await formSubmit("/register", registerFormObject);
         console.log(backendResponse);
         // if an internal server error occured - server unable to process any requests
-        if(backendResponse.status === 500){
+        if(backendResponse.status >= 500){
             return responseStatusMessages.SERVER_ERR;
         }
         let responseJson = await backendResponse.json();
-        console.log(responseJson)
+        console.log("Register Response -> " + JSON.stringify(responseJson));
         if(backendResponse.status === 200){
             return responseStatusMessages.REGISTER_SUCCESS;
         }
@@ -86,8 +90,29 @@ export async function registerFormSubmit(registerFormObject){
 
 }
 
-export function loginFormSubmit(loginFormObject){
-
+export async function loginFormSubmit(loginFormObject){
+    try{
+        let backendResponse = await formSubmit("/login", loginFormObject);
+        console.log(backendResponse);
+        if(backendResponse.status >= 500){
+            return responseStatusMessages.SERVER_ERR;
+        }
+        let responseJson = await backendResponse.json();
+        console.log("Login Response -> " + JSON.stringify(responseJson));
+        if(backendResponse.status === 200){
+            return responseStatusMessages.LOGIN_SUCCESS;
+        }
+        if(backendResponse.status >= 400){
+            switch(responseJson.err_code){
+                case 102401: return responseStatusMessages.LOGIN_FAIL_INVALID_PASSWORD;
+                case 102404: return responseStatusMessages.LOGIN_FAIL_INVALID_EMAIL_ID;
+                default: return responseStatusMessages.LOGIN_FAIL_OTHER;
+            }
+        }
+    }
+    catch(err){
+        console.log(err);
+    }
 }
 
 export function passwordResetFormSubmit(passwordResetFormObject){

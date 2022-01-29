@@ -22,9 +22,10 @@ exports.defaultLoginMessage = function(){
 // throw other errors if any
 exports.defaultUserLogin = async function(userCredentials){
     try{
+        console.log("defaultUserLogin() service ->");
         let loginUser = await ChatUserDAO.findUserById(userCredentials.emailId);
         if(!loginUser){ 
-            console.log('No such user found');
+            console.log('User doesnot exist');
             throw Errors.USER_EMAIL_ID_DOES_NOT_EXIST_ERR;
         }
         if( !await bcrypt.compare(userCredentials.password, loginUser.password) ){

@@ -14,7 +14,6 @@
 	border-radius: 999px;
 	border-width: 2px;
 	border-style: solid;
-	border-color: #000 transparent #000 transparent;
 	animation: lds-dual-ring 1s cubic-bezier(.65, -0.57, .4, 1.52) infinite;
 }
 
@@ -25,7 +24,6 @@
 .loader-dual-ring, .loader-ring.dark{
 	border-color: #000 transparent #000 transparent;
 }
-
 
 .loader-div.sm{
 	width: 18px;

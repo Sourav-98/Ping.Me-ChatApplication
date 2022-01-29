@@ -4,6 +4,7 @@ import { useState } from 'react';
 import AuthPageTemplate from '../templates/AuthPage.template';
 import { AuthWarningMessageConstants as warningMessages } from '../AuthUtils/AuthWarningMessages';
 import  * as AuthUtils from './../AuthUtils/AuthUtilities';
+import * as AuthServices from 'Services/AuthServices/Auth.service';
 
 import GoogleSvg from 'assets/google-color.svg';
 import FacebookSvg from 'assets/facebook-color.svg';
@@ -14,8 +15,9 @@ import { PasswordInput } from 'elements/Input/PasswordInput/PasswordInput';
 import { DefaultButton } from 'elements/Button/DefaultButton/DefaultButton';
 import { CheckboxGroup } from 'elements/Input/CheckboxGroup/CheckboxGroup';
 
+import Spinner1 from 'elements/PreLoaders/Spinner1/Spinner1';
+
 import './LoginPage.css';
-import { faLessThanEqual, faSleigh } from '@fortawesome/free-solid-svg-icons';
 
 export default function LoginPage({breakpoints, windowWidth, ...props}){
 
@@ -85,7 +87,9 @@ export default function LoginPage({breakpoints, windowWidth, ...props}){
         setLoginCheckboxOptions(() => updatedLoginOptions);
     }
 
-    //-------------------------------------FORM SUBMIT------------------------------------------------
+    //-------------------------------------FORM SUBMIT HANDLER------------------------------------------
+
+    const [loginFormSubmitLock, setLoginFormSubmitLock] = useState(() => false);
 
     const preSubmissionCheck = () => {
         let emailIdValid = isUserEmailIdValid();
@@ -97,24 +101,21 @@ export default function LoginPage({breakpoints, windowWidth, ...props}){
     }
 
     const loginFormSubmit = async() => {
-        if(preSubmissionCheck()){
-            let loginFormData = { emailId: userEmailId, password: userPassword };
-            try{
-                let response = await AuthUtils.formSubmit("/login", loginFormData);
-                if(response.status >= 400){
-                    console.log('Error in Reponse --> ');
-                    throw new Error("Response Error -> Status : " + response.status);
+        if(!loginFormSubmitLock){
+            if(preSubmissionCheck()){
+                setLoginFormSubmitLock(() => true);
+                let loginFormData = { emailId: userEmailId, password: userPassword };
+                let response = await AuthServices.loginFormSubmit(loginFormData);
+                switch(response.status_code){
+                    case 102000: console.log(response.status_message); break;
+                    case 102101: setUserEmailIdErrorStatus({ text: warningMessages.EMAIL_ID_INCORRECT, status: true}); break;
+                    case 102121: setUserPasswordErrorStatus({ text: warningMessages.PASSWORD_INCORRECT, status: true}); break;
+                    default: console.log(response.status_message); break;
                 }
-                else{
-                    let responseJson = response.json();
-                    console.log(responseJson);
-                }
-
+                setTimeout(() => {
+                    setLoginFormSubmitLock(() => false);
+                }, 500);
             }
-            catch(err){
-                console.log(err);
-            }
-            
         }
     }
 
@@ -126,7 +127,7 @@ export default function LoginPage({breakpoints, windowWidth, ...props}){
             <TextInput round type={'text'} placeholder={'Email Id'} onChange={userEmailIdInputHandler} onFocus={resetUserEmailIdErrorStatus} subLabelMessage={userEmailIdErrorStatus.text} errorMark={userEmailIdErrorStatus.status}></TextInput>
             <PasswordInput round placeholder={'Password'} onChange={userPasswordInputHandler} onFocus={resetUserPasswordErrorStatus} subLabelMessage={userPasswordErrorStatus.text} errorMark={userPasswordErrorStatus.status}></PasswordInput>
             <CheckboxGroup optionsList={loginCheckboxOptions} onChange={loginCheckboxOptionsHandler}></CheckboxGroup>
-            <DefaultButton wide round outlined primary onClick={loginFormSubmit}>Login</DefaultButton>
+            <DefaultButton wide round primary onClick={loginFormSubmit}>{ loginFormSubmitLock ? <Spinner1 light></Spinner1> : `Login`}</DefaultButton>
             <hr></hr>
             <div className='passport-login-options-div'>
                 <button className="passport-login-option">
@@ -151,8 +152,6 @@ export default function LoginPage({breakpoints, windowWidth, ...props}){
     );
 
     return(
-        <>
-            <AuthPageTemplate AuthForm={LoginForm}></AuthPageTemplate>
-        </>
+        <AuthPageTemplate>{LoginForm}</AuthPageTemplate>
     )
 }

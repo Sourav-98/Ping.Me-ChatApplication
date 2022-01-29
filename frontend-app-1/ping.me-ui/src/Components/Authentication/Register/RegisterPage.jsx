@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 
 import * as AuthServices from 'Services/AuthServices/Auth.service';
 import { AuthWarningMessageConstants as warningMessages } from '../AuthUtils/AuthWarningMessages';
-import AuthPageTemplate from "Components/Auth/templates/AuthPage.template";
+import AuthPageTemplate from "Components/Authentication/templates/AuthPage.template";
 import './RegisterPage.css';
 
 import Spinner1 from 'elements/PreLoaders/Spinner1/Spinner1';
@@ -244,8 +244,7 @@ export default function RegisterPage(){
             <PasswordInput round placeholder={'Password'} onChange={userPasswordInputHandler} onFocus={resetUserPasswordErrorStatus} onBlur={isUserPasswordValid} subLabelMessage={userPasswordErrorStatus.text} errorMark={userPasswordErrorStatus.status}/>
             <PasswordInput round placeholder={'Confirm Password'} onChange={userConfirmPasswordInputHandler} onBlur={isUserConfirmPasswordValid} subLabelMessage={userConfirmPasswordErrorStatus.text} errorMark={userConfirmPasswordErrorStatus.status}/>
             <CheckboxGroup optionsList={registerCheckboxOptions} onChange={registerCheckboxOptionsHandler}></CheckboxGroup>
-
-            <DefaultButton round primary wide disabled={isRegisterButtonDisabled} onMouseUp={onRegisterSubmit}>{ registerFormSubmitLock ? <Spinner1 light></Spinner1> : `Register`}</DefaultButton>
+            <DefaultButton round primary wide disabled={isRegisterButtonDisabled} onMouseUp={onRegisterSubmit}>{ registerFormSubmitLock ? <Spinner1 light></Spinner1> : 'Register'}</DefaultButton>
         </div>
     )
 

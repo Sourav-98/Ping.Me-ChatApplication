@@ -8,7 +8,7 @@ const Errors = {
     USER_EMAIL_ID_DOES_NOT_EXIST_ERR: {
         err_code: 102404,
         err_message: "User Email Id not registered!",
-        http_status_code: 401
+        http_status_code: 400
     },
     USER_PASSWORD_INCORRECT_ERR:{
         err_code: 102401,

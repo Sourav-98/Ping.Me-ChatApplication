@@ -6,6 +6,7 @@ export const AuthWarningMessageConstants = {
     LAST_NAME_INVALID : 'Please enter a valid Last Name',
     EMAIL_ID_EMPTY : 'Email Id should not be empty',
     EMAIL_ID_INVALID : 'Please enter a valid Email Id',
+    EMAIL_ID_INCORRECT: 'Please enter the correct Email Id',
     EMAIL_ID_EXISTS : 'This Email Id already exists',
     PASSWORD_EMPTY : 'Password should not be empty',
     PASSWORD_INVALID : 'Please enter a valid Password',
