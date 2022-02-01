@@ -2,11 +2,16 @@
 import { MdCheckBox, MdCheckBoxOutlineBlank} from 'react-icons/md';
 
 import { CgAsterisk } from 'react-icons/cg';
-import './CheckboxGroup.css';
+import './CheckboxGroupInput.css';
 
-// options = Array<{text: , isSelected: }>
-export function CheckboxGroup({optionsList, onChange, ...props}){
-
+/**
+ * CheckboxGroupInput - a React implementation for checkbox input
+ * param - optionsList -> a list of options of type Array<{text: string, isSelected: boolean, [required: boolean]}>
+ * param -> onChange -> a function passed down by the parent component to handle the change in the selected option
+ */
+export default function CheckboxGroupInput({optionsList, onChange, ...props}){
+    
+    /** optionToggler -> handles the change in the list of selected options */
     const optionToggler = (optionIndex)=>{
         let tempOptions = [...optionsList];
         tempOptions[optionIndex].isSelected = !tempOptions[optionIndex].isSelected;

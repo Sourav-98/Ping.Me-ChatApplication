@@ -2,20 +2,18 @@
 import { useState } from 'react';
 
 import AuthPageTemplate from '../templates/AuthPage.template';
-import { AuthWarningMessageConstants as warningMessages } from '../AuthUtils/AuthWarningMessages';
-import  * as AuthUtils from './../AuthUtils/AuthUtilities';
+
+import * as AuthUtilities from './../AuthUtils/AuthUtilities';
+import { AuthWarningConstants as warningMessages } from '../AuthUtils/AuthWarningMessages';
 import * as AuthServices from 'Services/AuthServices/Auth.service';
 
 import GoogleSvg from 'assets/google-color.svg';
 import FacebookSvg from 'assets/facebook-color.svg';
 import TwitterSvg from 'assets/twitter-color.svg';
 
-import { TextInput } from 'elements/Input/TextInput/TextInput';
-import { PasswordInput } from 'elements/Input/PasswordInput/PasswordInput';
-import { DefaultButton } from 'elements/Button/DefaultButton/DefaultButton';
-import { CheckboxGroup } from 'elements/Input/CheckboxGroup/CheckboxGroup';
-
-import Spinner1 from 'elements/PreLoaders/Spinner1/Spinner1';
+import { TextInput, PasswordInput, CheckboxGroupInput } from 'Components/Elements/Input';
+import { DefaultButton } from 'Components/Elements/Button';
+import { SemiSpinner } from 'Components/Elements/PreLoaders';
 
 import './LoginPage.css';
 
@@ -34,22 +32,13 @@ export default function LoginPage({breakpoints, windowWidth, ...props}){
     }
 
     const isUserEmailIdValid = () => {
-        if(!userEmailId){
-            setUserEmailIdErrorStatus({text : warningMessages.EMAIL_ID_EMPTY, status: true});
-            return false;
+        let checkResult = AuthUtilities.isUserEmailIdValid(userEmailId);
+        switch(checkResult){
+            case 0: setUserEmailIdErrorStatus({text : warningMessages.EMAIL_ID_EMPTY, status: true}); return false;
+            case -1: setUserEmailIdErrorStatus({text : warningMessages.EMAIL_ID_INVALID, status: true}); return false;
+            case 1: return true;
+            default: return true;
         }
-        else{
-            // Email Regex
-            let emailRegex = /[a-zA-Z0-9\._]+@[a-z]{3,10}\.[a-z]{2,5}/s;
-            if(!emailRegex.test(userEmailId)){
-                setUserEmailIdErrorStatus({text : warningMessages.EMAIL_ID_INVALID, status: true});
-                return false;
-            }
-            else{
-                resetUserEmailIdErrorStatus();
-            }
-        }
-        return true;
     }
 
     //--------------------------------------Password-------------------------------------------------------
@@ -65,14 +54,13 @@ export default function LoginPage({breakpoints, windowWidth, ...props}){
     }
 
     const isUserPasswordInputValid = () => {
-        if(!userPassword){
-            setUserPasswordErrorStatus({text : warningMessages.PASSWORD_EMPTY, status: true});
-            return false;
+        let checkResult = AuthUtilities.isPasswordValid(userPassword);
+        switch(checkResult){
+            case 0: setUserPasswordErrorStatus({ text: warningMessages.PASSWORD_EMPTY, status: true }); return false;
+            case -1: return false;
+            case 1: resetUserPasswordErrorStatus(); return true;
+            default: return true;
         }
-        else{
-            resetUserPasswordErrorStatus();
-        }
-        return true;
     }
 
     //--------------------------------------Login Checkbox----------------------------------------------
@@ -126,8 +114,8 @@ export default function LoginPage({breakpoints, windowWidth, ...props}){
             <h3>Login</h3>
             <TextInput round type={'text'} placeholder={'Email Id'} onChange={userEmailIdInputHandler} onFocus={resetUserEmailIdErrorStatus} subLabelMessage={userEmailIdErrorStatus.text} errorMark={userEmailIdErrorStatus.status}></TextInput>
             <PasswordInput round placeholder={'Password'} onChange={userPasswordInputHandler} onFocus={resetUserPasswordErrorStatus} subLabelMessage={userPasswordErrorStatus.text} errorMark={userPasswordErrorStatus.status}></PasswordInput>
-            <CheckboxGroup optionsList={loginCheckboxOptions} onChange={loginCheckboxOptionsHandler}></CheckboxGroup>
-            <DefaultButton wide round primary onClick={loginFormSubmit}>{ loginFormSubmitLock ? <Spinner1 light></Spinner1> : `Login`}</DefaultButton>
+            <CheckboxGroupInput optionsList={loginCheckboxOptions} onChange={loginCheckboxOptionsHandler}></CheckboxGroupInput>
+            <DefaultButton wide round primary onClick={loginFormSubmit}>{ loginFormSubmitLock ? <SemiSpinner light></SemiSpinner> : `Login`}</DefaultButton>
             <hr></hr>
             <div className='passport-login-options-div'>
                 <button className="passport-login-option">

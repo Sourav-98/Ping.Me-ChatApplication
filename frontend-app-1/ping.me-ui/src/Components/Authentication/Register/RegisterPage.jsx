@@ -2,16 +2,15 @@
 import { useState, useEffect } from 'react';
 
 import * as AuthServices from 'Services/AuthServices/Auth.service';
-import { AuthWarningMessageConstants as warningMessages } from '../AuthUtils/AuthWarningMessages';
+import * as AuthUtilities from './../AuthUtils/AuthUtilities';
+import { AuthWarningConstants as warningMessages } from '../AuthUtils/AuthWarningMessages';
 import AuthPageTemplate from "Components/Authentication/templates/AuthPage.template";
 import './RegisterPage.css';
 
-import Spinner1 from 'elements/PreLoaders/Spinner1/Spinner1';
-
-import { TextInput } from 'elements/Input/TextInput/TextInput';
-import { PasswordInput } from 'elements/Input/PasswordInput/PasswordInput';
-import { CheckboxGroup } from 'elements/Input/CheckboxGroup/CheckboxGroup';
-import { DefaultButton } from 'elements/Button/DefaultButton/DefaultButton';
+import { TextInput, PasswordInput, CheckboxGroupInput } from 'Components/Elements/Input';
+import { Alert } from 'Components/Elements/Notifications';
+import { DefaultButton } from 'Components/Elements/Button';
+import { SemiSpinner } from 'Components/Elements/PreLoaders';
 
 export default function RegisterPage(){
 
@@ -28,21 +27,13 @@ export default function RegisterPage(){
     }
 
     const isUserFirstNameValid = () => {
-        if(!userFirstName){
-            setUserFirstNameErrorStatus({ text: warningMessages.FIRST_NAME_EMPTY, status: true});
-            return false;
+        let checkResult = AuthUtilities.isFirstNameValid(userFirstName);
+        switch(checkResult){
+            case 0: setUserFirstNameErrorStatus({ text: warningMessages.FIRST_NAME_EMPTY, status: true}); return false;
+            case -1: setUserFirstNameErrorStatus({ text: warningMessages.FIRST_NAME_INVALID, status: true}); return false;
+            case 1: resetUserFirstNameErrorStatus(); return true;
+            default: return true;
         }
-        else{
-            let firstNameRegex = /^[a-zA-Z]+$/;  // Match a valid first name only
-            if(!firstNameRegex.test(userFirstName)){
-                setUserFirstNameErrorStatus({ text: warningMessages.FIRST_NAME_INVALID, status: true});
-                return false;
-            }
-            else{
-                resetUserFirstNameErrorStatus();
-            }
-        }
-        return true;
     }
 
     //-----------------------------------------LAST NAME---------------------------------------------
@@ -58,21 +49,13 @@ export default function RegisterPage(){
     }
 
     const isUserLastNameValid = () => {
-        if(!userLastName){
-            setUserLastNameErrorStatus({ text: warningMessages.LAST_NAME_EMPTY, status: true});
-            return false;
+        let checkResult = AuthUtilities.isLastNameValid(userLastName);
+        switch(checkResult){
+            case 0: setUserLastNameErrorStatus({ text: warningMessages.LAST_NAME_EMPTY, status: true}); return false;
+            case -1: setUserLastNameErrorStatus({ text: warningMessages.LAST_NAME_INVALID, status: true}); return false;
+            case 1: resetUserLastNameErrorStatus(); return true;
+            default: return true;
         }
-        else{
-            let lastNameRegex = /^[a-zA-Z][a-zA-Z\s]*[a-zA-Z]$/; // Match a valid last name only
-            if(!lastNameRegex.test(userLastName)){
-                setUserLastNameErrorStatus({ text: warningMessages.LAST_NAME_INVALID, status: true});
-                return false;
-            }
-            else{
-                resetUserLastNameErrorStatus();
-            }
-        }
-        return true;
     }
 
     //----------------------------------------EMAIL ID--------------------------------------------
@@ -88,22 +71,13 @@ export default function RegisterPage(){
     }
 
     const isUserEmailIdValid = () => {
-        if(!userEmailId){
-            setUserEmailIdErrorStatus({text : warningMessages.EMAIL_ID_EMPTY, status: true});
-            return false;
+        let checkResult = AuthUtilities.isUserEmailIdValid(userEmailId);
+        switch(checkResult){
+            case 0: setUserEmailIdErrorStatus({text : warningMessages.EMAIL_ID_EMPTY, status: true}); return false;
+            case -1: setUserEmailIdErrorStatus({text : warningMessages.EMAIL_ID_INVALID, status: true}); return false;
+            case 1: return true;
+            default: return true;
         }
-        else{
-            // Email Regex
-            let emailRegex = /[a-zA-Z0-9\._]+@[a-z]{3,10}\.[a-z]{2,5}/s;
-            if(!emailRegex.test(userEmailId)){
-                setUserEmailIdErrorStatus({text : warningMessages.EMAIL_ID_INVALID, status: true});
-                return false;
-            }
-            else{
-                resetUserEmailIdErrorStatus();
-            }
-        }
-        return true;
     }
 
     //--------------------------------------PASSWORD----------------------------------------------
@@ -119,14 +93,13 @@ export default function RegisterPage(){
     }
 
     const isUserPasswordValid = () => {
-        if(!userPassword){
-            setUserPasswordErrorStatus({ text: warningMessages.PASSWORD_EMPTY, status: true });
-            return false;
+        let checkResult = AuthUtilities.isPasswordValid(userPassword);
+        switch(checkResult){
+            case 0: setUserPasswordErrorStatus({ text: warningMessages.PASSWORD_EMPTY, status: true }); return false;
+            case -1: return false;
+            case 1: resetUserPasswordErrorStatus(); return true;
+            default: return true;
         }
-        else{
-            resetUserPasswordErrorStatus();
-        }
-        return true;
     }
 
     //---------------------------------------CONFIRM PASSWORD--------------------------------------
@@ -142,32 +115,22 @@ export default function RegisterPage(){
     }
 
     const isUserConfirmPasswordValid = () => {
-        if(!userConfirmPassword){
-            setUserConfirmPasswordErrorStatus({ text: warningMessages.CONFIRM_PASSWORD_EMPTY, status: true});
-            return false;
+        let checkResult = AuthUtilities.isConfirmPasswordValid(userConfirmPassword, userPassword);
+        switch(checkResult){
+            case 0: setUserConfirmPasswordErrorStatus({ text: warningMessages.CONFIRM_PASSWORD_EMPTY, status: true}); return false;
+            case -1: setUserConfirmPasswordErrorStatus({ text: warningMessages.CONFIRM_PASSWORD_INVALID, status: true}); return false;
+            case 1: resetUserConfirmPasswordErrorStatus(warningMessages.CONFIRM_PASSWORD_VALID); return true;
+            default: return true;
         }
-        else{
-            if(userConfirmPassword !== userPassword){
-                setUserConfirmPasswordErrorStatus({ text: warningMessages.CONFIRM_PASSWORD_INVALID, status: true});
-                return false;
-            }
-            else{
-                resetUserConfirmPasswordErrorStatus(warningMessages.CONFIRM_PASSWORD_VALID);
-            }
-        }
-        return true;
     }
 
     const userConfirmPasswordChecker = () => {
-        if(!userConfirmPassword){
-            resetUserConfirmPasswordErrorStatus();
-            return;
-        }
-        if(userPassword !== userConfirmPassword){
-            setUserConfirmPasswordErrorStatus({ text: warningMessages.CONFIRM_PASSWORD_INVALID, status: true });
-        }
-        else{
-            resetUserConfirmPasswordErrorStatus(warningMessages.CONFIRM_PASSWORD_VALID);
+        let checkResult = AuthUtilities.isConfirmPasswordValid(userConfirmPassword, userPassword);
+        switch(checkResult){
+            case 0: resetUserConfirmPasswordErrorStatus(); return;
+            case -1: setUserConfirmPasswordErrorStatus({ text: warningMessages.CONFIRM_PASSWORD_INVALID, status: true }); return;
+            case 1: resetUserConfirmPasswordErrorStatus(warningMessages.CONFIRM_PASSWORD_VALID); return;
+            default: return;
         }
     }
 
@@ -236,6 +199,16 @@ export default function RegisterPage(){
         }
     }
 
+    const [isAlertVisible, setIsAlertVisible] = useState(() => false);
+
+    const alertClose = () => {
+        setIsAlertVisible(() => false);
+    }
+
+    const toggleShowAlert = () => {
+        setIsAlertVisible((isVisible) => !isVisible);
+    }
+
     const RegisterForm = (
         <div className="register-form-main-div">
             <TextInput type={'text'} round placeholder={'First Name'} onChange={userFirstNameInputHandler} onFocus={resetUserFirstNameErrorStatus} onBlur={isUserFirstNameValid} subLabelMessage={userFirstNameErrorStatus.text} errorMark={userFirstNameErrorStatus.status}/>
@@ -243,8 +216,10 @@ export default function RegisterPage(){
             <TextInput type={'email'} round placeholder={'Email Id'} onChange={userEmailIdInputHandler} onFocus={resetUserEmailIdErrorStatus} onBlur={isUserEmailIdValid} subLabelMessage={userEmailIdErrorStatus.text} errorMark={userEmailIdErrorStatus.status}/>
             <PasswordInput round placeholder={'Password'} onChange={userPasswordInputHandler} onFocus={resetUserPasswordErrorStatus} onBlur={isUserPasswordValid} subLabelMessage={userPasswordErrorStatus.text} errorMark={userPasswordErrorStatus.status}/>
             <PasswordInput round placeholder={'Confirm Password'} onChange={userConfirmPasswordInputHandler} onBlur={isUserConfirmPasswordValid} subLabelMessage={userConfirmPasswordErrorStatus.text} errorMark={userConfirmPasswordErrorStatus.status}/>
-            <CheckboxGroup optionsList={registerCheckboxOptions} onChange={registerCheckboxOptionsHandler}></CheckboxGroup>
-            <DefaultButton round primary wide disabled={isRegisterButtonDisabled} onMouseUp={onRegisterSubmit}>{ registerFormSubmitLock ? <Spinner1 light></Spinner1> : 'Register'}</DefaultButton>
+            <CheckboxGroupInput optionsList={registerCheckboxOptions} onChange={registerCheckboxOptionsHandler}></CheckboxGroupInput>
+            <DefaultButton round primary wide disabled={isRegisterButtonDisabled} onMouseUp={onRegisterSubmit}>{ registerFormSubmitLock ? <SemiSpinner light></SemiSpinner> : 'Register'}</DefaultButton>
+            <DefaultButton round primary outlined sm onClick={toggleShowAlert}>Show Alert</DefaultButton>
+            <Alert isVisible={isAlertVisible} closeFunc={alertClose}></Alert>
         </div>
     )
 

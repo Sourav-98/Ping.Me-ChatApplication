@@ -1,9 +1,15 @@
-import './RadioGroup.css';
+import './RadioGroupInput.css';
 
 import { IoMdRadioButtonOff, IoMdRadioButtonOn } from 'react-icons/io';
 
-export default function RadioGroup({optionsList, onChange, ...props}){
-
+/**
+ * RadioGroupInput - a React implementation for radio button input
+ * param - optionsList -> a list of options containing an object {text: string, isSelected : boolean}
+ * param -> onChange -> a function passed down by the parent component to handle the change in the selected option
+ */
+export default function RadioGroupInput({optionsList, onChange, ...props}){
+    
+    /** optionToggler - handles the change in the selected option */
     const optionToggler = (optionIndex) => {
         onChange(optionsList.filter((option, index) => {
             if(index === optionIndex){

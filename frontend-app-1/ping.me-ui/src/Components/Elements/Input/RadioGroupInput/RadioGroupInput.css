@@ -1,12 +1,12 @@
 
-.checkbox-input-group{
+.radio-input-group{
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     margin-bottom: 6px;
 }
 
-.checkbox-input-group > .checkbox-input-item{
+.radio-input-group > .radio-input-item{
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
@@ -14,7 +14,7 @@
     margin-bottom: 6px;
 }
 
-.checkbox-input-item > .checkbox-input-icon-div{
+.radio-input-item > .radio-input-icon-div{
     box-sizing: border-box;
     width: 22px;
     /* height: 22px; */
@@ -25,15 +25,13 @@
     align-items: center;
     color: rgb(0, 86, 216);
     transform: scale(1.0);
-    -wedkit-transition: 0.08s ease-in-out;
-    transition: 0.08s ease-in-out;
 }
 
-.checkbox-input-icon-div:active{
-    transform: scale(0.9);
+.radio-input-icon-div:active{
+    color: rgb(32, 121, 255);
 }
 
-.checkbox-input-item > .checkbox-input-text{
+.radio-input-item > .radio-input-text{
     box-sizing: border-box;
     font-size: 16px;
     display: flex;
@@ -41,7 +39,7 @@
     align-items: center;
 }
 
-.checkbox-input-text > div{
+.radio-input-text > div{
     height: 100%;
     display: flex;
     flex-direction: column;

@@ -2,10 +2,10 @@
 import { useState } from 'react';
 import { IoEyeOutline, IoEyeOffOutline } from 'react-icons/io5';
 
-import { TextInput } from 'elements/Input/TextInput/TextInput';
+import TextInput from 'Components/Elements/Input/TextInput/TextInput';
 import './PasswordInput.css';
 
-export function PasswordInput({type, placeholder, onChange, onFocus, onBlur, subLabelMessage, round, sm, md, lg, errorMark, ...props}){
+export default function PasswordInput({type, placeholder, onChange, onFocus, onBlur, subLabelMessage, round, sm, md, lg, errorMark, ...props}){
 
     const [passwordVisible, setPasswordVisible] = useState(false);
 

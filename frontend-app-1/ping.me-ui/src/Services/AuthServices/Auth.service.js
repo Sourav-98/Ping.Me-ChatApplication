@@ -60,7 +60,6 @@ function getUrlEncoded(formObject){
     return formBody;
 }
 
-
 export async function registerFormSubmit(registerFormObject){
     try{
         let backendResponse = await formSubmit("/register", registerFormObject);

@@ -1,7 +1,7 @@
 
 import './TextInput.css';
 
-export function TextInput({type, placeholder, onChange, onFocus, onBlur, subLabelMessage, round, sm, md, lg, errorMark, ...props}){
+export default function TextInput({type, placeholder, onChange, onFocus, onBlur, subLabelMessage, round, sm, md, lg, errorMark, ...props}){
 
     return(
         <div className='cm-input-div'>

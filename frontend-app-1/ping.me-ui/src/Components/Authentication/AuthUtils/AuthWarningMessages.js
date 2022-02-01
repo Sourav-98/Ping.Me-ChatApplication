@@ -1,5 +1,5 @@
 
-export const AuthWarningMessageConstants = {
+export const AuthWarningConstants = {
     FIRST_NAME_EMPTY : 'First Name should not be empty',
     FIRST_NAME_INVALID : 'Please enter a valid First Name',
     LAST_NAME_EMPTY : 'Last Name should not be empty',

@@ -1,0 +1,49 @@
+
+.alert-div{
+    position: fixed;
+    top: 30px;
+    left: 50%;
+    z-index: 1;
+    max-width: 560px;
+    width: 88%;
+    height: 80px;
+    transform: translateX(-50%);
+    border: 1px solid rgba(0, 0, 0, 0);
+    border-radius: 10px;
+    background-color: white;
+    box-sizing: border-box;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.alert-div.top-right{
+    top: 30px;
+    right: 20px;
+}
+
+.alert-div.top-left{
+    top: 30px;
+    left: 20px;
+}
+
+.alert-div.top-center{
+
+}
+
+.alert-div-enter{
+    transform: translateX(-50%) scale(0);
+}
+
+.alert-div-enter-active{
+    transform: translateX(-50%) scale(1);
+    transition: 0.2s ease;
+}
+
+.alert-div-exit{
+    transform: translateX(-50%) scale(1);
+}
+
+.alert-div-exit-active{
+    opacity: 0;
+    transform: translateX(-50%) scale(0);
+    transition: 0.2s ease-in;
+}
