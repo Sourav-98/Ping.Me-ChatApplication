@@ -1,7 +1,9 @@
 
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 
 import AuthPageTemplate from '../templates/AuthPage.template';
+
+import AlertContext from 'Components/Utilities/AlertContext';
 
 import * as AuthUtilities from './../AuthUtils/AuthUtilities';
 import { AuthWarningConstants as warningMessages } from '../AuthUtils/AuthWarningMessages';
@@ -18,6 +20,10 @@ import { SemiSpinner } from 'Components/Elements/PreLoaders';
 import './LoginPage.css';
 
 export default function LoginPage({breakpoints, windowWidth, ...props}){
+
+    //---------------------Alert Context setup------------------------
+
+    const alertContext = useContext(AlertContext);
 
     //--------------------------------------Username-------------------------------------------------------
     const [userEmailId, setUserEmailId] = useState(() => undefined);

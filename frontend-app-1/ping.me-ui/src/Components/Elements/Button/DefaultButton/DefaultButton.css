@@ -8,8 +8,8 @@
     outline: none;
     opacity: 1.0;
     font-family: inherit;
-    font-weight: bold;
-    color: rgb(255, 255, 255);
+    font-weight: bolder;
+    color: rgba(255, 255, 255, 1);
     cursor: pointer;
     border-radius: 5px;
     -webkit-transition: 0.12s ease-in-out;
@@ -55,74 +55,73 @@
 
 /* PRIMARY */
 .cm-button.primary{
-    background-color: rgb(38, 125, 255);
-    border: 1px solid rgb(38, 125, 255);
+    background-color: rgba(38, 125, 255, 1);
+    border: 1px solid rgba(38, 125, 255, 1);
 }
 
 .cm-button.primary:hover{
-    background-color: rgb(23, 110, 250);
+    background-color: rgba(23, 110, 250, 1);
 }
 
 .cm-button.primary:active{
-    background-color: rgb(8, 95, 245);
+    background-color: rgba(8, 95, 245, 1);
 }
 
 /* SECONDARY */
 .cm-button.secondary{
-    background-color: rgb(110, 110, 110);
-    border: 1px solid rgb(110, 110, 110);
+    background-color: rgba(110, 110, 110, 1);
+    border: 1px solid rgba(110, 110, 110, 1);
 }
 
 .cm-button.secondary:hover{
-    background-color: rgb(95, 95, 95);
+    background-color: rgba(95, 95, 95, 1);
 }
 
 .cm-button.secondary:active{
-    background-color: rgb(80, 80, 80);
+    background-color: rgba(80, 80, 80, 1);
 }
 
 /* SUCCESS */
 .cm-button.success{
-    background-color: rgb(0, 166, 0);
-    border: 1px solid rgb(0, 166, 0);
+    background-color: rgba(0, 166, 0, 1);
+    border: 1px solid rgba(0, 166, 0, 1);
 }
 
 .cm-button.success:hover{
-    background-color: rgb(0, 151, 0);
+    background-color: rgba(0, 151, 0, 1);
 }
 
 .cm-button.success:active{
-    background-color: rgb(0, 136, 0);
+    background-color: rgba(0, 136, 0, 1);
 }
 
 /* DANGER */
 .cm-button.danger{
-    background-color: rgb(226, 0, 0);
-    border: 1px solid rgb(226, 0, 0);
+    background-color: rgba(226, 0, 0, 1);
+    border: 1px solid rgba(226, 0, 0, 1);
 }
 
 .cm-button.danger:hover{
-    background-color: rgb(211, 0, 0);
+    background-color: rgba(211, 0, 0, 1);
 }
 
 .cm-button.danger:active{
-    background-color: rgb(196, 0, 0);
+    background-color: rgba(196, 0, 0, 1);
 }
 
 /* ALERT */
 .cm-button.alert{
-    background-color: rgb(240, 147, 8);
-    border: 1px solid rgb(240, 147, 8);
+    background-color: rgba(240, 147, 8, 1);
+    border: 1px solid rgba(240, 147, 8, 1);
 }
 
 .cm-button.alert:hover{
-    background-color: rgb(225, 132, 8);
+    background-color: rgba(225, 132, 8, 1);
 }
 
 .cm-button.alert:active{
-    background-color: rgb(210, 117, 8);
+    background-color: rgba(210, 117, 8, 1);
 }
-
 
 
 /* CM-BUTTON OUTLINED */
@@ -132,13 +131,13 @@
 }
 
 .cm-button.outlined:active{
-    color: rgb(255, 255, 255);
+    color: rgba(255, 255, 255, 1);
 }
 
 /* PRIMARY */
 .cm-button.outlined.primary{
-    color: rgb(38, 125, 255);
-    border: 1px solid rgb(38, 125, 255);
+    color: rgba(38, 125, 255, 1);
+    border: 1px solid rgba(38, 125, 255, 1);
 }
 
 .cm-button.outlined.primary:hover{
@@ -146,14 +145,15 @@
 }
 
 .cm-button.outlined.primary:active{
-    color: rgb(255, 255, 255);
-    background-color: rgb(38, 125, 255);
+    color: rgba(255, 255, 255, 1);
+    background-color: rgba(38, 125, 255, 1);
 }
 
 /* SECONDARY */
 .cm-button.outlined.secondary{
-    color: rgb(110, 110, 110);
-    border: 1px solid rgb(110, 110, 110);
+    color: rgba(110, 110, 110, 1);
+    background-color: rgba(255, 255, 255, 1);
+    border: 1px solid rgba(110, 110, 110, 1);
 }
 
 .cm-button.outlined.secondary:hover{
@@ -161,14 +161,14 @@
 }
 
 .cm-button.outlined.secondary:active{
-    color: rgb(255, 255, 255);
-    background-color: rgb(110, 110, 110);
+    color: rgba(255, 255, 255, 1);
+    background-color: rgba(110, 110, 110, 1);
 }
 
 /* SUCCESS */
 .cm-button.outlined.success{
-    color: rgb(0, 166, 0);
-    border: 1px solid rgb(0, 166, 0);
+    color: rgba(0, 166, 0, 1);
+    border: 1px solid rgba(0, 166, 0, 1);
 }
 
 .cm-button.outlined.success:hover{
@@ -176,14 +176,14 @@
 }
 
 .cm-button.outlined.success:active{
-    color: rgb(255, 255, 255);
-    background-color: rgb(0, 166, 0);
+    color: rgba(255, 255, 255, 1);
+    background-color: rgba(0, 166, 0, 1);
 }
 
 /* DANGER */
 .cm-button.outlined.danger{
-    color: rgb(226, 0, 0);
-    border: 1px solid rgb(226, 0, 0);
+    color: rgba(226, 0, 0, 1);
+    border: 1px solid rgba(226, 0, 0, 1);
 }
 
 .cm-button.outlined.danger:hover{
@@ -191,14 +191,14 @@
 }
 
 .cm-button.outlined.danger:active{
-    color: rgb(255, 255, 255);
-    background-color: rgb(226, 0, 0);
+    color: rgba(255, 255, 255, 1);
+    background-color: rgba(226, 0, 0, 1);
 }
 
 /* ALERT */
 .cm-button.outlined.alert{
-    color: rgb(240, 147, 8);
-    border: 1px solid rgb(240, 147, 8);
+    color: rgba(240, 147, 8, 1);
+    border: 1px solid rgba(240, 147, 8, 1);
 }
 
 .cm-button.outlined.alert:hover{
@@ -206,6 +206,6 @@
 }
 
 .cm-button.outlined.alert:active{
-    color: rgb(255, 255, 255);
-    background-color: rgb(240, 147, 8);
+    color: rgba(255, 255, 255, 1);
+    background-color: rgba(240, 147, 8, 1);
 }

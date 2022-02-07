@@ -7,7 +7,7 @@ import { AuthWarningConstants as warningMessages } from '../AuthUtils/AuthWarnin
 import AuthPageTemplate from "Components/Authentication/templates/AuthPage.template";
 import './RegisterPage.css';
 
-import { TextInput, PasswordInput, CheckboxGroupInput } from 'Components/Elements/Input';
+import { TextInput1 as TextInput, PasswordInput1 as PasswordInput, CheckboxGroupInput } from 'Components/Elements/Input';
 import { Alert } from 'Components/Elements/Notifications';
 import { DefaultButton } from 'Components/Elements/Button';
 import { SemiSpinner } from 'Components/Elements/PreLoaders';
@@ -218,8 +218,8 @@ export default function RegisterPage(){
             <PasswordInput round placeholder={'Confirm Password'} onChange={userConfirmPasswordInputHandler} onBlur={isUserConfirmPasswordValid} subLabelMessage={userConfirmPasswordErrorStatus.text} errorMark={userConfirmPasswordErrorStatus.status}/>
             <CheckboxGroupInput optionsList={registerCheckboxOptions} onChange={registerCheckboxOptionsHandler}></CheckboxGroupInput>
             <DefaultButton round primary wide disabled={isRegisterButtonDisabled} onMouseUp={onRegisterSubmit}>{ registerFormSubmitLock ? <SemiSpinner light></SemiSpinner> : 'Register'}</DefaultButton>
-            <DefaultButton round primary outlined sm onClick={toggleShowAlert}>Show Alert</DefaultButton>
-            <Alert isVisible={isAlertVisible} closeFunc={alertClose}></Alert>
+            <DefaultButton round alert outlined sm onClick={toggleShowAlert}>Show Alert</DefaultButton>
+            <Alert outlined warning autoClose isVisible={isAlertVisible} closeFunc={alertClose}>A Dummy Message</Alert>
         </div>
     )
 
