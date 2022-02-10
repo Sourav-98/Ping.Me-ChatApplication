@@ -71,6 +71,7 @@
     width: 100%;
     height: 60px;
     margin-bottom: 5px;
+    background-color: inherit;
 }
 
 .user-options{

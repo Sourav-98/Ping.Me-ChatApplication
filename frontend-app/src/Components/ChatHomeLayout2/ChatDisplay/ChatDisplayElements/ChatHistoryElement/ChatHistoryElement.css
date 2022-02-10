@@ -19,7 +19,7 @@
     opacity: 0;
 } */
 
-@keyframes zoomIn {
+/* @keyframes zoomIn {
     from{
         -webkit-transform: scale(0);
         transform: scale(0);
@@ -39,23 +39,56 @@
         -webkit-transform: scale(0);
         transform: scale(0);
     }
+} */
+
+@keyframes zoomOut{
+    0%{
+        opacity: 1;
+        -webkit-transform: scaleY(1);
+        transform: scaleY(1);
+    }
+    50%{
+        opacity: 0;
+        -webkit-transform: scaleY(1);
+        transform: scaleY(1);
+    }
+    100%{
+        opacity: 0;
+        -webkit-transform: scaleY(0);
+        transform: scaleY(0);
+    }
 }
 
 .chat-history-element-enter{
+    max-height: 0px;
     -webkit-transform: scale(0);
     transform: scale(0);
 }
 .chat-history-element-enter-active{
-    -webkit-animation: zoomIn 0.1s ease-in-out forwards;
-    animation: zoomIn 0.1s ease-in-out forwards;
+    max-height: 400px;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    transition: max-height 1s ease-out, transform 0.2s ease-in-out 0.12s;
+    /* transition: max-height 0.2s cubic-bezier(0, 1, 0, 1) 0s, transform 0.1s ease-out 0.2s; */
 }
 .chat-history-element-exit{
+    max-height: 400px;
     -webkit-transform: scale(1);
     transform: scale(1);
 }
 .chat-history-element-exit-active{
-    -webkit-animation: zoomOut 0.1s ease-in-out forwards;
-    animation: zoomOut 0.1s ease-in-out forwards;
+    max-height: 0px;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+    transition: transform 0.2s ease-out, max-height 0.2s ease-out 0.12s;
+}
+
+.chat-history-element-container-wrapper{
+    width: 100%;
+    height: 78px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .chat-history-element-container{
@@ -63,11 +96,12 @@
     flex-direction: row;
     align-items: center;
     width: 100%;
-    height: 78px;
-    margin: 5px 0px 5px 0px;
+    height: 70px;
+    /* height: inherit; */
+    /* padding: 5px 0px 5px 0px; */
     box-sizing: border-box;
     border-radius: 6px;
-    padding: 0px;
+    /* padding: 0px; */
     background-color: #F5F5F5;
     cursor: pointer;
     /* -webkit-transition: 0.2s ease-in-out;
@@ -103,8 +137,8 @@
 
 .chat-user-avatar-box{
     box-sizing: border-box;
-    width: 74px;
-    height: 74px;
+    width: 70px;
+    height: 70px;
     background-color: inherit;
     border-radius: inherit;
 }

@@ -18,20 +18,23 @@ export const ChatHistoryElement = React.memo(function ChatHistoryElement({userUn
             classNames="chat-history-element"
             in={isShown}
             timeout={{
-                enter: 100,
-                exit: 200
+                enter: 1000,
+                exit: 700
             }}
-            unmountOnExit={true}
+            unmountOnExit
             onExited={()=>{removeElement(userUniqueId)}}
-        >     
-            <div id={userUniqueId} className="chat-history-element-container">
-                <div className="chat-user-avatar-box">
-                    <UserAvatarStatusElement2 userStatus={userStatus} userImage={userImage}></UserAvatarStatusElement2>
-                </div>
-                <div className="chat-history-disc-box">
-                    <button onClick={()=>{setIsShown(false)}}>X</button>
+        >
+            <div id={userUniqueId} className='chat-history-element-container-wrapper'>
+                <div className="chat-history-element-container">
+                    <div className="chat-user-avatar-box">
+                        <UserAvatarStatusElement2 userStatus={userStatus} userImage={userImage}></UserAvatarStatusElement2>
+                    </div>
+                    <div className="chat-history-disc-box">
+                        <button onClick={()=>{setIsShown(false)}}>X</button>
+                    </div>
                 </div>
             </div>
+            
         </CSSTransition>
         
     )

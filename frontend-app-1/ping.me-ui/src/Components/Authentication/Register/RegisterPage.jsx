@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 
 import * as AuthServices from 'Services/AuthServices/Auth.service';
 import * as AuthUtilities from './../AuthUtils/AuthUtilities';
@@ -12,7 +12,11 @@ import { Alert } from 'Components/Elements/Notifications';
 import { DefaultButton } from 'Components/Elements/Button';
 import { SemiSpinner } from 'Components/Elements/PreLoaders';
 
+import AppContext from 'Context/AppContext';
+
 export default function RegisterPage(){
+
+    const appContext = useContext(AppContext);
 
     //-----------------------------------------FIRST NAME-------------------------------------------
     const [userFirstName, setUserFirstName] = useState(() => undefined);
@@ -209,6 +213,22 @@ export default function RegisterPage(){
         setIsAlertVisible((isVisible) => !isVisible);
     }
 
+    const newPrimaryAlert = () => {
+        appContext.pushAlert('A Dummy Alert!', 'outlined');
+    }
+    const newSecondaryAlert = () => {
+        appContext.pushAlert('A Dummy Alert!', 'outlined', 'secondary');
+    }
+    const newSuccessAlert = () => {
+        appContext.pushAlert('A Dummy Alert!', 'outlined', 'success');
+    }
+    const newDangerAlert = () => {
+        appContext.pushAlert('A Dummy Alert!', 'outlined', 'danger');
+    }
+    const newWarningAlert = () => {
+        appContext.pushAlert('A Dummy Alert!', 'outlined', 'warning');
+    }
+
     const RegisterForm = (
         <div className="register-form-main-div">
             <TextInput type={'text'} round placeholder={'First Name'} onChange={userFirstNameInputHandler} onFocus={resetUserFirstNameErrorStatus} onBlur={isUserFirstNameValid} subLabelMessage={userFirstNameErrorStatus.text} errorMark={userFirstNameErrorStatus.status}/>
@@ -218,8 +238,15 @@ export default function RegisterPage(){
             <PasswordInput round placeholder={'Confirm Password'} onChange={userConfirmPasswordInputHandler} onBlur={isUserConfirmPasswordValid} subLabelMessage={userConfirmPasswordErrorStatus.text} errorMark={userConfirmPasswordErrorStatus.status}/>
             <CheckboxGroupInput optionsList={registerCheckboxOptions} onChange={registerCheckboxOptionsHandler}></CheckboxGroupInput>
             <DefaultButton round primary wide disabled={isRegisterButtonDisabled} onMouseUp={onRegisterSubmit}>{ registerFormSubmitLock ? <SemiSpinner light></SemiSpinner> : 'Register'}</DefaultButton>
-            <DefaultButton round alert outlined sm onClick={toggleShowAlert}>Show Alert</DefaultButton>
-            <Alert outlined warning autoClose isVisible={isAlertVisible} closeFunc={alertClose}>A Dummy Message</Alert>
+            <div className="alert-popup-buttons-list">
+                <DefaultButton sm round primary outlined onClick={newPrimaryAlert}>Alert</DefaultButton>
+                <DefaultButton round secondary outlined sm onClick={newSecondaryAlert}>Alert</DefaultButton>
+                <DefaultButton round success outlined sm onClick={newSuccessAlert}>Alert</DefaultButton>
+                <DefaultButton round danger outlined sm onClick={newDangerAlert}>Alert</DefaultButton>
+                <DefaultButton round alert outlined sm onClick={newWarningAlert}>Alert</DefaultButton>
+            </div>
+            
+            {/* <Alert outlined warning autoClose isVisible={isAlertVisible} closeFunc={alertClose}>A Dummy Message</Alert> */}
         </div>
     )
 

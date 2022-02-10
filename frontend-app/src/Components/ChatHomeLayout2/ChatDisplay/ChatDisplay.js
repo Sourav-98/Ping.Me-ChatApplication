@@ -72,11 +72,15 @@ export default function ChatDisplay(){
         )
     }
 
-    const deleteElement = useCallback(
-        (elementId) => {
-            setChatHistoryList(chatHistoryList => chatHistoryList.filter(user => user.userUniqueId !== elementId))
-        }, []
-    )
+    // const deleteElement = useCallback(
+    //     (elementId) => {
+    //         setChatHistoryList(chatHistoryList => chatHistoryList.filter(user => user.userUniqueId !== elementId))
+    //     }, []
+    // )
+
+    const deleteElement = (elementId) => {
+        setChatHistoryList(chatHistoryList => chatHistoryList.filter(user => user.userUniqueId !== elementId))
+    };
 
     const newChatElement = useCallback(
         ()=>{

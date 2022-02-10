@@ -14,7 +14,7 @@ import Page404 from './Components/ErrorPages/Page404/Page404';
 
 function App() {
 
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isAuthenticated, setIsAuthenticated] = useState(true);
 
     return(
         <Router>
