@@ -1,9 +1,8 @@
-.alerts-container{
+.alert-toaster-group-container-div{
     position: fixed;
     top: 10px;
     width: 42%;
     max-width: 500px;
-    min-height: 30%;
     box-sizing: border-box;
     display: block;
     justify-content: right;
@@ -12,28 +11,26 @@
 }
 
 @media only screen and (max-width: 768px){
-    .alerts-container{
+    .alert-toaster-group-container-div{
         left: 50%;
         transform: translateX(-50%);
     }
 }
 
 @media only screen and (min-width: 769px){
-    .alerts-container{
+    .alert-toaster-group-container-div{
         right: 10px;
         /* transform: translateX(-50%); */
     }
 }
 
-.alert-toaster-animation-enter{
+.alert-toaster-group-enter{
     max-height: 0px;
     -webkit-transform: translateX(110%);
     transform: translateX(110%);
 }
 
-/* cubic-bezier(.17,.67,.04,1) */
-/* cubic-bezier(.29,.37,0,.99) */
-.alert-toaster-animation-enter-active{
+.alert-toaster-group-enter-active{
     max-height: 100px;
     -webkit-transform: translateX(0px);
     transform: translateX(0px);
@@ -41,13 +38,13 @@
     transition: max-height 0.48s cubic-bezier(.29,.37,0,.99), transform 0.4s cubic-bezier(0,.08,0,.99) 0.28s;
 }
 
-.alert-toaster-animation-exit{
+.alert-toaster-group-exit{
     max-height: 100px;
     -webkit-transform: translateX(0px);
     transform: translateX(0px);
 }
 
-.alert-toaster-animation-exit-active{
+.alert-toaster-group-exit-active{
     max-height: 0px;
     -webkit-transform: translateX(120%);
     transform: translateX(120%);

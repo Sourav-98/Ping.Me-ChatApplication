@@ -8,7 +8,6 @@ import AuthPageTemplate from "Components/Authentication/templates/AuthPage.templ
 import './RegisterPage.css';
 
 import { TextInput1 as TextInput, PasswordInput1 as PasswordInput, CheckboxGroupInput } from 'Components/Elements/Input';
-import { Alert } from 'Components/Elements/Notifications';
 import { DefaultButton } from 'Components/Elements/Button';
 import { SemiSpinner } from 'Components/Elements/PreLoaders';
 
@@ -203,30 +202,30 @@ export default function RegisterPage(){
         }
     }
 
-    const [isAlertVisible, setIsAlertVisible] = useState(() => false);
+    // const [isAlertVisible, setIsAlertVisible] = useState(() => false);
 
-    const alertClose = () => {
-        setIsAlertVisible(() => false);
-    }
+    // const alertClose = () => {
+    //     setIsAlertVisible(() => false);
+    // }
 
-    const toggleShowAlert = () => {
-        setIsAlertVisible((isVisible) => !isVisible);
-    }
+    // const toggleShowAlert = () => {
+    //     setIsAlertVisible((isVisible) => !isVisible);
+    // }
 
     const newPrimaryAlert = () => {
-        appContext.pushAlert('A Dummy Alert!', 'outlined');
+        appContext.pushAlert('A Dummy Primary Alert!', 'outlined', 'primary', false);
     }
     const newSecondaryAlert = () => {
-        appContext.pushAlert('A Dummy Alert!', 'outlined', 'secondary');
+        appContext.pushAlert('A Dummy Secondary Alert!', 'outlined', 'secondary');
     }
     const newSuccessAlert = () => {
-        appContext.pushAlert('A Dummy Alert!', 'outlined', 'success');
+        appContext.pushAlert('A Dummy Success Alert!', 'outlined', 'success');
     }
     const newDangerAlert = () => {
-        appContext.pushAlert('A Dummy Alert!', 'outlined', 'danger');
+        appContext.pushAlert('A Dummy Danger Alert!', 'outlined', 'danger');
     }
     const newWarningAlert = () => {
-        appContext.pushAlert('A Dummy Alert!', 'outlined', 'warning');
+        appContext.pushAlert('A Dummy Warning Alert!', 'outlined', 'warning');
     }
 
     const RegisterForm = (
@@ -239,6 +238,7 @@ export default function RegisterPage(){
             <CheckboxGroupInput optionsList={registerCheckboxOptions} onChange={registerCheckboxOptionsHandler}></CheckboxGroupInput>
             <DefaultButton round primary wide disabled={isRegisterButtonDisabled} onMouseUp={onRegisterSubmit}>{ registerFormSubmitLock ? <SemiSpinner light></SemiSpinner> : 'Register'}</DefaultButton>
             <div className="alert-popup-buttons-list">
+                {/* <button onClick={toggleShowAlert}>Alert Default</button> */}
                 <DefaultButton sm round primary outlined onClick={newPrimaryAlert}>Alert</DefaultButton>
                 <DefaultButton round secondary outlined sm onClick={newSecondaryAlert}>Alert</DefaultButton>
                 <DefaultButton round success outlined sm onClick={newSuccessAlert}>Alert</DefaultButton>

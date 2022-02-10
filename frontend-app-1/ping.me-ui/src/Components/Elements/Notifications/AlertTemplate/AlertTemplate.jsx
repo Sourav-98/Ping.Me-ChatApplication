@@ -1,20 +1,24 @@
 import './AlertTemplate.css';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import { IoMdCheckmarkCircleOutline, IoMdClose, IoMdCloseCircleOutline, IoMdInformationCircleOutline } from 'react-icons/io';
 import { IoWarningOutline } from 'react-icons/io5';
 
-export default function AlertTemplate({outlined, closeFunc, primary, secondary, success, danger, warning, children, ...props}){
+export default function AlertTemplate({outlined, closeFunc, autoClose, primary, secondary, success, danger, warning, children, ...props}){
 
     const delayCloseTimer = useRef(undefined);
 
     useEffect(() => {
-        delayCloseTimer.current = setTimeout(closeFunc, 6500);
+        if(autoClose){
+            delayCloseTimer.current = setTimeout(closeFunc, 6500);
+        }
     }, []);
 
     const noDelayClose = () => {
-        clearTimeout(delayCloseTimer.current);
+        if(delayCloseTimer){
+            clearTimeout(delayCloseTimer.current);
+        }
         closeFunc();
     }
 

@@ -1,7 +1,7 @@
 
 import './App.css';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { v4 as uuid} from 'uuid';
 
 import AppContext from 'Context/AppContext';
@@ -24,7 +24,7 @@ function App() {
 	 */
 	const [alertsList, setAlertsList] = useState([]);
 
-	const alertTimeoutDuration = 6500;
+	// const alertTimeoutDuration = 6500;
 
 	const pushAlert = (message, template=undefined, type=undefined, autoClose=true) => {
 		let id = uuid();
@@ -34,22 +34,29 @@ function App() {
 				id: id,
 				message: message,
 				template: template,
-				type: type
+				type: type,
+				autoClose: autoClose
 			}, ...prevAlertsList
 		]);
 	}
 
 	const removeAlert = (id) => {
 		console.log('Alert Removed -> ' + id);
-		let tempAlerts = alertsList.filter( alert => alert.id != id);
-		console.log(tempAlerts);
 		setAlertsList(prevAlertsList => prevAlertsList.filter( alert => alert.id !== id ));
+	}
+
+	const removeLastAlert = () => {
+		console.log('Last Alert Removed');
+		let tempAlerts = [...alertsList];
+		tempAlerts.splice(alertsList.length-1, 1)
+		setAlertsList(() => tempAlerts);
 	}
 
 	const alertUtil = {
 		alertsList: alertsList,
 		pushAlert,
-		removeAlert
+		removeAlert,
+		removeLastAlert
 	}
 
 	/**---------------------------------------------------------- */
@@ -59,7 +66,7 @@ function App() {
 			<div className="app-root">
 				{/* <LoginPage/> */}
 				<RegisterPage/>
-				<AlertGroup/>
+				<AlertGroup max={6}/>
 			</div>
 		</AppContext.Provider>
   );
