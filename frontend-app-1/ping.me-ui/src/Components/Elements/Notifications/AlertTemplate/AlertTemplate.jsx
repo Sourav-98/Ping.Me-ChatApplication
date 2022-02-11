@@ -24,7 +24,7 @@ export default function AlertTemplate({outlined, closeFunc, autoClose, primary, 
 
     return(
         <div className='alert-toaster-wrapper'>
-            <div className={`alert-toaster-div${outlined ? ' outlined' : ''}${secondary ? ' secondary' : success ? ' success' : danger ? ' danger' : warning ? ' alert' : ' primary'}`}>
+            <div className={`alert-toaster-div${outlined ? ' outlined' : ''}${secondary ? ' secondary' : success ? ' success' : danger ? ' danger' : warning ? ' warning' : ' primary'}`}>
                 <div className='alert-toaster-type'>
                     { success ? <IoMdCheckmarkCircleOutline></IoMdCheckmarkCircleOutline> : danger ? <IoMdCloseCircleOutline></IoMdCloseCircleOutline> : warning ? <IoWarningOutline></IoWarningOutline> : <IoMdInformationCircleOutline></IoMdInformationCircleOutline>}
                 </div>

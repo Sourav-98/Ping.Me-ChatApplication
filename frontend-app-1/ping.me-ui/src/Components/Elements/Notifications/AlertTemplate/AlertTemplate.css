@@ -1,9 +1,9 @@
 
 .alert-toaster-wrapper{
-    height: 56px;
+    height: 50px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 .alert-toaster-div{
@@ -11,16 +11,16 @@
     max-width: 560px;
     width: 100%;
     box-sizing: border-box;
-    border: 2px solid white;
+    border: 1px solid white;
     border-radius: 8px;
-    background-color: white;
+    /* background-color: white; */
+    color: rgb(255, 255, 255);
     box-sizing: border-box;
     display : flex;
     flex-direction: row;
     align-items: center;
-    /* padding: 8px; */
-    padding: 9px 8px 9px 8px;
-    box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.13);
+    padding: 8px;
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
 }
 
 .alert-toaster-div > div{
@@ -42,8 +42,8 @@
     padding-left: 10px;
     padding-right: 10px;
     width: 100%;
-    font-size: 18px;
-    font-weight: bold;
+    font-size: 16px;
+    font-weight: 530;
 }
 
 .alert-toaster-div > .alert-toaster-action{
@@ -51,27 +51,28 @@
 }
 
 .alert-toaster-div, .alert-toaster-div.primary{
-
+    border-color: rgb(33, 116, 241);
+    background-color: rgb(33, 116, 241);
 }
 
 .alert-toaster-div.secondary{
-
+    background-color: rgb(110, 110, 110);
+    border-color: rgb(110, 110, 110);
 }
 
 .alert-toaster-div.success{
-
+    background-color: rgb(0, 166, 0);
+    border-color: rgb(0, 166, 0);
 }
 
 .alert-toaster-div.danger{
-
+    background-color: rgb(226, 0, 0);
+    border-color: rgb(226, 0, 0);
 }
 
-.alert-toaster-div.alert{
-
-}
-
-.alert-toaster-div.outlined{
-
+.alert-toaster-div.warning{
+    background-color: rgb(240, 147, 8);
+    border-color: rgb(240, 147, 8);
 }
 
 .alert-toaster-div.outlined, .alert-toaster-div.outlined.primary{
@@ -83,7 +84,7 @@
 .alert-toaster-div.outlined.secondary{
     color: rgb(110, 110, 110);
     border-color: rgb(110, 110, 110);
-    background-color: rgb(233, 233, 233);
+    background-color: rgb(241, 241, 241);
 }
 
 .alert-toaster-div.outlined.success{
@@ -98,7 +99,7 @@
     background-color: rgb(255, 239, 239);
 }
 
-.alert-toaster-div.outlined.alert{
+.alert-toaster-div.outlined.warning{
     color: rgb(240, 147, 8);
     background-color: rgb(255, 248, 236);
     border-color: rgb(240, 147, 8);

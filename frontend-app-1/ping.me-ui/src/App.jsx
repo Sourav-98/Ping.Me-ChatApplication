@@ -26,7 +26,7 @@ function App() {
 
 	// const alertTimeoutDuration = 6500;
 
-	const pushAlert = (message, template=undefined, type=undefined, autoClose=true) => {
+	const pushAlert = ({message, template = undefined, type = undefined, autoClose = true}) => {
 		let id = uuid();
 		console.log('Alert pushed -> id: ' + id + + ' <->  message: ' + message + ' <-> type: ' + type);
 		setAlertsList(prevAlertsList => [

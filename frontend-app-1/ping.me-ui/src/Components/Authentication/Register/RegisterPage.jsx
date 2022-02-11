@@ -202,30 +202,36 @@ export default function RegisterPage(){
         }
     }
 
-    // const [isAlertVisible, setIsAlertVisible] = useState(() => false);
-
-    // const alertClose = () => {
-    //     setIsAlertVisible(() => false);
-    // }
-
-    // const toggleShowAlert = () => {
-    //     setIsAlertVisible((isVisible) => !isVisible);
-    // }
-
     const newPrimaryAlert = () => {
-        appContext.pushAlert('A Dummy Primary Alert!', 'outlined', 'primary', false);
+        appContext.pushAlert({message: 'A Dummy Primary Alert!', autoClose: false});
     }
     const newSecondaryAlert = () => {
-        appContext.pushAlert('A Dummy Secondary Alert!', 'outlined', 'secondary');
+        appContext.pushAlert({message: 'A Dummy Secondary Alert!', type: 'secondary'});
     }
     const newSuccessAlert = () => {
-        appContext.pushAlert('A Dummy Success Alert!', 'outlined', 'success');
+        appContext.pushAlert({message: 'A Dummy Success Alert!', type: 'success'});
     }
     const newDangerAlert = () => {
-        appContext.pushAlert('A Dummy Danger Alert!', 'outlined', 'danger');
+        appContext.pushAlert({message: 'A Dummy Danger Alert', type: 'danger'});
     }
     const newWarningAlert = () => {
-        appContext.pushAlert('A Dummy Warning Alert!', 'outlined', 'warning');
+        appContext.pushAlert({message: 'A Dummy Warning Alert', type: 'warning'});
+    }
+
+    const newOutlinedPrimaryAlert = () => {
+        appContext.pushAlert({message: 'A Dummy Primary Alert', template: 'outlined'});
+    }
+    const newOutlinedSecondaryAlert = () => {
+        appContext.pushAlert({message: 'A Dummy Secondary Alert', template: 'outlined', type: 'secondary'});
+    }
+    const newOutlinedSuccessAlert = () => {
+        appContext.pushAlert({message: 'A Dummy Success Alert', template: 'outlined', type: 'success'});
+    }
+    const newOutlinedDangerAlert = () => {
+        appContext.pushAlert({message: 'A Dummy Danger Alert', template: 'outlined', type: 'danger'});
+    }
+    const newOutlinedWarningAlert = () => {
+        appContext.pushAlert({message: 'A Dummy Warning Alert', template: 'outlined', type: 'warning'});
     }
 
     const RegisterForm = (
@@ -239,13 +245,21 @@ export default function RegisterPage(){
             <DefaultButton round primary wide disabled={isRegisterButtonDisabled} onMouseUp={onRegisterSubmit}>{ registerFormSubmitLock ? <SemiSpinner light></SemiSpinner> : 'Register'}</DefaultButton>
             <div className="alert-popup-buttons-list">
                 {/* <button onClick={toggleShowAlert}>Alert Default</button> */}
-                <DefaultButton sm round primary outlined onClick={newPrimaryAlert}>Alert</DefaultButton>
-                <DefaultButton round secondary outlined sm onClick={newSecondaryAlert}>Alert</DefaultButton>
-                <DefaultButton round success outlined sm onClick={newSuccessAlert}>Alert</DefaultButton>
-                <DefaultButton round danger outlined sm onClick={newDangerAlert}>Alert</DefaultButton>
-                <DefaultButton round alert outlined sm onClick={newWarningAlert}>Alert</DefaultButton>
+                <DefaultButton sm round primary outlined onClick={newOutlinedPrimaryAlert}>Alert</DefaultButton>
+                <DefaultButton round secondary outlined sm onClick={newOutlinedSecondaryAlert}>Alert</DefaultButton>
+                <DefaultButton round success outlined sm onClick={newOutlinedSuccessAlert}>Alert</DefaultButton>
+                <DefaultButton round danger outlined sm onClick={newOutlinedDangerAlert}>Alert</DefaultButton>
+                <DefaultButton round alert outlined sm onClick={newOutlinedWarningAlert}>Alert</DefaultButton>
             </div>
-            
+            <hr></hr>
+            <div className="alert-popup-buttons-list">
+                {/* <button onClick={toggleShowAlert}>Alert Default</button> */}
+                <DefaultButton sm round primary onClick={newPrimaryAlert}>Alert</DefaultButton>
+                <DefaultButton round secondary sm onClick={newSecondaryAlert}>Alert</DefaultButton>
+                <DefaultButton round success sm onClick={newSuccessAlert}>Alert</DefaultButton>
+                <DefaultButton round danger sm onClick={newDangerAlert}>Alert</DefaultButton>
+                <DefaultButton round alert sm onClick={newWarningAlert}>Alert</DefaultButton>
+            </div>
             {/* <Alert outlined warning autoClose isVisible={isAlertVisible} closeFunc={alertClose}>A Dummy Message</Alert> */}
         </div>
     )
