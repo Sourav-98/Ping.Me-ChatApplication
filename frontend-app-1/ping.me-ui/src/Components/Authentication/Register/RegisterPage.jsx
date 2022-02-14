@@ -182,18 +182,28 @@ export default function RegisterPage(){
         return true;
     }
 
+    const clearAllSubLabelMessages = () => {
+        resetUserFirstNameErrorStatus();
+        resetUserLastNameErrorStatus();
+        resetUserEmailIdErrorStatus();
+        resetUserPasswordErrorStatus();
+    }
+
     const onRegisterSubmit = async() => {
         if(!registerFormSubmitLock){
             if(preSubmissionCheck()){
+                clearAllSubLabelMessages();
                 setRegisterFormSubmitLock(true);
                 let registerFormData = { firstName: userFirstName, lastName: userLastName, emailId: userEmailId, password: userPassword };
                 let res = await AuthServices.registerFormSubmit(registerFormData);
                 switch(res.status_code){
-                    case 202100: break;
-                    case 202101: setUserEmailIdErrorStatus({ text : warningMessages.EMAIL_ID_EXISTS, status: true }); break;
+                    case 202100: appContext.pushAlert({ message: res.status_message, type: 'success', autoClose: false}); break;
+                    case 202101: appContext.pushAlert({ message: 'Registration Failed', type: 'danger'}); setUserEmailIdErrorStatus({ text : warningMessages.EMAIL_ID_EXISTS, status: true }); break;
                     case 202111: break;
-                    case 999999: break;
-                    default: break;
+                    case 999999: appContext.pushAlert({message: 'Server-side error! Please try after some time.', type: 'danger', autoClose: false}); break;
+                    case 111111: appContext.pushAlert({message: 'Error communicating with the server.', type: 'danger', autoClose: false}); break;
+                    case 555555: 
+                    default: appContext.pushAlert({message: 'Unknown error occured', type: 'warning'}); break;
                 }
                 setTimeout(() => {
                     setRegisterFormSubmitLock(false);
@@ -244,7 +254,6 @@ export default function RegisterPage(){
             <CheckboxGroupInput optionsList={registerCheckboxOptions} onChange={registerCheckboxOptionsHandler}></CheckboxGroupInput>
             <DefaultButton round primary wide disabled={isRegisterButtonDisabled} onMouseUp={onRegisterSubmit}>{ registerFormSubmitLock ? <SemiSpinner light></SemiSpinner> : 'Register'}</DefaultButton>
             <div className="alert-popup-buttons-list">
-                {/* <button onClick={toggleShowAlert}>Alert Default</button> */}
                 <DefaultButton sm round primary outlined onClick={newOutlinedPrimaryAlert}>Alert</DefaultButton>
                 <DefaultButton round secondary outlined sm onClick={newOutlinedSecondaryAlert}>Alert</DefaultButton>
                 <DefaultButton round success outlined sm onClick={newOutlinedSuccessAlert}>Alert</DefaultButton>
@@ -253,14 +262,12 @@ export default function RegisterPage(){
             </div>
             <hr></hr>
             <div className="alert-popup-buttons-list">
-                {/* <button onClick={toggleShowAlert}>Alert Default</button> */}
                 <DefaultButton sm round primary onClick={newPrimaryAlert}>Alert</DefaultButton>
                 <DefaultButton round secondary sm onClick={newSecondaryAlert}>Alert</DefaultButton>
                 <DefaultButton round success sm onClick={newSuccessAlert}>Alert</DefaultButton>
                 <DefaultButton round danger sm onClick={newDangerAlert}>Alert</DefaultButton>
                 <DefaultButton round alert sm onClick={newWarningAlert}>Alert</DefaultButton>
             </div>
-            {/* <Alert outlined warning autoClose isVisible={isAlertVisible} closeFunc={alertClose}>A Dummy Message</Alert> */}
         </div>
     )
 

@@ -48,8 +48,9 @@ function App() {
 	const removeLastAlert = () => {
 		console.log('Last Alert Removed');
 		let tempAlerts = [...alertsList];
-		tempAlerts.splice(alertsList.length-1, 1)
+		tempAlerts.pop();
 		setAlertsList(() => tempAlerts);
+		// setAlertsList(prevAlertsList => prevAlertsList.filter( alert => alert.id !== prevAlertsList.pop().id))
 	}
 
 	const alertUtil = {
@@ -64,8 +65,8 @@ function App() {
 	return (
 		<AppContext.Provider value={alertUtil}>
 			<div className="app-root">
-				{/* <LoginPage/> */}
-				<RegisterPage/>
+				<LoginPage/>
+				{/* <RegisterPage/> */}
 				<AlertGroup max={6}/>
 			</div>
 		</AppContext.Provider>

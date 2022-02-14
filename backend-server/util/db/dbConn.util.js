@@ -14,12 +14,16 @@ class Connection{
             this._client = client;
             this._db = client.db(dbConfig.db);
         })
-        .catch( err =>{
+        .catch( err => {
+            console.log("-------------MongoDB Connection ERROR--------------");
             console.log(err);
         })
     }
 
     static getDb(){
+        if(!this._client){
+            this.connect();
+        }
         return this._db;
     }
 }

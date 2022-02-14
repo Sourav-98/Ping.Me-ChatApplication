@@ -2,7 +2,7 @@
 
 class ChatUserDTO {
 
-    constructor(firstName, lastName, phoneNo, dateOfBirth, emailId, password, isVerified, lastLogin, lastPasswordChange, userRolesList) {
+    constructor({firstName = undefined, lastName = undefined, phoneNo = undefined, dateOfBirth = undefined, emailId = undefined, password = undefined, isVerified = false, lastLogin = undefined, lastPasswordChange = undefined, userRolesList = undefined}) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNo = phoneNo;

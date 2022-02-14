@@ -14,31 +14,29 @@ exports.defaultLoginMessage = function(){
     return defaultMessage;
 }
 
-
-// defaultUserLogin - the standard user login service
-// returns true if the user credentials are valid
-// throws DB_USER_DOES_NOT_EXIST_ERROR if user email id is invalid (does not exists in the database)
-// throws DB_USER_INVALID_PASSWORD_ERROR if the user password is invalid
-// throw other errors if any
+/** defaultUserLogin service - used to login a new user
+ * returns 1 if login is successful
+ * returns 0 if the user email id is not registered
+ * returns -1 if the user password entered does not match the password in the db
+ * throws exception if any
+ */
 exports.defaultUserLogin = async function(userCredentials){
     try{
         console.log("defaultUserLogin() service ->");
         let loginUser = await ChatUserDAO.findUserById(userCredentials.emailId);
         if(!loginUser){ 
             console.log('User doesnot exist');
-            throw Errors.USER_EMAIL_ID_DOES_NOT_EXIST_ERR;
+            return 0;
         }
         if( !await bcrypt.compare(userCredentials.password, loginUser.password) ){
-            console.log('Invalid User Credentials');
-            throw Errors.USER_PASSWORD_INCORRECT_ERR;
+            console.log('Invalid User Password');
+            return -1
         }
-        else{
-            console.log('Valid Credentials');
-            return true;
-        }
+        console.log('Valid Credentials');
+        return 1;
     }
     catch(err){
-        console.log(err);
+        console.log('Error at defaultUserLogin() -> ' + JSON.stringify(err));
         throw err;
     }
 }

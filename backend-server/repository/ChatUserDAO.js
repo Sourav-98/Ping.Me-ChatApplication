@@ -26,13 +26,19 @@ class ChatUserDAO{
     */
 
     // Get the list of all the Chat Users
-    static async findAll(){
+    static async findAllUsers(){
+        console.log('ChatUser DAO >> findAllUsers() -------------');
         try{
-            return await Connection.getDb().collection(this._collectionName).find().toArray();
+            let chatUsersDB = await Connection.getDb().collection(this._collectionName).find().toArray();
+            let chatUsersDTO = [];
+            chatUsersDB.map( chatUserDB => {
+                chatUsersDTO.push(new ChatUserDTO({...chatUserDB}));
+            });
+            return chatUsersDTO;
         }
         catch(err){
             console.log("Error at findAll() -> " + err);
-            throw Errors.SERVER_DB_CONNECTION_ERR;
+            throw Errors.SERVER_DB_ERR;
         }
     }
     
@@ -41,22 +47,20 @@ class ChatUserDAO{
     // return the user object if the user exists
     // throw error if any
     static async findUserById(chatUserEmailId){
+        console.log('ChatUser DAO >> findUserById() -------------');
         try{
-            console.log('findUserById DAO -------------');
+            
             let chatUserDB = await Connection.getDb().collection(this._collectionName).findOne({emailId : chatUserEmailId});    // returns a single object
             if(!chatUserDB){
                 return null;      
             }
-            let chatUserDTO = new ChatUserDTO();
-            chatUserDTO.setFirstName(chatUserDB.firstName);
-            chatUserDTO.setLastName(chatUserDB.lastName);
-            chatUserDTO.setEmailId(chatUserDB.emailId);
-            chatUserDTO.setPassword(chatUserDB.password);
+            let chatUserDTO = new ChatUserDTO({...chatUserDB}); // or new ChatUserDTO(chatUserDB);
+            console.log(chatUserDTO);
             return chatUserDTO;
         }
         catch(err){
             console.log("Error at findUserById() -> " + err);
-            throw Errors.SERVER_DB_CONNECTION_ERR;
+            throw Errors.SERVER_DB_ERR;
         }
     }
 
@@ -64,16 +68,15 @@ class ChatUserDAO{
     // return true if user successfully entered
     // throw error if any
     static async insertNewUser(chatUserData){
+        console.log('ChatUser DAO >> insertNewUser() -------------');
         try{
-            console.log('insertNewUser DAO -------------');
             let result = await Connection.getDb().collection(this._collectionName).insertOne(chatUserData);
-            console.log(result);
+            console.log('User Inserted >> ' + JSON.stringify(result));
             return true;
         }
         catch(err){
             console.log("Error at insertNewUser() -> " + err);
-            throw Errors.SERVER_DB_CONNECTION_ERR;
-            // throw err;
+            throw Errors.SERVER_DB_ERR;
         }
     }
 
@@ -85,7 +88,7 @@ class ChatUserDAO{
         }
         catch(err){
             console.log("Error at deleteUserAccount() -> " + err);
-            throw Errors.SERVER_DB_CONNECTION_ERR;
+            throw Errors.SERVER_DB_ERR;
         }
     }
     

@@ -3,7 +3,7 @@ import './AlertTemplate.css';
 import React, { useEffect, useRef } from 'react';
 
 import { IoMdCheckmarkCircleOutline, IoMdClose, IoMdCloseCircleOutline, IoMdInformationCircleOutline } from 'react-icons/io';
-import { IoWarningOutline } from 'react-icons/io5';
+import { IoWarningOutline, IoWarning } from 'react-icons/io5';
 
 export default function AlertTemplate({outlined, closeFunc, autoClose, primary, secondary, success, danger, warning, children, ...props}){
 
@@ -26,7 +26,7 @@ export default function AlertTemplate({outlined, closeFunc, autoClose, primary, 
         <div className='alert-toaster-wrapper'>
             <div className={`alert-toaster-div${outlined ? ' outlined' : ''}${secondary ? ' secondary' : success ? ' success' : danger ? ' danger' : warning ? ' warning' : ' primary'}`}>
                 <div className='alert-toaster-type'>
-                    { success ? <IoMdCheckmarkCircleOutline></IoMdCheckmarkCircleOutline> : danger ? <IoMdCloseCircleOutline></IoMdCloseCircleOutline> : warning ? <IoWarningOutline></IoWarningOutline> : <IoMdInformationCircleOutline></IoMdInformationCircleOutline>}
+                    { success ? <IoMdCheckmarkCircleOutline></IoMdCheckmarkCircleOutline> : danger ? <IoWarning></IoWarning> : warning ? <IoWarningOutline></IoWarningOutline> : <IoMdInformationCircleOutline></IoMdInformationCircleOutline>}
                 </div>
                 <div className='alert-toaster-content'>
                     {children}

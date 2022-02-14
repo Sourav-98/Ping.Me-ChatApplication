@@ -3,7 +3,7 @@ import { useState, useContext } from 'react';
 
 import AuthPageTemplate from '../templates/AuthPage.template';
 
-import AlertContext from 'Components/Utilities/AlertContext';
+import AppContext from 'Context/AppContext';
 
 import * as AuthUtilities from './../AuthUtils/AuthUtilities';
 import { AuthWarningConstants as warningMessages } from '../AuthUtils/AuthWarningMessages';
@@ -13,7 +13,7 @@ import GoogleSvg from 'assets/google-color.svg';
 import FacebookSvg from 'assets/facebook-color.svg';
 import TwitterSvg from 'assets/twitter-color.svg';
 
-import { TextInput, PasswordInput, CheckboxGroupInput } from 'Components/Elements/Input';
+import { TextInput1 , PasswordInput1, CheckboxGroupInput } from 'Components/Elements/Input';
 import { DefaultButton } from 'Components/Elements/Button';
 import { SemiSpinner } from 'Components/Elements/PreLoaders';
 
@@ -23,18 +23,18 @@ export default function LoginPage({breakpoints, windowWidth, ...props}){
 
     //---------------------Alert Context setup------------------------
 
-    const alertContext = useContext(AlertContext);
+    const appContext = useContext(AppContext);
 
     //--------------------------------------Username-------------------------------------------------------
     const [userEmailId, setUserEmailId] = useState(() => undefined);
-    const [userEmailIdErrorStatus, setUserEmailIdErrorStatus] = useState({ text: '', status: false });
+    const [userEmailIdErrorStatus, setUserEmailIdErrorStatus] = useState({ text: undefined, status: false });
 
     const userEmailIdInputHandler = (event) => {
         setUserEmailId(() => event.target.value);
     }
 
     const resetUserEmailIdErrorStatus = () => {
-        setUserEmailIdErrorStatus({ text: '', status: false });
+        setUserEmailIdErrorStatus({ text: undefined, status: false });
     }
 
     const isUserEmailIdValid = () => {
@@ -42,21 +42,21 @@ export default function LoginPage({breakpoints, windowWidth, ...props}){
         switch(checkResult){
             case 0: setUserEmailIdErrorStatus({text : warningMessages.EMAIL_ID_EMPTY, status: true}); return false;
             case -1: setUserEmailIdErrorStatus({text : warningMessages.EMAIL_ID_INVALID, status: true}); return false;
-            case 1: return true;
+            case 1: resetUserEmailIdErrorStatus(); return true;
             default: return true;
         }
     }
 
     //--------------------------------------Password-------------------------------------------------------
     const [userPassword, setUserPassword] = useState(() => undefined);
-    const [userPasswordErrorStatus, setUserPasswordErrorStatus] = useState({text : '', status : false});
+    const [userPasswordErrorStatus, setUserPasswordErrorStatus] = useState({text : undefined, status : false});
 
     const userPasswordInputHandler = (event) => {
         setUserPassword(() => event.target.value)
     }
 
     const resetUserPasswordErrorStatus = () => {
-        setUserPasswordErrorStatus({text : '', status: false});
+        setUserPasswordErrorStatus({text : undefined, status: false});
     }
 
     const isUserPasswordInputValid = () => {
@@ -94,14 +94,20 @@ export default function LoginPage({breakpoints, windowWidth, ...props}){
         return true;
     }
 
+    const clearAllSubLabelMessages = () => {
+        resetUserEmailIdErrorStatus();
+        resetUserPasswordErrorStatus();
+    }
+
     const loginFormSubmit = async() => {
         if(!loginFormSubmitLock){
             if(preSubmissionCheck()){
+                clearAllSubLabelMessages();
                 setLoginFormSubmitLock(() => true);
                 let loginFormData = { emailId: userEmailId, password: userPassword };
                 let response = await AuthServices.loginFormSubmit(loginFormData);
                 switch(response.status_code){
-                    case 102000: console.log(response.status_message); break;
+                    case 102000: console.log(response.status_message); appContext.pushAlert({message: 'Login Successful!', type: 'success'}); break;
                     case 102101: setUserEmailIdErrorStatus({ text: warningMessages.EMAIL_ID_INCORRECT, status: true}); break;
                     case 102121: setUserPasswordErrorStatus({ text: warningMessages.PASSWORD_INCORRECT, status: true}); break;
                     default: console.log(response.status_message); break;
@@ -118,8 +124,8 @@ export default function LoginPage({breakpoints, windowWidth, ...props}){
     const LoginForm = (
         <div className='login-form-main-div'>
             <h3>Login</h3>
-            <TextInput round type={'text'} placeholder={'Email Id'} onChange={userEmailIdInputHandler} onFocus={resetUserEmailIdErrorStatus} subLabelMessage={userEmailIdErrorStatus.text} errorMark={userEmailIdErrorStatus.status}></TextInput>
-            <PasswordInput round placeholder={'Password'} onChange={userPasswordInputHandler} onFocus={resetUserPasswordErrorStatus} subLabelMessage={userPasswordErrorStatus.text} errorMark={userPasswordErrorStatus.status}></PasswordInput>
+            <TextInput1 round type={'text'} placeholder={'Email Id'} onChange={userEmailIdInputHandler} onFocus={resetUserEmailIdErrorStatus} onBlur={isUserEmailIdValid} subLabelMessage={userEmailIdErrorStatus.text} errorMark={userEmailIdErrorStatus.status}></TextInput1>
+            <PasswordInput1 round placeholder={'Password'} onChange={userPasswordInputHandler} onFocus={resetUserPasswordErrorStatus} onBlur={isUserPasswordInputValid} subLabelMessage={userPasswordErrorStatus.text} errorMark={userPasswordErrorStatus.status}></PasswordInput1>
             <CheckboxGroupInput optionsList={loginCheckboxOptions} onChange={loginCheckboxOptionsHandler}></CheckboxGroupInput>
             <DefaultButton wide round primary onClick={loginFormSubmit}>{ loginFormSubmitLock ? <SemiSpinner light></SemiSpinner> : `Login`}</DefaultButton>
             <hr></hr>

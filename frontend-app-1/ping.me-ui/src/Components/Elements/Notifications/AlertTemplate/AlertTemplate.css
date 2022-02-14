@@ -1,12 +1,12 @@
 
 .alert-toaster-wrapper{
-    height: 50px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
 }
 
 .alert-toaster-div{
+    margin-bottom: 8px;
     z-index: inherit;
     max-width: 560px;
     width: 100%;

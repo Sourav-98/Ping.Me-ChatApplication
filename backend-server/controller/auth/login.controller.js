@@ -2,7 +2,7 @@
 const loginController = require('express').Router();
 const loginService = require('./../../services/auth/login.service');
 
-// const authMiddleware = require('./auth.middleware');
+const { AuthStatusEnums } = require('./../../util/statusCodes/AuthStatusEnums');
 
 let asyncDelay = async(time) => {
     return new Promise(resolve => {
@@ -19,25 +19,18 @@ loginController.get('/login', async(req, res) => {
 loginController.post('/login', async(req, res) => {
     let userData = req.body;
     try{
-        let isAuthenticated = await loginService.defaultUserLogin(userData);
-        if(isAuthenticated){
-            await asyncDelay(1000);
-            res.status(200).send({
-                status_code : 200,
-                status_message : "User Authenticated"
-            })
-        }
-        else{
-            await asyncDelay(1000);
-            res.status(401).send({
-                status_code : 401,
-                status_message : "User Not Authenticated"
-            });
+        let loginServiceResult = await loginService.defaultUserLogin(userData);
+        await asyncDelay(2000);
+        switch(loginServiceResult){
+            case -1: res.status(200).send(JSON.stringify(AuthStatusEnums.LOGIN_FAIL_INVALID_PASSWORD)); break;
+            case 0: res.status(200).send(JSON.stringify(AuthStatusEnums.LOGIN_FAIL_INVALID_EMAIL_ID)); break;
+            case 1: res.status(200).send(JSON.stringify(AuthStatusEnums.LOGIN_SUCCESS)); break;
+            default: res.status(400).send(JSON.stringify({'blank' : 'blank'})); break;
         }
     }
     catch(err){
         await asyncDelay(1000);
-        res.status(err.http_status_code).send(err);
+        res.status(500).send(JSON.stringify({...AuthStatusEnums.LOGIN_FAIL_OTHER, 'err' : err}));
     }
 });
 

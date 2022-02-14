@@ -1,7 +1,6 @@
 .alert-toaster-group-container-div{
     position: fixed;
     top: 10px;
-    width: 42%;
     max-width: 500px;
     box-sizing: border-box;
     display: block;
@@ -12,6 +11,7 @@
 
 @media only screen and (max-width: 768px){
     .alert-toaster-group-container-div{
+        width: 88%;
         left: 50%;
         transform: translateX(-50%);
     }
@@ -19,8 +19,8 @@
 
 @media only screen and (min-width: 769px){
     .alert-toaster-group-container-div{
+        width: 44%;
         right: 10px;
-        /* transform: translateX(-50%); */
     }
 }
 

@@ -18,7 +18,7 @@ const responseStatusMessages = {
     },
     REGISTER_SUCCESS: {
         status_code: 202100,
-        status_message: "Successful Registration!"
+        status_message: "Registration Successful!"
     },
     REGISTER_FAIL_EMAIL_ID_TAKEN: {
         status_code: 202101,
@@ -35,12 +35,16 @@ const responseStatusMessages = {
     ANNONYMOUS_ERR: {
         status_code: 555555,
         status_message: "Annonymous Error!"
+    },
+    SERVER_CONN_ERR: {
+        status_code: 111111,
+        status_message: "Server Connection Error!"
     }
 }
 
 async function formSubmit(url, formObject){
     let formBody = getUrlEncoded(formObject);
-    return fetch(url, {
+    return await fetch(url, {
         method: 'POST',
         headers:{
             'Content-type' : 'application/x-www-form-urlencoded; charset=UTF-8'
@@ -63,54 +67,59 @@ function getUrlEncoded(formObject){
 export async function registerFormSubmit(registerFormObject){
     try{
         let backendResponse = await formSubmit("/register", registerFormObject);
+        console.log('registerFormSubmit() response -> ');
         console.log(backendResponse);
-        // if an internal server error occured - server unable to process any requests
-        if(backendResponse.status >= 500){
-            return responseStatusMessages.SERVER_ERR;
+        if(!backendResponse){   // no backend response received
+            return responseStatusMessages.SERVER_CONN_ERR;
         }
         let responseJson = await backendResponse.json();
-        console.log("Register Response -> " + JSON.stringify(responseJson));
-        if(backendResponse.status === 200){
-            return responseStatusMessages.REGISTER_SUCCESS;
-        }
-        // if the response is an error response
-        if(backendResponse.status >= 400){
-            switch(responseJson.err_code){
-                case 101040: return responseStatusMessages.REGISTER_FAIL_EMAIL_ID_TAKEN;
-                default : return responseStatusMessages.REGISTER_FAIL_OTHER;
+        if(backendResponse.status >= 200 && backendResponse.status < 300){
+            switch(responseJson.status_code){
+                case 1000: return responseStatusMessages.REGISTER_SUCCESS;
+                case 1001: return responseStatusMessages.REGISTER_FAIL_EMAIL_ID_TAKEN;
             }
         }
-        return responseJson;
+        if(backendResponse.status >= 400){
+            switch (responseJson.err.err_code){
+                case 501000: 
+                case 500009: return responseStatusMessages.SERVER_ERR;
+                default: return responseStatusMessages.ANNONYMOUS_ERR;
+            }
+        }
     }
     catch(err){
-        console.log(err);
-        // throw err;
+        console.log('Exception at registerFormSubmit() -> ' + err);
+        return responseStatusMessages.ANNONYMOUS_ERR;
     }
-
 }
 
 export async function loginFormSubmit(loginFormObject){
     try{
         let backendResponse = await formSubmit("/login", loginFormObject);
+        console.log('loginFormSubmit() response -> ');
         console.log(backendResponse);
-        if(backendResponse.status >= 500){
-            return responseStatusMessages.SERVER_ERR;
+        if(!backendResponse){   // no backend response received
+            return responseStatusMessages.SERVER_CONN_ERR;
         }
         let responseJson = await backendResponse.json();
-        console.log("Login Response -> " + JSON.stringify(responseJson));
-        if(backendResponse.status === 200){
-            return responseStatusMessages.LOGIN_SUCCESS;
+        if(backendResponse.status >= 200 && backendResponse.status < 300){
+            switch(responseJson.status_code){
+                case 2000: return responseStatusMessages.LOGIN_SUCCESS;
+                case 2001: return responseStatusMessages.LOGIN_FAIL_INVALID_EMAIL_ID
+                case 2002: return responseStatusMessages.LOGIN_FAIL_INVALID_PASSWORD;
+            }
         }
         if(backendResponse.status >= 400){
-            switch(responseJson.err_code){
-                case 102401: return responseStatusMessages.LOGIN_FAIL_INVALID_PASSWORD;
-                case 102404: return responseStatusMessages.LOGIN_FAIL_INVALID_EMAIL_ID;
-                default: return responseStatusMessages.LOGIN_FAIL_OTHER;
+            switch (responseJson.err.err_code){
+                case 501000: 
+                case 500009: return responseStatusMessages.SERVER_ERR;
+                default: return responseStatusMessages.ANNONYMOUS_ERR;
             }
         }
     }
     catch(err){
-        console.log(err);
+        console.log('Exception at registerFormSubmit() -> ' + err);
+        return responseStatusMessages.ANNONYMOUS_ERR;
     }
 }
 

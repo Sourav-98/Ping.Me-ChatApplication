@@ -9,6 +9,30 @@
     transform: translateX(-50%);
 }
 
+.alert-toaster-single-container-div.top-left{
+
+}
+
+.alert-toaster-single-container-div.top-center{
+
+}
+
+.alert-toaster-single-container-div.top-right{
+
+}
+
+.alert-toaster-single-container-div.bottom-right{
+
+}
+
+.alert-toaster-single-container-div.bottom-center{
+
+}
+
+.alert-toaster-single-container-div.bottom-left{
+    
+}
+
 .alert-toaster-single-enter{
     transform: scale(0);
 }
