@@ -29,7 +29,7 @@ registerController.post('/register', async(req, res) => {
             case -1: res.send(JSON.stringify(AuthStatusEnums.REGISTER_FAIL_EMAIL_ID_TAKEN)); break;
             case 0: res.send(JSON.stringify(AuthStatusEnums.REGISTER_FAIL_INVALID_EMAIL_ID)); break;
             case 1: res.send(JSON.stringify(AuthStatusEnums.REGISETER_SUCCESS)); break;
-            default: res.send({'blank' : 'blank'});
+            default: res.send(JSON.stringify({'blank' : 'blank'}));
         }
     }
     catch(err){

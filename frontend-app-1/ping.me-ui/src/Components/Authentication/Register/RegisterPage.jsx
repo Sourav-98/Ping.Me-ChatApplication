@@ -12,6 +12,7 @@ import { DefaultButton } from 'Components/Elements/Button';
 import { SemiSpinner } from 'Components/Elements/PreLoaders';
 
 import AppContext from 'Context/AppContext';
+import { ResponseEnums } from 'Services/Utilities/ResponseEnums';
 
 export default function RegisterPage(){
 
@@ -197,12 +198,12 @@ export default function RegisterPage(){
                 let registerFormData = { firstName: userFirstName, lastName: userLastName, emailId: userEmailId, password: userPassword };
                 let res = await AuthServices.registerFormSubmit(registerFormData);
                 switch(res.status_code){
-                    case 202100: appContext.pushAlert({ message: res.status_message, type: 'success', autoClose: false}); break;
-                    case 202101: appContext.pushAlert({ message: 'Registration Failed', type: 'danger'}); setUserEmailIdErrorStatus({ text : warningMessages.EMAIL_ID_EXISTS, status: true }); break;
-                    case 202111: break;
-                    case 999999: appContext.pushAlert({message: 'Server-side error! Please try after some time.', type: 'danger', autoClose: false}); break;
-                    case 111111: appContext.pushAlert({message: 'Error communicating with the server.', type: 'danger', autoClose: false}); break;
-                    case 555555: 
+                    case ResponseEnums.REGISETER_SUCCESS.status_code: appContext.pushAlert({ message: res.status_message, type: 'success', autoClose: false}); break;
+                    case ResponseEnums.REGISTER_FAIL_EMAIL_ID_TAKEN.status_code: appContext.pushAlert({ message: 'Registration Failed', type: 'danger'}); setUserEmailIdErrorStatus({ text : warningMessages.EMAIL_ID_EXISTS, status: true }); break;
+                    case ResponseEnums.REGISTER_FAIL_INVALID_EMAIL_ID.status_code: break;
+                    case ResponseEnums.SERVER_ERR.status_code: appContext.pushAlert({message: 'Server-side error! Please try after some time.', type: 'danger'}); break;
+                    case ResponseEnums.SERVER_CONN_ERR.status_code: appContext.pushAlert({message: 'Error communicating with the server.', type: 'danger'}); break;
+                    case ResponseEnums.ANNONYMOUS_ERR.status_code: 
                     default: appContext.pushAlert({message: 'Unknown error occured', type: 'warning'}); break;
                 }
                 setTimeout(() => {

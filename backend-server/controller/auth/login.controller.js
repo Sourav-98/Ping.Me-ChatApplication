@@ -18,6 +18,7 @@ loginController.get('/login', async(req, res) => {
 
 loginController.post('/login', async(req, res) => {
     let userData = req.body;
+    console.log(userData);
     try{
         let loginServiceResult = await loginService.defaultUserLogin(userData);
         await asyncDelay(2000);
