@@ -47,6 +47,10 @@ const AuthStatusEnums = {
     USER_PASSWORD_RESET_FAIL_TOKEN_INVALID: {
         status_code: 4001,
         status_message: 'User Password Reset Failed - Invalid Reset Token'
+    },
+    REQUEST_FAIL_INVALID_PARAMETERS: {
+        status_code: 9400,
+        status_message: 'User Login Failed - Invalid Request Parameters'
     }
 }
 

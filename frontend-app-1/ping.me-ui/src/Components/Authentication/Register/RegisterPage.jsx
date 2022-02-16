@@ -201,6 +201,7 @@ export default function RegisterPage(){
                     case ResponseEnums.REGISETER_SUCCESS.status_code: appContext.pushAlert({ message: res.status_message, type: 'success', autoClose: false}); break;
                     case ResponseEnums.REGISTER_FAIL_EMAIL_ID_TAKEN.status_code: appContext.pushAlert({ message: 'Registration Failed', type: 'danger'}); setUserEmailIdErrorStatus({ text : warningMessages.EMAIL_ID_EXISTS, status: true }); break;
                     case ResponseEnums.REGISTER_FAIL_INVALID_EMAIL_ID.status_code: break;
+                    case ResponseEnums.REQUEST_FAIL_INVALID_PARAMETERS.status_code: appContext.pushAlert({message : 'Bad Request was made!', template: 'outlined', type: 'danger'}); break;
                     case ResponseEnums.SERVER_ERR.status_code: appContext.pushAlert({message: 'Server-side error! Please try after some time.', type: 'danger'}); break;
                     case ResponseEnums.SERVER_CONN_ERR.status_code: appContext.pushAlert({message: 'Error communicating with the server.', type: 'danger'}); break;
                     case ResponseEnums.ANNONYMOUS_ERR.status_code: 

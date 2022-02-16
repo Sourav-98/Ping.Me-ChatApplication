@@ -113,6 +113,7 @@ export default function LoginPage({breakpoints, windowWidth, ...props}){
                     case ResponseEnums.LOGIN_FAIL_INVALID_EMAIL_ID.status_code: setUserEmailIdErrorStatus({ text: warningMessages.EMAIL_ID_INCORRECT, status: true}); break;
                     case ResponseEnums.LOGIN_FAIL_INVALID_PASSWORD.status_code: setUserPasswordErrorStatus({ text: warningMessages.PASSWORD_INCORRECT, status: true}); break;
                     case ResponseEnums.LOGIN_FAIL_OTHER.status_code: appContext.pushAlert({message : 'Invalid Login Request made!', template: 'outlined', type: 'warning'}); break;
+                    case ResponseEnums.REQUEST_FAIL_INVALID_PARAMETERS.status_code: appContext.pushAlert({message : 'Bad Request was made!', template: 'outlined', type: 'danger'}); break;
                     case ResponseEnums.SERVER_ERR.status_code: appContext.pushAlert({message: 'Server-side error! Please try after some time.', type: 'danger', autoClose: false}); break;
                     case ResponseEnums.SERVER_CONN_ERR.status_code: appContext.pushAlert({message: 'Error communicating with the server.', type: 'danger', autoClose: false}); break;
                     case 555555: 

@@ -55,6 +55,10 @@ const AuthResponseEnums = {
 }
 
 const ServerErrorEnums = {
+    REQUEST_FAIL_INVALID_PARAMETERS: {
+        status_code: 9400,
+        status_message: 'User Login Failed - Invalid Request Parameters'
+    },
     SERVER_ERR: {
         status_code: 9999,
         status_message: "Server Error"

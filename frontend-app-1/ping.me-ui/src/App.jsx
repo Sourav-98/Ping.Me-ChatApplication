@@ -65,8 +65,8 @@ function App() {
 	return (
 		<AppContext.Provider value={alertUtil}>
 			<div className="app-root">
-				{/* <LoginPage/> */}
-				<RegisterPage/>
+				<LoginPage/>
+				{/* <RegisterPage/> */}
 				<AlertGroup max={6}/>
 			</div>
 		</AppContext.Provider>

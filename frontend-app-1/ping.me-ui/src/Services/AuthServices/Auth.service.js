@@ -56,7 +56,7 @@ export async function registerFormSubmit(registerFormObject){
     }
     else if(backendResponse.status >= 400 && backendResponse.status < 500){
         switch(backendResponse.status){
-            case 400: // insert -> bad request
+            case 400: return ResponseEnums.REQUEST_FAIL_INVALID_PARAMETERS;
             case 404: // insert -> invalid url hit
             default: return ResponseEnums.REGISTER_FAIL_OTHER;
         }
@@ -105,7 +105,7 @@ export async function loginFormSubmit(loginFormObject){
     }
     else if(backendResponse.status >= 400 && backendResponse.status < 500){
         switch(backendResponse.status){
-            case 400: // insert -> bad request
+            case 400: return ResponseEnums.REQUEST_FAIL_INVALID_PARAMETERS;
             case 404: // insert -> invalid url hit
             default: return ResponseEnums.LOGIN_FAIL_CLIENT_ERR;
         }
