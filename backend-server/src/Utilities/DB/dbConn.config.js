@@ -1,6 +1,6 @@
 
-let dbConfig = {
-    uri: 'mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false',
+export const dbConfig = {
+    uri: 'mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&directConnection=true&ssl=false',
     options: {
         useNewUrlParser: true,
         useUnifiedTopology: true,
@@ -10,5 +10,3 @@ let dbConfig = {
     }, 
     db: 'test-chat-app'
 }
-
-module.exports = {dbConfig}

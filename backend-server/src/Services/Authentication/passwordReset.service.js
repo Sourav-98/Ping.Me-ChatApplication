@@ -1,7 +1,7 @@
 
-const { ChatUserDAO } = require('./../../repository/ChatUserDAO');
+import ChatUserDAO from "Repositories/ChatUserDAO";
 
-exports.userPasswordReset = async function(chatUserData){
+export const userPasswordReset = async function(chatUserData){
     try{
         let chatUser = await ChatUserDAO.findUserById(chatUserData.emailId);
         

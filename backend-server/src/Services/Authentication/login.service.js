@@ -1,16 +1,15 @@
 // login service - provides authentication service for a Chat User Login
 
-const { ChatUserDAO } = require('./../../repository/ChatUserDAO');
-const { Errors } = require('../../util/errorCodes/errorCodes');
+import ChatUserDAO from 'Repositories/ChatUserDAO';
 
-const bcrypt = require('bcrypt');
+import bcrypt from 'bcrypt';
 
 const defaultMessage = {
     service: "Login Service", 
     message: "The service for providing authentication..."
 }
 
-exports.defaultLoginMessage = function(){
+export const defaultLoginMessage = function(){
     return defaultMessage;
 }
 
@@ -20,7 +19,7 @@ exports.defaultLoginMessage = function(){
  * returns -1 if the user password entered does not match the password in the db
  * throws exception if any
  */
-exports.defaultUserLogin = async function(userCredentials){
+export const defaultUserLogin = async function(userCredentials){
     try{
         console.log("defaultUserLogin() service ->");
         let loginUser = await ChatUserDAO.findUserById(userCredentials.emailId);
@@ -41,7 +40,7 @@ exports.defaultUserLogin = async function(userCredentials){
     }
 }
 
-exports.emailVerification = async function(userEmailId){
+export const emailVerification = async function(userEmailId){
     try{
         return await ChatUserDAO.updateUserIsVerifiedByEmailId(userEmailId);
     }

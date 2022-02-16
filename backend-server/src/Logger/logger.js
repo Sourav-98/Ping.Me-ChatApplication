@@ -1,5 +1,5 @@
 
-exports.appLogger = function(req, res, next){
+export const appLogger = function(req, res, next){
     let url = req.url;
     let ip = req.ip;
     let method = req.method;

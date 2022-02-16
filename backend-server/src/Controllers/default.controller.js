@@ -1,5 +1,6 @@
 
-const defaultController = require('express').Router();
+import { Router } from 'express';
+const defaultController = Router();
 
 defaultController.get('/', async(req, res) => {
     let defaultData = {
@@ -13,4 +14,4 @@ defaultController.get('**', async(req, res)=>{
     res.status(404).send('Page Not Found');
 })
 
-module.exports = { defaultController };
+export default defaultController;

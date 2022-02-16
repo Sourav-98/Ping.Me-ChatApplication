@@ -1,10 +1,11 @@
 
-const loginController = require('express').Router();
-const loginService = require('./../../services/auth/login.service');
+import { Router } from 'express';
+const loginController = Router();
 
-const ControllerUtility = require('./../Utilities/ControllerUtility');
+import * as loginService from 'Services/Authentication/login.service';
 
-const { AuthStatusEnums } = require('./../../util/statusCodes/AuthStatusEnums');
+import * as ControllerUtility from 'Utilities/Controllers/Authentication/authController.utility';
+import { ResponseEnums } from 'Utilities/Enums/ResponseEnums';
 
 let asyncDelay = async(time) => {
     return new Promise(resolve => {
@@ -24,23 +25,23 @@ loginController.post('/login', async(req, res) => {
     // check if valid data parameters was passed to the /login POST request
     let paramsList = [ 'emailId', 'password' ];
     if(!ControllerUtility.isRequestParamsValid(userData, paramsList)){
-        res.status(400).send(JSON.stringify(AuthStatusEnums.REQUEST_FAIL_INVALID_PARAMETERS));
+        res.status(400).send(JSON.stringify(ResponseEnums.REQUEST_FAIL_INVALID_PARAMETERS));
         return;
     }
     try{
         let loginServiceResult = await loginService.defaultUserLogin(userData);
         await asyncDelay(2000);
         switch(loginServiceResult){
-            case -1: res.status(200).send(JSON.stringify(AuthStatusEnums.LOGIN_FAIL_INVALID_PASSWORD)); break;
-            case 0: res.status(200).send(JSON.stringify(AuthStatusEnums.LOGIN_FAIL_INVALID_EMAIL_ID)); break;
-            case 1: res.status(200).send(JSON.stringify(AuthStatusEnums.LOGIN_SUCCESS)); break;
+            case -1: res.status(200).send(JSON.stringify(ResponseEnums.LOGIN_FAIL_INVALID_PASSWORD)); break;
+            case 0: res.status(200).send(JSON.stringify(ResponseEnums.LOGIN_FAIL_INVALID_EMAIL_ID)); break;
+            case 1: res.status(200).send(JSON.stringify(ResponseEnums.LOGIN_SUCCESS)); break;
             default: res.status(400).send(JSON.stringify({'blank' : 'blank'})); break;
         }
     }
     catch(err){
         await asyncDelay(1000);
-        res.status(500).send(JSON.stringify({...AuthStatusEnums.LOGIN_FAIL_OTHER, 'err' : err}));
+        res.status(500).send(JSON.stringify({...ResponseEnums.LOGIN_FAIL_OTHER, 'err' : err}));
     }
 });
 
-module.exports = { loginController }
+export default loginController;

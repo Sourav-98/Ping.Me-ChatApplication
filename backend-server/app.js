@@ -1,6 +1,6 @@
 const http = require('http')
 const { app } = require('./server');
-const { Connection } = require('./util/db/dbConn.util');
+const { Connection } = require('Utilities/DB/dbConn.utility');
 
 // const dotenv = require('dotenv');
 const path = require('path');

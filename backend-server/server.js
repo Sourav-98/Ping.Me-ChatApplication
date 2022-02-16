@@ -1,17 +1,18 @@
 const express = require('express');
-const path = require('path');
-const bodyParser = require('body-parser');
+// const path = require('path');
+// const bodyParser = require('body-parser');
 const session = require('express-session');
 
 const app = express();
 
-const appLogger = require('./logger/logger');
+// const appLogger = require('./logger/logger');
 
-const { loginController } = require('./controller/auth/login.controller');
-const { registerController } = require('./controller/auth/register.controller');
-const { defaultController } = require('./controller/default.controller');
+// const { loginController } = require('Controllers/Authentication/login.controller');
+import loginController from 'Controllers/Authentication/login.controller';
+import registerController from 'Controllers/Authentication/register.controller';
+import defaultController from 'Controllers/default.controller';
 
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(express.urlencoded({extended: false}))
 app.use(loginController);
 app.use(registerController);
 app.use(defaultController);

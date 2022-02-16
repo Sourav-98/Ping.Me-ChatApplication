@@ -1,11 +1,11 @@
 
-const { ChatUserDTO } = require('./../models/ChatUserDTO');
-const { Connection } = require('./../util/db/dbConn.util');
+import ChatUserDTO from 'Models/ChatUserDTO';
+import { Connection } from 'Utilities/DB/dbConn.utility';
 
-const { Errors } = require('../util/errorCodes/errorCodes');
+import { Errors } from 'Utilities/Enums/errorCodes/errorCodes';
 
 // Basic Chat User CRUD Operation + Additional user fetches operations
-class ChatUserDAO{
+export default class ChatUserDAO{
     
     // MongoDB Collection Name for ChatUserDAO
     static _collectionName = "chat-users";
@@ -160,5 +160,3 @@ class ChatUserDAO{
 
     
 }
-
-module.exports = { ChatUserDAO };

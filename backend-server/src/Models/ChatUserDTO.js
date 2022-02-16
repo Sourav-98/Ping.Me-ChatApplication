@@ -1,6 +1,6 @@
 "use strict";
 
-class ChatUserDTO {
+export default class ChatUserDTO {
 
     constructor({firstName = undefined, lastName = undefined, phoneNo = undefined, dateOfBirth = undefined, emailId = undefined, password = undefined, isVerified = false, lastLogin = undefined, lastPasswordChange = undefined, userRolesList = undefined}) {
         this.firstName = firstName;
@@ -95,5 +95,3 @@ class ChatUserDTO {
         return this.userRolesList;
     }
 }
-
-module.exports = { ChatUserDTO }

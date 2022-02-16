@@ -1,8 +1,8 @@
 
-const MongoClient = require('mongodb').MongoClient;
-const { dbConfig } = require('./db.config.js');
+import { MongoClient } from 'mongodb';
+import { dbConfig } from './dbConn.config';
 
-class Connection{
+export class Connection{
     static _client = undefined;
     static _db = undefined;
     static _dbConfig = dbConfig;
@@ -27,5 +27,3 @@ class Connection{
         return this._db;
     }
 }
-
-module.exports = { Connection }
