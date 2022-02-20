@@ -1,5 +1,5 @@
 
-import './SemiSpinner.css'
+import './SemiSpinner.css';
 
 export default function SemiSpinner({sm, md, lg, light, dark}){
     return(

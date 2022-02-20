@@ -1,35 +1,34 @@
 
 import ChatUserDTO from 'Models/ChatUserDTO';
-import { Connection } from 'Utilities/DB/dbConn.utility';
+import DBConnection from 'Utilities/DB/dbConn.utility';
 
 import { Errors } from 'Utilities/Enums/errorCodes/errorCodes';
 
 // Basic Chat User CRUD Operation + Additional user fetches operations
+
+
+
 export default class ChatUserDAO{
     
     // MongoDB Collection Name for ChatUserDAO
     static _collectionName = "chat-users";
 
-    /*
+    /** ChatUserDAO - The Data Access Object for the chat-users collection
+     *  List of functions:
+     *  0. findAllUsers()
+     *  1. findUserById()
+     *  2. insertNewUser()
+     *  3. deleteUserByEmailId()
+     *  4. updateUserDataByEmailId()
+     *  5. updateUserPasswordByEmailId()
+     *  6. updateUserLastLoginByEmailId()
+     *  7. updateUserIsVerifiedByEmailId()
+     */
 
-    Functions Listing
-
-    0. getAllChatUsers() - admin acess only
-    1. findUserByEmailId(chatUserEmailId)
-    2. insertNewUser(chatUserData)
-    3. deleteUserByEmailId(chatUserEmailId)
-    4. updateUserDataByEmailId(chatUserData)
-    5. updateUserPasswordbyEmailId(chatUserData)
-    6. updateUserLastLoginByEmailId(chatUserData)
-    7. updateUserIsVerifiedByEmailId(chatUserEmailId)
-
-    */
-
-    // Get the list of all the Chat Users
     static async findAllUsers(){
         console.log('ChatUser DAO >> findAllUsers() -------------');
         try{
-            let chatUsersDB = await Connection.getDb().collection(this._collectionName).find().toArray();
+            let chatUsersDB = await DBConnection.getDb().collection(this._collectionName).find().toArray();
             let chatUsersDTO = [];
             chatUsersDB.map( chatUserDB => {
                 chatUsersDTO.push(new ChatUserDTO({...chatUserDB}));
@@ -42,15 +41,19 @@ export default class ChatUserDAO{
         }
     }
     
-    // Find a Chat User by the given unique Email Id
-    // return null if no users found
-    // return the user object if the user exists
-    // throw error if any
+    /** 
+     *  @function findUserById
+     *  @description : finds a chat user from the collection, given the user's email id
+     *  @param {string} chatUserEmailId
+     *  @returns {ChatUserDTO} chatUserDTO : if there exists a chat user
+     *  @returns {null} : if no user is found
+     *  @throws {Errors.SERVER_DB_ERR} : if any
+     */
     static async findUserById(chatUserEmailId){
         console.log('ChatUser DAO >> findUserById() -------------');
         try{
             
-            let chatUserDB = await Connection.getDb().collection(this._collectionName).findOne({emailId : chatUserEmailId});    // returns a single object
+            let chatUserDB = await DBConnection.getDb().collection(this._collectionName).findOne({emailId : chatUserEmailId});    // returns a single object
             if(!chatUserDB){
                 return null;      
             }
@@ -70,7 +73,7 @@ export default class ChatUserDAO{
     static async insertNewUser(chatUserData){
         console.log('ChatUser DAO >> insertNewUser() -------------');
         try{
-            let result = await Connection.getDb().collection(this._collectionName).insertOne(chatUserData);
+            let result = await DBConnection.getDb().collection(this._collectionName).insertOne(chatUserData);
             console.log('User Inserted >> ' + JSON.stringify(result));
             return true;
         }
@@ -83,7 +86,7 @@ export default class ChatUserDAO{
     // delete an existing Chat User by the given Email Id
     static async deleteUserByEmailId(chatUserEmailId){
         try{
-            await Connection.getDb().collection(this._collectionName).delete({emailId : chatUserEmailId});
+            await DBConnection.getDb().collection(this._collectionName).delete({emailId : chatUserEmailId});
             return true;
         }
         catch(err){
@@ -95,7 +98,7 @@ export default class ChatUserDAO{
     // update the details of a Chat User by the given Email Id
     static async updateUserDataByEmailId(chatUserData){  // Updates all the user info except emailId, password and lastPasswordChange
         try{
-            await Connection.getDb().collection(this._collectionName).updateOne({emailId : chatUserData.emailId}, {
+            await DBConnection.getDb().collection(this._collectionName).updateOne({emailId : chatUserData.emailId}, {
                 $set : {
                     "firstName" : chatUserData.firstName,
                     "lastName" : chatUserData.lastName,
@@ -113,7 +116,7 @@ export default class ChatUserDAO{
     // update the Password of a Chat User by the given Email Id
     static async updateUserPasswordByEmailId(chatUserData){
         try{
-            await Connection.getDb().collection(this._collectionName).updateOne({emailId : chatUserData.emailId}, {
+            await DBConnection.getDb().collection(this._collectionName).updateOne({emailId : chatUserData.emailId}, {
                 $set : {
                     "password" : chatUserData.password,
                     "lastPasswordChange" : chatUserData.lastPasswordChange
@@ -130,7 +133,7 @@ export default class ChatUserDAO{
     // update Chat User's last login status by the give Email Id
     static async updateUserLastLoginByEmailId(chatUserData){
         try{
-            await Connection.getDb().collection(this._collectionName).updateOne({emailId : chatUserData.emailId}, {
+            await DBConnection.getDb().collection(this._collectionName).updateOne({emailId : chatUserData.emailId}, {
                 $set : {
                     "lastLogin" : chatUserData.lastLogin
                 }
@@ -146,7 +149,7 @@ export default class ChatUserDAO{
     // update Chat User's verification status by the givem Email Id
     static async updateUserIsVerifiedByEmailId(chatUserEmailId){
         try{
-            await Connection.getDb().collection(this._collectionName).updateOne({emailId : chatUserEmailId}, {
+            await DBConnection.getDb().collection(this._collectionName).updateOne({emailId : chatUserEmailId}, {
                 $set : {
                     "isVerified" : true
                 }

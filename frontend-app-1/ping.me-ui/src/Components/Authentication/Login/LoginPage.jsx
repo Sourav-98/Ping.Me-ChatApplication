@@ -109,13 +109,28 @@ export default function LoginPage({breakpoints, windowWidth, ...props}){
                 let loginFormData = { emailId: userEmailId, password: userPassword };
                 let response = await AuthServices.loginFormSubmit(loginFormData);
                 switch(response.status_code){
-                    case ResponseEnums.LOGIN_SUCCESS.status_code: console.log(response.status_message); appContext.pushAlert({message: 'Login Successful!', type: 'success'}); break;
-                    case ResponseEnums.LOGIN_FAIL_INVALID_EMAIL_ID.status_code: setUserEmailIdErrorStatus({ text: warningMessages.EMAIL_ID_INCORRECT, status: true}); break;
-                    case ResponseEnums.LOGIN_FAIL_INVALID_PASSWORD.status_code: setUserPasswordErrorStatus({ text: warningMessages.PASSWORD_INCORRECT, status: true}); break;
-                    case ResponseEnums.LOGIN_FAIL_OTHER.status_code: appContext.pushAlert({message : 'Invalid Login Request made!', template: 'outlined', type: 'warning'}); break;
-                    case ResponseEnums.REQUEST_FAIL_INVALID_PARAMETERS.status_code: appContext.pushAlert({message : 'Bad Request was made!', template: 'outlined', type: 'danger'}); break;
-                    case ResponseEnums.SERVER_ERR.status_code: appContext.pushAlert({message: 'Server-side error! Please try after some time.', type: 'danger', autoClose: false}); break;
-                    case ResponseEnums.SERVER_CONN_ERR.status_code: appContext.pushAlert({message: 'Error communicating with the server.', type: 'danger', autoClose: false}); break;
+                    case ResponseEnums.LOGIN_SUCCESS.status_code: 
+                        console.log(response.status_message);
+                        appContext.pushAlert({message: 'Login Successful!', type: 'success'});
+                        break;
+                    case ResponseEnums.LOGIN_FAIL_INVALID_EMAIL_ID.status_code: 
+                        setUserEmailIdErrorStatus({ text: warningMessages.EMAIL_ID_INCORRECT, status: true});
+                        break;
+                    case ResponseEnums.LOGIN_FAIL_INVALID_PASSWORD.status_code: 
+                        setUserPasswordErrorStatus({ text: warningMessages.PASSWORD_INCORRECT, status: true});
+                        break;
+                    case ResponseEnums.LOGIN_FAIL_OTHER.status_code: 
+                        appContext.pushAlert({message : 'Invalid Login Request made!', template: 'outlined', type: 'warning'});
+                        break;
+                    case ResponseEnums.REQUEST_FAIL_INVALID_PARAMETERS.status_code:
+                        appContext.pushAlert({message : 'Bad Request was made!', template: 'outlined', type: 'danger'});
+                        break;
+                    case ResponseEnums.SERVER_ERR.status_code:
+                        appContext.pushAlert({message: 'Server-side error! Please try after some time.', type: 'danger', autoClose: false});
+                        break;
+                    case ResponseEnums.SERVER_CONN_ERR.status_code:
+                        appContext.pushAlert({message: 'Error communicating with the server.', type: 'danger', autoClose: false});
+                        break;
                     case 555555: 
                     default: appContext.pushAlert({message: 'Unknown error occured', type: 'warning'}); break;
                 }

@@ -1,8 +1,8 @@
 
 import { MongoClient } from 'mongodb';
-import { dbConfig } from './dbConn.config';
+import dbConfig from './dbConn.config';
 
-export class Connection{
+export default class DBConnection{
     static _client = undefined;
     static _db = undefined;
     static _dbConfig = dbConfig;

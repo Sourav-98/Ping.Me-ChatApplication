@@ -1,20 +1,18 @@
-const express = require('express');
+import express from 'express';
 // const path = require('path');
 // const bodyParser = require('body-parser');
-const session = require('express-session');
+import session from 'express-session';
 
-const app = express();
-
+const server = express();
 // const appLogger = require('./logger/logger');
 
-// const { loginController } = require('Controllers/Authentication/login.controller');
 import loginController from 'Controllers/Authentication/login.controller';
 import registerController from 'Controllers/Authentication/register.controller';
 import defaultController from 'Controllers/default.controller';
 
-app.use(express.urlencoded({extended: false}))
-app.use(loginController);
-app.use(registerController);
-app.use(defaultController);
+server.use(express.urlencoded({extended: false}))
+server.use(loginController);
+server.use(registerController);
+server.use(defaultController);
 
-module.exports = { app };
+export default server;

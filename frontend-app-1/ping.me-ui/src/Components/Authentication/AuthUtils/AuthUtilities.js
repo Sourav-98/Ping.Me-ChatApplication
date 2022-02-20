@@ -2,11 +2,12 @@
 /** Auth Utilities - Contains all the frontend utility code like form input checking, etc */
 
 
-/** isFirstNameValid -> checks the validity of the first name
- * param - firstName -> entered by the user
- * returns 0 if the firstName is null or undefined
- * returns -1 if the firstName is not valid
- * returns 1 if firstName is valid
+/**
+ * @description isFirstNameValid() -> checks the validity of the first name
+ * @param {string} firstName
+ * @returns {number} 0, if firstName is undefined or null
+ * @returns {number} -1, if the firstName does not match the Regex pattern
+ * @returns {number} 1, if the firstName is valid
  */
 export function isFirstNameValid(firstName){
     if(!firstName){
@@ -19,11 +20,12 @@ export function isFirstNameValid(firstName){
     return 1;
 }
 
-/** isLastNameValid -> checks the validity of the last name
- * param - lastName -> entered by the user
- * returns 0 if the lastName is null or undefined
- * returns -1 if the lastName is not valid
- * returns 1 if lastName is valid
+/**
+ * @description isLastNameValid() -> checks the validity of the last name
+ * @param {string} lastName
+ * @returns {number} 0, if lastName is undefined or null
+ * @returns {number} -1, if the lastName does not match the Regex pattern
+ * @returns {number} 1, if the lastName is valid
  */
 export function isLastNameValid(lastName){
     if(!lastName){
@@ -36,11 +38,12 @@ export function isLastNameValid(lastName){
     return 1;
 }
 
-/** isEmailIdValid -> checks the validity of the user email id
- * param - emailId -> entered by the user
- * returns 0 if the emailId is null or undefined
- * returns -1 if the emailId is not valid
- * returns 1 if the emailId is valid
+/**
+ * @description isUserEmailIdValid() -> checks the validity of the user email id
+ * @param {string} emailId
+ * @returns {number} 0 -> if the emailId is null or undefined
+ * @returns {number} -1 -> if the emailId does not match the Regex pattern
+ * @returns {number} 1 -> if the emailId is valid
  */
 export function isUserEmailIdValid(emailId){
     if(!emailId){
@@ -54,10 +57,11 @@ export function isUserEmailIdValid(emailId){
     return 1;
 }
 
-/** isPasswordValid -> checks the validity of the user password
- * param - password -> entered by the user
- * returns 0 if the password is null or undefined
- * returns 1 if the password is valid
+/**
+ * @description isPasswordValid() -> checks the validity of the user password
+ * @param {string} password
+ * @returns {number} 0 -> if the password is null or undefined
+ * @returns {number} 1 -> if the password is valid
  */
 export function isPasswordValid(password){
     if(!password){
@@ -66,11 +70,13 @@ export function isPasswordValid(password){
     return 1;
 }
 
-/** isConfirmPasswordValid -> checks the validity of the user confirm password
- * param - confirmPassword, password -> entered by the user
- * returns 0 if the confirmPassword is null or undefined
- * returns -1 if the confirmPassword doesnot match with the password
- * returns 1 if the confirmPassword is the same as the password
+/**
+ * @description isConfirmPasswordValid() -> checks the validity of the user confirm password
+ * @param {string} confirmPassword
+ * @param {string} password
+ * @returns {number} 0 -> if the confirmPassword is null or undefined
+ * @returns {number} -1 -> if the confirmPassword and password do not match
+ * @returns {number} 1 -> if the confirmPassword matches the password
  */
 export function isConfirmPasswordValid(confirmPassword, password){
     if(!confirmPassword){

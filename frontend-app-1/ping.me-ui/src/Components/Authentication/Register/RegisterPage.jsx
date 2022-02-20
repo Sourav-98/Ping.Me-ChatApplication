@@ -4,7 +4,8 @@ import { useState, useEffect, useContext } from 'react';
 import * as AuthServices from 'Services/AuthServices/Auth.service';
 import * as AuthUtilities from './../AuthUtils/AuthUtilities';
 import { AuthWarningConstants as warningMessages } from '../AuthUtils/AuthWarningMessages';
-import AuthPageTemplate from "Components/Authentication/templates/AuthPage.template";
+import { ResponseEnums } from 'Services/Utilities/ResponseEnums';
+import AuthPageTemplate from "./../templates/AuthPage.template";
 import './RegisterPage.css';
 
 import { TextInput1 as TextInput, PasswordInput1 as PasswordInput, CheckboxGroupInput } from 'Components/Elements/Input';
@@ -12,7 +13,6 @@ import { DefaultButton } from 'Components/Elements/Button';
 import { SemiSpinner } from 'Components/Elements/PreLoaders';
 
 import AppContext from 'Context/AppContext';
-import { ResponseEnums } from 'Services/Utilities/ResponseEnums';
 
 export default function RegisterPage(){
 

@@ -1,5 +1,5 @@
 
-const Errors = {
+export const Errors = {
     USER_EMAIL_ID_EXISTS_ERR: {
         err_code: 101040,
         err_message: "User Email Id already registered!"
@@ -21,5 +21,3 @@ const Errors = {
         err_message: "DB Exception..."
     }
 }
-
-export default { Errors }

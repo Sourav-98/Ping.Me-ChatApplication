@@ -23,9 +23,7 @@ function App() {
 	 * 		}
 	 */
 	const [alertsList, setAlertsList] = useState([]);
-
-	// const alertTimeoutDuration = 6500;
-
+	
 	const pushAlert = ({message, template = undefined, type = undefined, autoClose = true}) => {
 		let id = uuid();
 		console.log('Alert pushed -> id: ' + id + + ' <->  message: ' + message + ' <-> type: ' + type);
@@ -50,7 +48,6 @@ function App() {
 		let tempAlerts = [...alertsList];
 		tempAlerts.pop();
 		setAlertsList(() => tempAlerts);
-		// setAlertsList(prevAlertsList => prevAlertsList.filter( alert => alert.id !== prevAlertsList.pop().id))
 	}
 
 	const alertUtil = {
