@@ -2,6 +2,6 @@
 import { Router } from 'express';
 const passwordResetController = Router();
 
-const passwordResetService;
+// const passwordResetService;
 
 export default passwordResetController;
