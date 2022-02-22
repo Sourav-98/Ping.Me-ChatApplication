@@ -1,5 +1,37 @@
 "use strict";
 
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function () {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -8,13 +40,11 @@ const express_1 = require("express");
 
 const registerController = (0, express_1.Router)();
 
-const registerService = require("../../Services/Authentication/register.service");
+const registerService = __importStar(require("../../Services/Authentication/register.service"));
 
-const ControllerUtility = require("../../Utilities/Controllers/Authentication/authController.utility");
+const ControllerUtility = __importStar(require("../../Utilities/Controllers/Authentication/authController.utility"));
 
-const {
-  ResponseEnums
-} = require("../../Utilities/Enums/ResponseEnums");
+const ResponseEnums_1 = require("../../Utilities/Enums/ResponseEnums");
 
 let asyncDelay = async time => {
   return new Promise(resolve => {
@@ -35,7 +65,7 @@ registerController.post('/register', async (req, res) => {
   let paramsList = ['firstName', 'lastName', 'emailId', 'password'];
 
   if (!ControllerUtility.isRequestParamsValid(userData, paramsList)) {
-    res.status(400).send(JSON.stringify(ResponseEnums.REQUEST_FAIL_INVALID_PARAMETERS));
+    res.status(400).send(JSON.stringify(ResponseEnums_1.ResponseEnums.REQUEST_FAIL_INVALID_PARAMETERS));
     return;
   }
 
@@ -45,15 +75,15 @@ registerController.post('/register', async (req, res) => {
 
     switch (registerServiceResult) {
       case -1:
-        res.send(JSON.stringify(ResponseEnums.REGISTER_FAIL_EMAIL_ID_TAKEN));
+        res.send(JSON.stringify(ResponseEnums_1.ResponseEnums.REGISTER_FAIL_EMAIL_ID_TAKEN));
         break;
 
       case 0:
-        res.send(JSON.stringify(ResponseEnums.REGISTER_FAIL_INVALID_EMAIL_ID));
+        res.send(JSON.stringify(ResponseEnums_1.ResponseEnums.REGISTER_FAIL_INVALID_EMAIL_ID));
         break;
 
       case 1:
-        res.send(JSON.stringify(ResponseEnums.REGISETER_SUCCESS));
+        res.send(JSON.stringify(ResponseEnums_1.ResponseEnums.REGISETER_SUCCESS));
         break;
 
       default:
@@ -62,7 +92,7 @@ registerController.post('/register', async (req, res) => {
         }));
     }
   } catch (err) {
-    res.status(500).send(JSON.stringify(Object.assign(Object.assign({}, ResponseEnums.REGISTER_FAIL_OTHER), {
+    res.status(500).send(JSON.stringify(Object.assign(Object.assign({}, ResponseEnums_1.ResponseEnums.REGISTER_FAIL_OTHER), {
       'err': err
     })));
   }

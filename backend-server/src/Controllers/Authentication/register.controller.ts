@@ -1,10 +1,13 @@
 
-import { Router } from 'express';
+import { Router, Request, Response } from 'express';
 const registerController = Router();
-const registerService = require('Services/Authentication/register.service');
 
-const ControllerUtility = require('Utilities/Controllers/Authentication/authController.utility');
-const { ResponseEnums } = require('Utilities/Enums/ResponseEnums');
+import { RegisterFormBody } from 'Utilities/FormRequestTypes/formRequest.types';
+
+import * as registerService from 'Services/Authentication/register.service';
+
+import * as ControllerUtility from 'Utilities/Controllers/Authentication/authController.utility';
+import { ResponseEnums } from 'Utilities/Enums/ResponseEnums';
 
 let asyncDelay = async(time : number) => {
     return new Promise<void>(resolve => {
@@ -14,14 +17,14 @@ let asyncDelay = async(time : number) => {
     })
 }
 
-registerController.get('/register', async(req, res) => {
+registerController.get('/register', async(req : Request, res : Response) => {
     let responseData = await registerService.defaultRegisterService();
     await asyncDelay(2000);
     res.send(responseData);
 });
 
 
-registerController.post('/register', async(req, res) => {
+registerController.post('/register', async(req : Request<{}, {}, RegisterFormBody>, res : Response) => {
     let userData = req.body;
 
     // check if valid data parameters was passed to the /register POST request

@@ -1,5 +1,8 @@
 
-import { Router } from 'express';
+import { Router, Request, Response } from 'express';
+
+import { LoginFormBody } from 'Utilities/FormRequestTypes/formRequest.types';
+
 const loginController = Router();
 
 import * as loginService from 'Services/Authentication/login.service';
@@ -15,13 +18,12 @@ let asyncDelay = async(time : number) => {
     })
 }
 
-loginController.get('/login', async(req, res) => {
+loginController.get('/login', async(req : Request, res : Response) : Promise<void> => {
     res.send(loginService.defaultLoginMessage());
 })
 
-loginController.post('/login', async(req, res) => {
-    let userData = req.body;
-    
+loginController.post('/login', async(req : Request<{}, {}, LoginFormBody>, res) : Promise<void> => {
+    let userData : LoginFormBody = req.body;
     // check if valid data parameters was passed to the /login POST request
     let paramsList = [ 'emailId', 'password' ];
     if(!ControllerUtility.isRequestParamsValid(userData, paramsList)){

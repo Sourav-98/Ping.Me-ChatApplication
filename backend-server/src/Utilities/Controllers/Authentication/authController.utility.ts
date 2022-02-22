@@ -6,7 +6,7 @@
  *  @returns true -> if valid
  *  @returns false -> if invalid
  */
-export const isRequestParamsValid = (requestBody : any, paramsList : Array<any>) => {
+export const isRequestParamsValid = (requestBody : any, paramsList : Array<any>) : boolean => {
     let keys = Object.keys(requestBody);
     if(keys.length !== paramsList.length){
         return false;
