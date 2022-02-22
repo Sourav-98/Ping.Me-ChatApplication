@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+      "strict": true,
+      "alwaysStrict": true,
+      "pretty": true,
+      "module": "commonjs",
+      "esModuleInterop": true,
+      "target": "es2017",
+      "moduleResolution": "node",
+      "resolveJsonModule": true,
+      "sourceMap": true,
+      "outDir": "dist",
+      "rootDir": "src",
+      "baseUrl": "src"
+    },
+    "lib": ["es6"]
+  }
