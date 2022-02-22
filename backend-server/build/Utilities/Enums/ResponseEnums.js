@@ -27,7 +27,7 @@ const AuthResponseEnums = {
   },
   LOGIN_FAIL_INVALID_EMAIL_ID: {
     status_code: 2001,
-    status_message: 'User Login Failed - Email Id invalid'
+    status_message: 'User Login Failed - Email Id not registered'
   },
   LOGIN_FAIL_INVALID_PASSWORD: {
     status_code: 2002,

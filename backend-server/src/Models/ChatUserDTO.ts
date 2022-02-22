@@ -1,108 +1,118 @@
 
 export default class ChatUserDTO {
 
-    private firstName : string;
-    private lastName : string;
-    private phoneNo : string;
-    private dateOfBirth : Date;
-    private emailId : string;
-    private password : string;
-    private isVerified : boolean;
-    private lastLogin : Date;
-    private lastPasswordChange : Date;
-    private userRolesList : Array<string>;
+    private _firstName : string;
+    private _lastName : string;
+    private _phoneNo : string;
+    private _dateOfBirth : Date;
+    private _emailId : string;
+    private _password : string;
+    private _accountCreationDate: Date;
+    private _isVerified : boolean;
+    private _lastLogin : Date;
+    private _lastPasswordChange : Date;
+    private _userRolesList : Array<string>;
 
 
-    constructor({firstName = "", lastName = "", phoneNo = "", dateOfBirth = new Date(), emailId = "", password = "", isVerified = false, lastLogin = new Date(), lastPasswordChange = new Date(), userRolesList = []}) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.phoneNo = phoneNo;
-        this.dateOfBirth = dateOfBirth;
-        this.emailId = emailId;
-        this.password = password;
-        this.isVerified = isVerified;
-        this.lastLogin = lastLogin;
-        this.lastPasswordChange = lastPasswordChange;
-        this.userRolesList = userRolesList;
+    constructor({firstName = "", lastName = "", phoneNo = "", dateOfBirth = new Date(0), emailId = "", password = "", accountCreationDate = new Date(0), isVerified = false, lastLogin = new Date(0), lastPasswordChange = new Date(0), userRolesList = []}) {
+        this._firstName = firstName;
+        this._lastName = lastName;
+        this._phoneNo = phoneNo;
+        this._dateOfBirth = dateOfBirth;
+        this._emailId = emailId;
+        this._password = password;
+        this._accountCreationDate = accountCreationDate;
+        this._isVerified = isVerified;
+        this._lastLogin = lastLogin;
+        this._lastPasswordChange = lastPasswordChange;
+        this._userRolesList = userRolesList;
     }
 
-    setFirstName(firstName : string){
-        this.firstName = firstName;
+    public setFirstName(firstName : string) : void{
+        this._firstName = firstName;
     }
 
-    setLastName(lastName : string){
-        this.lastName = lastName;
+    public setLastName(lastName : string) : void{
+        this._lastName = lastName;
     }
 
-    setDateOfBirth(dateOfBirth : Date){
-        this.dateOfBirth = dateOfBirth;
+    public setDateOfBirth(dateOfBirth : Date) : void{
+        this._dateOfBirth = dateOfBirth;
     }
 
-    setPhoneNo(phoneNo : string){
-        this.phoneNo = phoneNo;
+    public setPhoneNo(phoneNo : string) : void{
+        this._phoneNo = phoneNo;
     }
 
-    setEmailId(emailId : string){
-        this.emailId = emailId;
+    public setEmailId(emailId : string) : void{
+        this._emailId = emailId;
     }
 
-    setPassword(password : string){
-        this.password = password;
+    public setPassword(password : string) : void{
+        this._password = password;
     }
 
-    setLastLogin(lastLogin : Date){
-        this.lastLogin = lastLogin;
+    public setAccountCreationDate(accountCreationDate : Date) : void{
+        this._accountCreationDate = accountCreationDate;
     }
 
-    setLastPasswordChange(lastPasswordChange : Date){
-        this.lastPasswordChange = lastPasswordChange;
+    public setLastLogin(lastLogin : Date) : void{
+        this._lastLogin = lastLogin;
     }
 
-    setIsVerified(isVerified : boolean){
-        this.isVerified = isVerified;
+    public setLastPasswordChange(lastPasswordChange : Date) : void{
+        this._lastPasswordChange = lastPasswordChange;
     }
 
-    setUserRolesList(userRolesList : Array<string>){
-        this.userRolesList = userRolesList;
+    public setIsVerified(isVerified : boolean) : void{
+        this._isVerified = isVerified;
     }
 
-    getFirstName(){
-        return this.firstName;
+    public setUserRolesList(userRolesList : Array<string>) : void{
+        this._userRolesList = userRolesList;
     }
 
-    getLastName(){
-        return this.lastName;
+    public getFirstName() : string{
+        return this._firstName;
     }
 
-    getDateOfBirth(){
-        return this.dateOfBirth;
+    public getLastName() : string{
+        return this._lastName;
     }
 
-    getPhoneNo(){
-        return this.phoneNo;
+    public getDateOfBirth() : Date{
+        return this._dateOfBirth;
     }
 
-    getEmailId(){
-        return this.emailId;
+    public getPhoneNo() : string{
+        return this._phoneNo;
     }
 
-    getPassword(){
-        return this.password;
+    public getEmailId() : string{
+        return this._emailId;
     }
 
-    getLastLogin(){
-        return this.lastLogin;
+    public getPassword() : string{
+        return this._password;
     }
 
-    getLastPasswordChange(){
-        return this.lastPasswordChange;
+    public getAccountCreationDate() : Date{
+        return this._accountCreationDate;
     }
 
-    getIsVerified(){
-        return this.isVerified;
+    public getLastLogin() : Date{
+        return this._lastLogin;
     }
 
-    getUserRolesList(){
-        return this.userRolesList;
+    public getLastPasswordChange() : Date{
+        return this._lastPasswordChange;
+    }
+
+    public getIsVerified() : boolean{
+        return this._isVerified;
+    }
+
+    public getUserRolesList() : Array<string>{
+        return this._userRolesList;
     }
 }

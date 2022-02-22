@@ -56,7 +56,8 @@ let asyncDelay = async time => {
 
 loginController.get('/login', async (req, res) => {
   res.send(loginService.defaultLoginMessage());
-});
+}); // interface e.Request<P = ParamsDictionary, ResBody = any, ReqBody = any, ReqQuery = QueryString.ParsedQs, Locals extends Record<string, any> = Record<string, any>>
+
 loginController.post('/login', async (req, res) => {
   let userData = req.body; // check if valid data parameters was passed to the /login POST request
 

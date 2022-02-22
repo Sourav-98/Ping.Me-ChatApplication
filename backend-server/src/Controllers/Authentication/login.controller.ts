@@ -22,7 +22,9 @@ loginController.get('/login', async(req : Request, res : Response) : Promise<voi
     res.send(loginService.defaultLoginMessage());
 })
 
-loginController.post('/login', async(req : Request<{}, {}, LoginFormBody>, res) : Promise<void> => {
+// interface e.Request<P = ParamsDictionary, ResBody = any, ReqBody = any, ReqQuery = QueryString.ParsedQs, Locals extends Record<string, any> = Record<string, any>>
+
+loginController.post('/login', async(req : Request<{}, {}, LoginFormBody>, res : Response) : Promise<void> => {
     let userData : LoginFormBody = req.body;
     // check if valid data parameters was passed to the /login POST request
     let paramsList = [ 'emailId', 'password' ];

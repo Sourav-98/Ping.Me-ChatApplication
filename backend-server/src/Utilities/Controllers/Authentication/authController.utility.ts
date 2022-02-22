@@ -2,9 +2,9 @@
 
 /** requestParamsCheck -> A Utility function to check the validity of the parameters being passed
  *  @param requestBody -> the form request body
- *  @param paramsList -> the valid params list to tally with the requestBody
- *  @returns true -> if valid
- *  @returns false -> if invalid
+ *  @param {Array<string>} paramsList -> the valid params list to tally with the requestBody
+ *  @returns {boolean} true -> if valid
+ *  @returns {boolean} false -> if invalid
  */
 export const isRequestParamsValid = (requestBody : any, paramsList : Array<any>) : boolean => {
     let keys = Object.keys(requestBody);
