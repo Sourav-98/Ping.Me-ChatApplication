@@ -1,4 +1,5 @@
 {
+	"presets": [["minify"]],
     "plugins": [
 		["module-resolver", {
         	"root": ["dist"],

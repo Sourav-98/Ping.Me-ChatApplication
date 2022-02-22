@@ -105,4 +105,4 @@ dist
 .tern-port
 
 #DS_Store (only on MacOS)
-*/.DS_Store
+**/.DS_Store
