@@ -1,0 +1,211 @@
+
+.cm-button{
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    outline: none;
+    opacity: 1.0;
+    font-family: inherit;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 1);
+    cursor: pointer;
+    border-radius: 5px;
+    -webkit-transition: 0.12s ease-in-out;
+    transition: 0.12s ease-in-out;
+}
+
+.cm-button.block{
+    width: 100%;
+}
+
+.cm-button.wide{
+    width: 48%;
+}
+
+.cm-button:disabled{
+    pointer-events: none;
+    opacity: 0.55;
+}
+
+.cm-button.round{
+    border-radius: 999px;
+}
+
+.cm-button.sm{
+    font-size: 14px;
+    height: 32px;
+    padding: 0px 12px 2px 12px;
+}
+
+.cm-button, .cm-button.md{
+    font-size: 17px;
+    height: 40px;
+    padding: 0px 15px 0px 15px;
+}
+
+.cm-button.lg{
+    font-size: 21px;
+    height: 50px;
+    padding: 0px 18px 0px 18px;
+}
+
+/* CM-BUTTON DEFAULT */
+
+/* PRIMARY */
+.cm-button.primary{
+    background-color: rgba(38, 125, 255, 1);
+    border: 1px solid rgba(38, 125, 255, 1);
+}
+
+.cm-button.primary:hover{
+    background-color: rgba(23, 110, 250, 1);
+}
+
+.cm-button.primary:active{
+    background-color: rgba(8, 95, 245, 1);
+}
+
+/* SECONDARY */
+.cm-button.secondary{
+    background-color: rgba(110, 110, 110, 1);
+    border: 1px solid rgba(110, 110, 110, 1);
+}
+
+.cm-button.secondary:hover{
+    background-color: rgba(95, 95, 95, 1);
+}
+
+.cm-button.secondary:active{
+    background-color: rgba(80, 80, 80, 1);
+}
+
+/* SUCCESS */
+.cm-button.success{
+    background-color: rgba(0, 166, 0, 1);
+    border: 1px solid rgba(0, 166, 0, 1);
+}
+
+.cm-button.success:hover{
+    background-color: rgba(0, 151, 0, 1);
+}
+
+.cm-button.success:active{
+    background-color: rgba(0, 136, 0, 1);
+}
+
+/* DANGER */
+.cm-button.danger{
+    background-color: rgba(226, 0, 0, 1);
+    border: 1px solid rgba(226, 0, 0, 1);
+}
+
+.cm-button.danger:hover{
+    background-color: rgba(211, 0, 0, 1);
+}
+
+.cm-button.danger:active{
+    background-color: rgba(196, 0, 0, 1);
+}
+
+/* ALERT */
+.cm-button.alert{
+    background-color: rgba(240, 147, 8, 1);
+    border: 1px solid rgba(240, 147, 8, 1);
+}
+
+.cm-button.alert:hover{
+    background-color: rgba(225, 132, 8, 1);
+}
+
+.cm-button.alert:active{
+    background-color: rgba(210, 117, 8, 1);
+}
+
+
+/* CM-BUTTON OUTLINED */
+
+.cm-button.outlined{
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.cm-button.outlined:active{
+    color: rgba(255, 255, 255, 1);
+}
+
+/* PRIMARY */
+.cm-button.outlined.primary{
+    color: rgba(38, 125, 255, 1);
+    border: 1px solid rgba(38, 125, 255, 1);
+}
+
+.cm-button.outlined.primary:hover{
+    background-color: rgba(38, 125, 255, 0.2);
+}
+
+.cm-button.outlined.primary:active{
+    color: rgba(255, 255, 255, 1);
+    background-color: rgba(38, 125, 255, 1);
+}
+
+/* SECONDARY */
+.cm-button.outlined.secondary{
+    color: rgba(110, 110, 110, 1);
+    background-color: rgba(255, 255, 255, 1);
+    border: 1px solid rgba(110, 110, 110, 1);
+}
+
+.cm-button.outlined.secondary:hover{
+    background-color: rgba(110, 110, 110, 0.2);
+}
+
+.cm-button.outlined.secondary:active{
+    color: rgba(255, 255, 255, 1);
+    background-color: rgba(110, 110, 110, 1);
+}
+
+/* SUCCESS */
+.cm-button.outlined.success{
+    color: rgba(0, 166, 0, 1);
+    border: 1px solid rgba(0, 166, 0, 1);
+}
+
+.cm-button.outlined.success:hover{
+    background-color: rgba(0, 166, 0, 0.2);
+}
+
+.cm-button.outlined.success:active{
+    color: rgba(255, 255, 255, 1);
+    background-color: rgba(0, 166, 0, 1);
+}
+
+/* DANGER */
+.cm-button.outlined.danger{
+    color: rgba(226, 0, 0, 1);
+    border: 1px solid rgba(226, 0, 0, 1);
+}
+
+.cm-button.outlined.danger:hover{
+    background-color: rgba(226, 0, 0, 0.2);
+}
+
+.cm-button.outlined.danger:active{
+    color: rgba(255, 255, 255, 1);
+    background-color: rgba(226, 0, 0, 1);
+}
+
+/* ALERT */
+.cm-button.outlined.alert{
+    color: rgba(240, 147, 8, 1);
+    border: 1px solid rgba(240, 147, 8, 1);
+}
+
+.cm-button.outlined.alert:hover{
+    background-color: rgba(240, 147, 8, 0.2);
+}
+
+.cm-button.outlined.alert:active{
+    color: rgba(255, 255, 255, 1);
+    background-color: rgba(240, 147, 8, 1);
+}
