@@ -1,1 +1,0 @@
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.socketConfig=void 0,exports.socketConfig={path:"/chat-api"};

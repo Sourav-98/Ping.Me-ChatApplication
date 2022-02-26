@@ -1,2 +1,0 @@
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0});const dbConfig={uri:"mongodb://127.0.0.1:27017",options:{useNewUrlParser:!0,useUnifiedTopology:!0,connectTimeoutMS:3e3,// serverSelectionTimeoutMS: 5000,
-socketTimeoutMS:5e3},db:"test-chat-app"};exports.default=dbConfig;

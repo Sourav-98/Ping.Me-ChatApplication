@@ -1,4 +1,0 @@
-"use strict";var __importDefault=this&&this.__importDefault||function(a){return a&&a.__esModule?a:{default:a}};Object.defineProperty(exports,"__esModule",{value:!0});const http_1=__importDefault(require("http")),server_1=__importDefault(require("./server")),dbConn_utility_1=__importDefault(require("./Utilities/DB/dbConn.utility")),server_2=__importDefault(require("./SocketServer/server")),host="localhost",port=8080,httpServer=http_1.default.createServer(server_1.default);//initialize DB connection
-//initialize socket server
-// SocketService(SocketServer.getSocketConnection());
-dbConn_utility_1.default.connect(),server_2.default.init(httpServer),httpServer.listen(port,host,()=>{console.log("PingMe backend running on http://"+host+":"+port+"\n")});

@@ -1,8 +1,0 @@
-"use strict";var __importDefault=this&&this.__importDefault||function(a){return a&&a.__esModule?a:{default:a}};Object.defineProperty(exports,"__esModule",{value:!0}),exports.newUserRegistration=exports.defaultRegisterService=void 0;const ChatUserDAO_1=__importDefault(require("../../Repositories/ChatUserDAO")),ChatUserDTO_1=__importDefault(require("../../Models/ChatUserDTO")),bcrypt_1=__importDefault(require("bcrypt")),defaultMessage={service:"Register Service",message:"The service responsible for creating new users"},defaultRegisterService=async function(){return defaultMessage};exports.defaultRegisterService=defaultRegisterService;/** newUserRegistration service
- * called when a new user is being created
- * returns 1 if the user is successfully created in the db
- * returns 0 if the user email id already exists in the db
- * returns -1 if the user email id is an invalid email id
- * throws any execution error, if any
- */const newUserRegistration=async function(a){let b=new ChatUserDTO_1.default({firstName:a.firstName,lastName:a.lastName,emailId:a.emailId,password:a.password});try{// check if the user already exists
-let a=await ChatUserDAO_1.default.findUserById(b.getEmailId());return a?-1:(b.setPassword(await bcrypt_1.default.hash(b.getPassword(),10)),await ChatUserDAO_1.default.insertNewUser(b),1);/** User can now be inserted */}catch(a){throw console.log("Error at newUserRegistration() service -> "+JSON.stringify(a)),a}};exports.newUserRegistration=newUserRegistration;

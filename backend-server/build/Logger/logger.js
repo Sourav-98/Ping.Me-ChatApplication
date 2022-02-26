@@ -1,1 +1,0 @@
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.appLogger=void 0;const appLogger=function(a,b,c){let d=a.url,e=a.ip,f=a.method,g=new Date;console.log("["+g.toISOString()+"] - "+e+" made a "+f+" request on URL="+d),c()};exports.appLogger=appLogger;
