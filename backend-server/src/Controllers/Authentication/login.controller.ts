@@ -1,7 +1,7 @@
 
 import { Router, Request, Response } from 'express';
 
-import { LoginFormBody } from 'Utilities/FormRequestTypes/formRequest.types';
+import { LoginFormBody } from 'Utilities/FormRequestTypes/FormRequestTypes';
 
 const loginController = Router();
 
@@ -10,7 +10,7 @@ import * as loginService from 'Services/Authentication/login.service';
 import * as ControllerUtility from 'Utilities/Controllers/Authentication/authController.utility';
 import { ResponseEnums } from 'Utilities/Enums/ResponseEnums';
 
-let asyncDelay = async(time : number) => {
+let asyncDelay = async(time : number) : Promise<void> => {
     return new Promise<void>(resolve => {
         setTimeout(() => {
             return resolve();
@@ -33,7 +33,7 @@ loginController.post('/login', async(req : Request<{}, {}, LoginFormBody>, res :
         return;
     }
     try{
-        let loginServiceResult = await loginService.defaultUserLogin(userData);
+        let loginServiceResult : number = await loginService.defaultUserLogin(userData);
         await asyncDelay(2000);
         switch(loginServiceResult){
             case -1: res.status(200).send(JSON.stringify(ResponseEnums.LOGIN_FAIL_INVALID_PASSWORD)); break;

@@ -18,14 +18,14 @@ export const defaultRegisterService = async function(){
     return defaultMessage;
 }
 
-/** newUserRegistration service
- * called when a new user is being created
- * returns 1 if the user is successfully created in the db
- * returns 0 if the user email id already exists in the db
- * returns -1 if the user email id is an invalid email id
- * throws any execution error, if any
+/** 
+ * @description newUserRegistration service - called when a new user is being created
+ * @returns {number} 1 if the user is successfully created in the db
+ * @returns {number} 0 if the user email id already exists in the db
+ * @returns {number} -1 if the user email id is an invalid email id
+ * @throws any execution error, if any
  */
-export const newUserRegistration = async function(userData : any){
+export const newUserRegistration = async function(userData : any) : Promise<number>{
     let user = new ChatUserDTO({ firstName: userData.firstName, lastName: userData.lastName, emailId: userData.emailId, password: userData.password});
     try{
         // check if the user already exists

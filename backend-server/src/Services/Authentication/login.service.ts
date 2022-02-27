@@ -1,6 +1,7 @@
 // login service - provides authentication service for a Chat User Login
 
 import ChatUserDAO from 'Repositories/ChatUserDAO';
+import ChatUserDTO from 'Models/ChatUserDTO';
 
 import bcrypt from 'bcrypt';
 
@@ -13,16 +14,17 @@ export const defaultLoginMessage = function(){
     return defaultMessage;
 }
 
-/** defaultUserLogin service - used to login a new user
- * returns 1 if login is successful
- * returns 0 if the user email id is not registered
- * returns -1 if the user password entered does not match the password in the db
- * throws exception if any
+/** 
+ * @description defaultUserLogin service - used to login a new user
+ * @returns {number} 1 if login is successful
+ * @returns {number} 0 if the user email id is not registered
+ * @returns {number} -1 if the user password entered does not match the password in the db
+ * @throws exception if any
  */
-export const defaultUserLogin = async function(userCredentials : any){
+export const defaultUserLogin = async function(userCredentials : any) : Promise<number>{
     try{
         console.log("defaultUserLogin() service ->");
-        let loginUser = await ChatUserDAO.findUserById(userCredentials.emailId);
+        let loginUser : ChatUserDTO  = await ChatUserDAO.findUserById(userCredentials.emailId);
         if(!loginUser){ 
             console.log('User doesnot exist');
             return 0;

@@ -2,7 +2,7 @@
 import { Router, Request, Response } from 'express';
 const registerController = Router();
 
-import { RegisterFormBody } from 'Utilities/FormRequestTypes/formRequest.types';
+import { RegisterFormBody } from 'Utilities/FormRequestTypes/FormRequestTypes';
 
 import * as registerService from 'Services/Authentication/register.service';
 

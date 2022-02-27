@@ -25,7 +25,7 @@ export default class ChatUserDAO{
      *  7. updateUserIsVerifiedByEmailId()
      */
 
-    static async findAllUsers(){
+    static async findAllUsers() : Promise<Array<ChatUserDTO>>{
         console.log('ChatUser DAO >> findAllUsers() -------------');
         try{
             let chatUsersDB = await DBConnection.getDb().collection(this._collectionName).find().toArray();
@@ -54,12 +54,13 @@ export default class ChatUserDAO{
      *  @returns {null} : if no user is found
      *  @throws {Errors.SERVER_DB_ERR} : if any
      */
-    static async findUserById(chatUserEmailId : string) : Promise<ChatUserDTO | undefined>{
+    static async findUserById(chatUserEmailId : string) : Promise<ChatUserDTO>{
         console.log('ChatUser DAO >> findUserById() -------------');
         try{
             let chatUserDB = await DBConnection.getDb().collection(this._collectionName).findOne({emailId : chatUserEmailId});    // returns a single object
-            let chatUserDTO : ChatUserDTO | undefined;
+            let chatUserDTO : ChatUserDTO;
             if(!chatUserDB){
+                chatUserDTO = new ChatUserDTO({});  // create an empty ChatUserDTO Object
                 return chatUserDTO;      
             }
             chatUserDTO = new ChatUserDTO({
@@ -80,7 +81,7 @@ export default class ChatUserDAO{
     // Insert a new Chat User given the user details
     // return true if user successfully entered
     // throw error if any
-    static async insertNewUser(chatUserData : ChatUserDTO){
+    static async insertNewUser(chatUserData : ChatUserDTO) : Promise<boolean>{
         console.log('ChatUser DAO >> insertNewUser() -------------');
         try{
             let result = await DBConnection.getDb().collection(this._collectionName).insertOne(chatUserData);
@@ -94,7 +95,7 @@ export default class ChatUserDAO{
     }
 
     // delete an existing Chat User by the given Email Id
-    static async deleteUserByEmailId(chatUserEmailId : string){
+    static async deleteUserByEmailId(chatUserEmailId : string) : Promise<boolean>{
         try{
             await DBConnection.getDb().collection(this._collectionName).deleteOne({emailId : chatUserEmailId});
             return true;
@@ -106,7 +107,7 @@ export default class ChatUserDAO{
     }
     
     // update the details of a Chat User by the given Email Id
-    static async updateUserDataByEmailId(chatUserData : ChatUserDTO){  // Updates all the user info except emailId, password and lastPasswordChange
+    static async updateUserDataByEmailId(chatUserData : ChatUserDTO) : Promise<boolean>{  // Updates all the user info except emailId, password and lastPasswordChange
         try{
             await DBConnection.getDb().collection(this._collectionName).updateOne({emailId : chatUserData.getEmailId()}, {
                 $set : {
@@ -124,15 +125,15 @@ export default class ChatUserDAO{
     }
 
     // update the Password of a Chat User by the given Email Id
-    static async updateUserPasswordByEmailId(chatUserData : ChatUserDTO){
+    static async updateUserPasswordByEmailId(chatUserData : ChatUserDTO) : Promise<boolean>{
         try{
             await DBConnection.getDb().collection(this._collectionName).updateOne({emailId : chatUserData.getEmailId()}, {
                 $set : {
                     "password" : chatUserData.getPassword(),
                     "lastPasswordChange" : chatUserData.getLastPasswordChange()
                 }
-            })
-
+            });
+            return true;
         }
         catch(err){
             console.log("Error at updateUserPasswordByEmailId() -> " + err);
@@ -141,7 +142,7 @@ export default class ChatUserDAO{
     }
 
     // update Chat User's last login status by the give Email Id
-    static async updateUserLastLoginByEmailId(chatUserData : ChatUserDTO){
+    static async updateUserLastLoginByEmailId(chatUserData : ChatUserDTO) : Promise<boolean>{
         try{
             await DBConnection.getDb().collection(this._collectionName).updateOne({emailId : chatUserData.getEmailId()}, {
                 $set : {
@@ -157,13 +158,14 @@ export default class ChatUserDAO{
     }
 
     // update Chat User's verification status by the givem Email Id
-    static async updateUserIsVerifiedByEmailId(chatUserEmailId : string){
+    static async updateUserIsVerifiedByEmailId(chatUserEmailId : string) : Promise<boolean>{
         try{
             await DBConnection.getDb().collection(this._collectionName).updateOne({emailId : chatUserEmailId}, {
                 $set : {
                     "isVerified" : true
                 }
-            })
+            });
+            return true;
         }
         catch(err){
             console.log("Error at updateUserIsVerifiedByEmailId() -> " + err);

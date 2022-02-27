@@ -20,3 +20,13 @@ export const isRequestParamsValid = (requestBody : any, paramsList : Array<any>)
     }
     return true;
 }
+
+export const isRequestParamsValidv2 = (requestBody : any) : boolean => {
+    let keys = Object.keys(requestBody);
+    for(let i = 0; i < keys.length; i++){
+        if(!requestBody[i]){    // if any one of the parameters is undefined, then return false
+            return false;
+        }
+    }
+    return true;
+}

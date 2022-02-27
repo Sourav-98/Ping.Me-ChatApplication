@@ -6,15 +6,15 @@
   "scripts": {
     "dev": "NODE_PATH=./src nodemon src/app.ts",
     "build:tsc": "tsc",
-    "build:babel": "babel dist --out-dir build",
-    "compress": "minify ",
+    "build:babel": "babel dist --out-dir dist",
     "build:final": "npm run build:tsc && npm run build:babel",
-    "start": "node build/app.js",
+    "start": "node dist/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "SRC",
   "license": "ISC",
   "dependencies": {
+    "@types/uuid": "^8.3.4",
     "bcrypt": "^5.0.1",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
@@ -22,7 +22,8 @@
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.4.0",
     "passport": "^0.4.1",
-    "socket.io": "^4.4.1"
+    "socket.io": "^4.4.1",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.17.3",

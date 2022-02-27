@@ -7,8 +7,10 @@ import { v4 as uuid } from 'uuid';
 import AlertsContext from 'Context/AlertsContext/AlertsContext';
 import { AlertObjectType } from 'Context/AlertsContext/AlertContextType';
 // import AlertContext from 'Components/Utilities/AlertContext';
-import LoginPage from 'Components/Authentication/Login/LoginPage';
-import RegisterPage from 'Components/Authentication/Register/RegisterPage';
+// import LoginPage from 'Components/Authentication/Login/LoginPage';
+// import RegisterPage from 'Components/Authentication/Register/RegisterPage';
+
+import AuthRoutes from 'Components/Authentication/auth.routes';
 
 import { AlertGroup } from 'Components/Commons/AlertGroup/AlertGroup';
 
@@ -66,27 +68,10 @@ function App() {
 
 	/**---------------------------------------------------------- */
 
-	const [tbInput, setTbInput] = useState<string | undefined>(() => undefined);
-	const [tbFocus, setTbFocus] = useState<string | undefined>(() => undefined);
-	const [tbBlur, setTbBlur] = useState<string | undefined>(() => undefined);
-
-	const tbInputHandler : React.ChangeEventHandler<HTMLInputElement> = (event : React.ChangeEvent<HTMLInputElement>) => {
-		setTbInput(() => event.target.value);
-	}
-
-	const tbFocusHandler : React.ChangeEventHandler<HTMLInputElement> = (event : React.ChangeEvent<HTMLInputElement>) => {
-		setTbFocus(() => event.target.value);
-	}
-
-	const tbBlurHandler : React.ChangeEventHandler<HTMLInputElement> = (event : React.ChangeEvent<HTMLInputElement>) => {
-		setTbBlur(() => event.target.value);
-	}
-
 	return (
 		<AlertsContext.Provider value={alertUtil}>
 			<div className="app-root">
-				{/* <LoginPage/> */}
-				<RegisterPage/>
+				<AuthRoutes isAuthenticated={true}></AuthRoutes>
 				<AlertGroup max={6}/>
 			</div>
 		</AlertsContext.Provider>
