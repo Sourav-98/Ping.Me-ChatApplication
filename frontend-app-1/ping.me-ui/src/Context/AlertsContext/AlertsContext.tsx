@@ -8,6 +8,9 @@ let AlertsContextInterfaceDefault = {
     pushAlert : (alert : AlertObjectType) : void => {},
     removeAlert : (alertId?: string) : void => {},
     removeLastAlert : () : void => {},
+    toggleBackdropOn : () : void => {},
+    toggleBackdropOff : () : void => {},
+    getBackdropStatus : () : boolean => false
 }
 
 const AlertsContext = React.createContext<AlertsContextInterface>(AlertsContextInterfaceDefault);

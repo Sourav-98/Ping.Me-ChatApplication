@@ -8,9 +8,9 @@ import { ResponseEnums } from 'Services/Utilities/ResponseEnums';
 import AuthPageTemplate from "./../templates/AuthPage.template";
 import './RegisterPage.css';
 
-import { TextInput1 as TextInput, PasswordInput1 as PasswordInput, CheckboxGroupInput, CheckboxOptionType } from 'Components/Elements/Input';
-import { DefaultButton } from 'Components/Elements/Button';
-import { SemiSpinner } from 'Components/Elements/PreLoaders';
+import { TextInput1 as TextInput, PasswordInput1 as PasswordInput, CheckboxGroupInput, CheckboxOptionType } from 'UI/Input';
+import { DefaultButton } from 'UI/Button';
+import { SemiSpinner } from 'UI/PreLoaders';
 
 import AlertsContext from 'Context/AlertsContext/AlertsContext';
 
@@ -262,7 +262,7 @@ export default function RegisterPage(){
             <DefaultButton round primary wide disabled={isRegisterButtonDisabled} onMouseUp={onRegisterSubmit}>{ registerFormSubmitLock ? <SemiSpinner light></SemiSpinner> : 'Register'}</DefaultButton>
             <br/>
             <div className="alert-popup-buttons-list">
-                <DefaultButton sm round primary outlined onClick={newOutlinedPrimaryAlert}>Alert</DefaultButton>
+                <DefaultButton sm round  outlined onClick={newOutlinedPrimaryAlert}>Alert</DefaultButton>
                 <DefaultButton round secondary outlined sm onClick={newOutlinedSecondaryAlert}>Alert</DefaultButton>
                 <DefaultButton round success outlined sm onClick={newOutlinedSuccessAlert}>Alert</DefaultButton>
                 <DefaultButton round danger outlined sm onClick={newOutlinedDangerAlert}>Alert</DefaultButton>
@@ -270,11 +270,19 @@ export default function RegisterPage(){
             </div>
             <br/>
             <div className="alert-popup-buttons-list">
-                <DefaultButton sm round primary onClick={newPrimaryAlert}>Alert</DefaultButton>
-                <DefaultButton round secondary sm onClick={newSecondaryAlert}>Alert</DefaultButton>
-                <DefaultButton round success sm onClick={newSuccessAlert}>Alert</DefaultButton>
-                <DefaultButton round danger sm onClick={newDangerAlert}>Alert</DefaultButton>
-                <DefaultButton round warning sm onClick={newWarningAlert}>Alert</DefaultButton>
+                <DefaultButton  round onClick={newPrimaryAlert}>Alert</DefaultButton>
+                <DefaultButton round secondary  onClick={newSecondaryAlert}>Alert</DefaultButton>
+                <DefaultButton round success  onClick={newSuccessAlert}>Alert</DefaultButton>
+                <DefaultButton round danger  onClick={newDangerAlert}>Alert</DefaultButton>
+                <DefaultButton round warning  onClick={newWarningAlert}>Alert</DefaultButton>
+            </div>
+            <br/>
+            <div className="alert-popup-buttons-list">
+                <DefaultButton lg round primary onClick={newPrimaryAlert}>Alert</DefaultButton>
+                <DefaultButton lg round secondary  onClick={newSecondaryAlert}>Alert</DefaultButton>
+                <DefaultButton lg round success onClick={newSuccessAlert}>Alert</DefaultButton>
+                <DefaultButton lg round danger  onClick={newDangerAlert}>Alert</DefaultButton>
+                <DefaultButton lg round warning onClick={newWarningAlert}>Alert</DefaultButton>
             </div>
         </div>
     )

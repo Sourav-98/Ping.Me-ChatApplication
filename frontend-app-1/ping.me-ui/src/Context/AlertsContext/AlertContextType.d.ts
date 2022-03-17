@@ -6,9 +6,16 @@ export type AlertObjectType = {
     autoClose ?: boolean
 };
 
+export type BackDropType = {
+    isShown : boolean
+}
+
 export interface AlertsContextInterface {
     getAlerts : () => Array<AlertObjectType>,
     pushAlert : (alert : AlertObjectType) => void,
     removeAlert : (alertId? : string) => void,
-    removeLastAlert : () => void
+    removeLastAlert : () => void,
+    toggleBackdropOn : () => void,
+    toggleBackdropOff : () => void,
+    getBackdropStatus : () => boolean
 }

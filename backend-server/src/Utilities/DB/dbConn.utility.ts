@@ -7,7 +7,7 @@ export default class DBConnection{
     private static _db : Db;
     private static _dbConfig = dbConfig;
 
-    static async connect() : Promise<void>{
+    static async init() : Promise<void>{
         MongoClient.connect(this._dbConfig.uri, this._dbConfig.options)
         .then( client => {
             console.log("--------Connected to MongoDB database--------");
@@ -22,7 +22,7 @@ export default class DBConnection{
 
     static getDb() : Db{
         if(!this._client){
-            this.connect();
+            this.init();
         }
         return this._db;
     }

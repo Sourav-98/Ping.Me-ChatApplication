@@ -5,6 +5,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    margin : 0px;
     outline: none;
     opacity: 1.0;
     font-family: inherit;
@@ -16,14 +17,6 @@
     transition: 0.12s ease-in-out;
 }
 
-.cm-button.block{
-    width: 100%;
-}
-
-.cm-button.wide{
-    width: 48%;
-}
-
 .cm-button:disabled{
     pointer-events: none;
     opacity: 0.55;
@@ -33,94 +26,109 @@
     border-radius: 999px;
 }
 
-.cm-button.sm{
-    font-size: 14px;
-    height: 32px;
-    padding: 0px 12px 2px 12px;
+.cm-button.block{
+    width: 100%;
 }
 
+/* cm-button sizes */
+
 .cm-button, .cm-button.md{
-    font-size: 17px;
-    height: 40px;
-    padding: 0px 15px 0px 15px;
+    font-size: 16px;
+    padding: 8px 16px 8px 16px;
+}
+
+.cm-button.wide, .cm-button.md.wide{
+    padding: 8px 45px 8px 45px;
+}
+
+.cm-button.sm{
+    font-size: 14px;
+    padding: 6px 12px 6px 12px;
+}
+
+.cm-button.sm.wide{
+    padding: 6px 30px 6px 30px;
 }
 
 .cm-button.lg{
     font-size: 21px;
-    height: 50px;
-    padding: 0px 18px 0px 18px;
+    padding: 9px 20px 9px 20px;
+}
+
+.cm-button.lg.wide{
+    padding : 9px 60px 9px 60px;
 }
 
 /* CM-BUTTON DEFAULT */
 
-/* PRIMARY */
-.cm-button.primary{
-    background-color: rgba(38, 125, 255, 1);
-    border: 1px solid rgba(38, 125, 255, 1);
-}
-
-.cm-button.primary:hover{
-    background-color: rgba(23, 110, 250, 1);
-}
-
-.cm-button.primary:active{
-    background-color: rgba(8, 95, 245, 1);
-}
-
 /* SECONDARY */
-.cm-button.secondary{
+.cm-button.default.secondary{
     background-color: rgba(110, 110, 110, 1);
     border: 1px solid rgba(110, 110, 110, 1);
 }
 
-.cm-button.secondary:hover{
+.cm-button.default.secondary:hover{
     background-color: rgba(95, 95, 95, 1);
 }
 
-.cm-button.secondary:active{
+.cm-button.default.secondary:active{
     background-color: rgba(80, 80, 80, 1);
 }
 
 /* SUCCESS */
-.cm-button.success{
+.cm-button.default.success{
     background-color: rgba(0, 166, 0, 1);
     border: 1px solid rgba(0, 166, 0, 1);
 }
 
-.cm-button.success:hover{
+.cm-button.default.success:hover{
     background-color: rgba(0, 151, 0, 1);
 }
 
-.cm-button.success:active{
+.cm-button.default.success:active{
     background-color: rgba(0, 136, 0, 1);
 }
 
 /* DANGER */
-.cm-button.danger{
+.cm-button.default.danger{
     background-color: rgba(226, 0, 0, 1);
     border: 1px solid rgba(226, 0, 0, 1);
 }
 
-.cm-button.danger:hover{
+.cm-button.default.danger:hover{
     background-color: rgba(211, 0, 0, 1);
 }
 
-.cm-button.danger:active{
+.cm-button.default.danger:active{
     background-color: rgba(196, 0, 0, 1);
 }
 
 /* ALERT */
-.cm-button.alert{
+.cm-button.default.warning{
     background-color: rgba(240, 147, 8, 1);
     border: 1px solid rgba(240, 147, 8, 1);
 }
 
-.cm-button.alert:hover{
+.cm-button.default.warning:hover{
     background-color: rgba(225, 132, 8, 1);
 }
 
-.cm-button.alert:active{
+.cm-button.default.warning:active{
     background-color: rgba(210, 117, 8, 1);
+}
+
+/* PRIMARY */
+.cm-button.default, .cm-button.default.primary{
+    background-color: rgba(38, 125, 255, 1);
+    border: 1px solid rgba(38, 125, 255, 1);
+}
+
+.cm-button.default:hover, .cm-button.default.primary:hover{
+    background-color: rgba(23, 110, 250, 1);
+}
+
+.cm-button.default:active, .cm-button.default.primary:active{
+    background-color: rgba(8, 95, 245, 1);
 }
 
 
@@ -132,21 +140,6 @@
 
 .cm-button.outlined:active{
     color: rgba(255, 255, 255, 1);
-}
-
-/* PRIMARY */
-.cm-button.outlined.primary{
-    color: rgba(38, 125, 255, 1);
-    border: 1px solid rgba(38, 125, 255, 1);
-}
-
-.cm-button.outlined.primary:hover{
-    background-color: rgba(38, 125, 255, 0.2);
-}
-
-.cm-button.outlined.primary:active{
-    color: rgba(255, 255, 255, 1);
-    background-color: rgba(38, 125, 255, 1);
 }
 
 /* SECONDARY */
@@ -196,16 +189,31 @@
 }
 
 /* ALERT */
-.cm-button.outlined.alert{
+.cm-button.outlined.warning{
     color: rgba(240, 147, 8, 1);
     border: 1px solid rgba(240, 147, 8, 1);
 }
 
-.cm-button.outlined.alert:hover{
+.cm-button.outlined.warning:hover{
     background-color: rgba(240, 147, 8, 0.2);
 }
 
-.cm-button.outlined.alert:active{
+.cm-button.outlined.warning:active{
     color: rgba(255, 255, 255, 1);
     background-color: rgba(240, 147, 8, 1);
+}
+
+/* PRIMARY */
+.cm-button.outlined, .cm-button.outlined.primary{
+    color: rgba(38, 125, 255, 1);
+    border: 1px solid rgba(38, 125, 255, 1);
+}
+
+.cm-button.outlined:hover, .cm-button.outlined.primary:hover{
+    background-color: rgba(38, 125, 255, 0.2);
+}
+
+.cm-button.outlined:active, .cm-button.outlined.primary:active{
+    color: rgba(255, 255, 255, 1);
+    background-color: rgba(38, 125, 255, 1);
 }

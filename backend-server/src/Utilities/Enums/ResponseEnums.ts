@@ -28,6 +28,10 @@ const AuthResponseEnums = {
         status_code: 2002,
         status_message: 'User Login Failed - Password invalid'
     },
+    LOGIN_FAIL_USER_NOT_VERIFIED : {
+        status_code : 2011,
+        status_message : 'User Login Failed - Email Id not verified'
+    },
     LOGIN_FAIL_OTHER: {
         status_code: 2099,
         status_message: 'User Login Failed - Other'
@@ -51,7 +55,20 @@ const AuthResponseEnums = {
     USER_PASSWORD_RESET_FAIL_TOKEN_INVALID: {
         status_code: 4001,
         status_message: 'User Password Reset Failed - Invalid Reset Token'
+    },
+    EMAIL_VERIFY_SUCCESS : {
+        status_code : 6600,
+        status_message : "Email Verification Successful"
+    },
+    EMAIL_VERIFY_FAIL_INVALID_TOKEN : {
+        status_code : 6601,
+        status_message : "Email Verification Failed - Invalid Token"
+    },
+    EMAIL_VERIFY_FAIL_EXPIRED_TOKEN : {
+        status_code : 6611,
+        status_message : "Email Verification Failed - Expired Token"
     }
+
 }
 
 const ServerStatusEnums = {

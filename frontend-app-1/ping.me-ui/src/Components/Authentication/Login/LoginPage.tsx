@@ -15,9 +15,10 @@ import GoogleSvg from 'assets/google-color.svg';
 import FacebookSvg from 'assets/facebook-color.svg';
 import TwitterSvg from 'assets/twitter-color.svg';
 
-import { TextInput1, PasswordInput1, CheckboxGroupInput, CheckboxOptionType } from 'Components/Elements/Input';
-import { DefaultButton } from 'Components/Elements/Button';
-import { SemiSpinner } from 'Components/Elements/PreLoaders';
+import { TextInput1, PasswordInput1, CheckboxGroupInput, CheckboxOptionType } from 'UI/Input';
+import { DefaultButton, DropDownButton } from 'UI/Button';
+import { SemiSpinner } from 'UI/PreLoaders';
+
 
 import './LoginPage.css';
 
@@ -153,8 +154,9 @@ export default function LoginPage({...props}){
             <TextInput1 round type={'text'} placeholder={'Email Id'} onChange={userEmailIdInputHandler} onFocus={resetUserEmailIdErrorStatus} onBlur={isUserEmailIdValid} subLabelMessage={userEmailIdErrorStatus.text} errorMark={userEmailIdErrorStatus.status}></TextInput1>
             <PasswordInput1 round placeholder={'Password'} onChange={userPasswordInputHandler} onFocus={resetUserPasswordErrorStatus} onBlur={isUserPasswordInputValid} subLabelMessage={userPasswordErrorStatus.text} errorMark={userPasswordErrorStatus.status}></PasswordInput1>
             <CheckboxGroupInput optionsList={loginCheckboxOptions} onChange={loginCheckboxOptionsHandler}></CheckboxGroupInput>
-            <DefaultButton wide round primary onClick={loginFormSubmit}>{ loginFormSubmitLock ? <SemiSpinner light></SemiSpinner> : `Login`}</DefaultButton>
+            <DefaultButton wide round primary onClick={alertsContext.toggleBackdropOn}>{ loginFormSubmitLock ? <SemiSpinner light></SemiSpinner> : `Login`}</DefaultButton>
             <hr></hr>
+            <DropDownButton right>Menu</DropDownButton>
             <div className='passport-login-options-div'>
                 <button className="passport-login-option">
                     <img src={GoogleSvg} alt="Google Login"></img>

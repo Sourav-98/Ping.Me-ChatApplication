@@ -1,0 +1,45 @@
+
+.backdrop-container-fade-enter{
+    opacity: 0;
+}
+
+.backdrop-container-fade-enter-active{
+    opacity: 1;
+    -moz-transition : opacity 0.2s linear;
+    -webkit-transition : opacity 0.2s linear;
+    transition : opacity 0.2s linear;
+}
+
+.backdrop-container-fade-exit{
+    opacity : 1;
+}
+
+.backdrop-container-fade-exit-active{
+    opacity: 0;
+    -moz-transition : opacity 0.2s linear;
+    -webkit-transition : opacity 0.2s linear;
+    transition : opacity 0.2s linear;
+}
+
+.backdrop-container{
+    position : fixed;
+    top : 0px;
+    left : 0px;
+    width: 100%;
+    height : 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.65);
+}
+
+.backdrop-container > .backdrop-loader-div{
+    opacity: inherit;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}

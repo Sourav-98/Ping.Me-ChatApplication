@@ -19,15 +19,20 @@ export const defaultLoginMessage = function(){
  * @returns {number} 1 if login is successful
  * @returns {number} 0 if the user email id is not registered
  * @returns {number} -1 if the user password entered does not match the password in the db
+ * @returns {number} -11 - if the user's email id is not verified
  * @throws exception if any
  */
 export const defaultUserLogin = async function(userCredentials : any) : Promise<number>{
     try{
         console.log("defaultUserLogin() service ->");
-        let loginUser : ChatUserDTO  = await ChatUserDAO.findUserById(userCredentials.emailId);
+        let loginUser : ChatUserDTO | null  = await ChatUserDAO.findUserById(userCredentials.emailId);
         if(!loginUser){ 
             console.log('User doesnot exist');
             return 0;
+        }
+        if(!loginUser.getIsVerified()){
+            console.log('User Email Id not verified!');
+            return -11;
         }
         if( !await bcrypt.compare(userCredentials.password, loginUser.getPassword() || '') ){
             console.log('Invalid User Password');

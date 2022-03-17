@@ -54,14 +54,14 @@ export default class ChatUserDAO{
      *  @returns {null} : if no user is found
      *  @throws {Errors.SERVER_DB_ERR} : if any
      */
-    static async findUserById(chatUserEmailId : string) : Promise<ChatUserDTO>{
+    static async findUserById(chatUserEmailId : string) : Promise<ChatUserDTO | null>{
         console.log('ChatUser DAO >> findUserById() -------------');
         try{
-            let chatUserDB = await DBConnection.getDb().collection(this._collectionName).findOne({emailId : chatUserEmailId});    // returns a single object
+            let chatUserDB = await DBConnection.getDb().collection(this._collectionName).findOne({_emailId : chatUserEmailId});    // returns a single object
+            console.log('ChatUser Db result : ' + JSON.stringify(chatUserDB))
             let chatUserDTO : ChatUserDTO;
             if(!chatUserDB){
-                chatUserDTO = new ChatUserDTO({});  // create an empty ChatUserDTO Object
-                return chatUserDTO;      
+                return null;      
             }
             chatUserDTO = new ChatUserDTO({
                 firstName : chatUserDB.firstName,
@@ -97,7 +97,7 @@ export default class ChatUserDAO{
     // delete an existing Chat User by the given Email Id
     static async deleteUserByEmailId(chatUserEmailId : string) : Promise<boolean>{
         try{
-            await DBConnection.getDb().collection(this._collectionName).deleteOne({emailId : chatUserEmailId});
+            await DBConnection.getDb().collection(this._collectionName).deleteOne({_emailId : chatUserEmailId});
             return true;
         }
         catch(err){
@@ -109,11 +109,11 @@ export default class ChatUserDAO{
     // update the details of a Chat User by the given Email Id
     static async updateUserDataByEmailId(chatUserData : ChatUserDTO) : Promise<boolean>{  // Updates all the user info except emailId, password and lastPasswordChange
         try{
-            await DBConnection.getDb().collection(this._collectionName).updateOne({emailId : chatUserData.getEmailId()}, {
+            await DBConnection.getDb().collection(this._collectionName).updateOne({_emailId : chatUserData.getEmailId()}, {
                 $set : {
-                    "firstName" : chatUserData.getFirstName(),
-                    "lastName" : chatUserData.getLastName(),
-                    "rolesList" : chatUserData.getUserRolesList()
+                    "_firstName" : chatUserData.getFirstName(),
+                    "_lastName" : chatUserData.getLastName(),
+                    "_rolesList" : chatUserData.getUserRolesList()
                 }
             });
             return true;
@@ -127,10 +127,10 @@ export default class ChatUserDAO{
     // update the Password of a Chat User by the given Email Id
     static async updateUserPasswordByEmailId(chatUserData : ChatUserDTO) : Promise<boolean>{
         try{
-            await DBConnection.getDb().collection(this._collectionName).updateOne({emailId : chatUserData.getEmailId()}, {
+            await DBConnection.getDb().collection(this._collectionName).updateOne({_emailId : chatUserData.getEmailId()}, {
                 $set : {
-                    "password" : chatUserData.getPassword(),
-                    "lastPasswordChange" : chatUserData.getLastPasswordChange()
+                    "_password" : chatUserData.getPassword(),
+                    "_lastPasswordChange" : chatUserData.getLastPasswordChange()
                 }
             });
             return true;
@@ -144,9 +144,9 @@ export default class ChatUserDAO{
     // update Chat User's last login status by the give Email Id
     static async updateUserLastLoginByEmailId(chatUserData : ChatUserDTO) : Promise<boolean>{
         try{
-            await DBConnection.getDb().collection(this._collectionName).updateOne({emailId : chatUserData.getEmailId()}, {
+            await DBConnection.getDb().collection(this._collectionName).updateOne({_emailId : chatUserData.getEmailId()}, {
                 $set : {
-                    "lastLogin" : chatUserData.getLastLogin()
+                    "_lastLogin" : chatUserData.getLastLogin()
                 }
             });
             return true;
@@ -160,9 +160,9 @@ export default class ChatUserDAO{
     // update Chat User's verification status by the givem Email Id
     static async updateUserIsVerifiedByEmailId(chatUserEmailId : string) : Promise<boolean>{
         try{
-            await DBConnection.getDb().collection(this._collectionName).updateOne({emailId : chatUserEmailId}, {
+            await DBConnection.getDb().collection(this._collectionName).updateOne({_emailId : chatUserEmailId}, {
                 $set : {
-                    "isVerified" : true
+                    "_isVerified" : true
                 }
             });
             return true;

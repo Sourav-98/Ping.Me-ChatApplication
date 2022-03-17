@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { IoEyeOutline, IoEyeOffOutline } from 'react-icons/io5';
 
-import TextInput1 from 'Components/Elements/Input/TextInput1/TextInput1';
+import { TextInput1 } from '..';
 import { TextInput1Type } from '..';
 
 import './PasswordInput1.css';

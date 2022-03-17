@@ -4,7 +4,7 @@ import AlertsContext from 'Context/AlertsContext/AlertsContext';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import './AlertGroup.css';
 
-import { AlertTemplate } from 'Components/Elements/Notifications';
+import { AlertTemplate } from 'UI/Notifications';
 import { useEffect } from 'react';
 
 const AlertGroupContainer : React.FC<{ max : number }> = ({max, ...props}) => {

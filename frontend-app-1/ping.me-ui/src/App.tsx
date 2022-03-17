@@ -13,6 +13,7 @@ import { AlertObjectType } from 'Context/AlertsContext/AlertContextType';
 import AuthRoutes from 'Components/Authentication/auth.routes';
 
 import { AlertGroup } from 'Components/Commons/AlertGroup/AlertGroup';
+import { BackDrop } from 'Components/Commons/BackDrop/BackDrop';
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
 	 */
 
 	const [alertsList, setAlertsList] = useState<Array<AlertObjectType>>([]);
+	const [isBackDropOn, setBackdrop] = useState<boolean>(() => false);
 
 	const getAlerts = () : Array<AlertObjectType> => {
 		return alertsList;
@@ -59,11 +61,26 @@ function App() {
 		setAlertsList(() => tempAlerts);
 	}
 
+	const toggleBackdropOn = () : void => {
+		setBackdrop(true)
+	}
+
+	const toggleBackdropOff = () : void => {
+		setBackdrop(false);
+	}
+
+	const getBackdropStatus = () : boolean => {
+		return isBackDropOn;
+	}
+
 	const alertUtil = {
 		getAlerts,
 		pushAlert,
 		removeAlert,
-		removeLastAlert
+		removeLastAlert,
+		toggleBackdropOn,
+		toggleBackdropOff,
+		getBackdropStatus
 	}
 
 	/**---------------------------------------------------------- */
@@ -71,8 +88,9 @@ function App() {
 	return (
 		<AlertsContext.Provider value={alertUtil}>
 			<div className="app-root">
-				<AuthRoutes isAuthenticated={true}></AuthRoutes>
+				<AuthRoutes isAuthenticated={false}></AuthRoutes>
 				<AlertGroup max={6}/>
+				<BackDrop></BackDrop>
 			</div>
 		</AlertsContext.Provider>
   );

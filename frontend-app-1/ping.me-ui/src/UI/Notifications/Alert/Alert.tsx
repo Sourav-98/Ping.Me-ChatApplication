@@ -5,7 +5,7 @@ import { CSSTransition } from 'react-transition-group';
 
 import { AlertType } from './AlertType';
 
-import { AlertTemplate } from 'Components/Elements/Notifications';
+import { AlertTemplate } from '..';
 
 const AlertElement : React.FC <AlertType> = ({message, isVisible, closeFunc, autoClose, delay, topLeft, topCenter, topRight, bottomRight, bottomCenter, bottomLeft, outlined, primary, secondary, success, danger, warning, children, ...props}) => {
 

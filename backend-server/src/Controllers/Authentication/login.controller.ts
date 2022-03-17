@@ -36,10 +36,11 @@ loginController.post('/login', async(req : Request<{}, {}, LoginFormBody>, res :
         let loginServiceResult : number = await loginService.defaultUserLogin(userData);
         await asyncDelay(2000);
         switch(loginServiceResult){
-            case -1: res.status(200).send(JSON.stringify(ResponseEnums.LOGIN_FAIL_INVALID_PASSWORD)); break;
-            case 0: res.status(200).send(JSON.stringify(ResponseEnums.LOGIN_FAIL_INVALID_EMAIL_ID)); break;
-            case 1: res.status(200).send(JSON.stringify(ResponseEnums.LOGIN_SUCCESS)); break;
-            default: res.status(400).send(JSON.stringify({'blank' : 'blank'})); break;
+            case -1 : res.status(200).send(JSON.stringify(ResponseEnums.LOGIN_FAIL_INVALID_PASSWORD)); break;
+            case -11 : res.status(200).send(JSON.stringify(ResponseEnums.LOGIN_FAIL_USER_NOT_VERIFIED)); break;
+            case 0 : res.status(200).send(JSON.stringify(ResponseEnums.LOGIN_FAIL_INVALID_EMAIL_ID)); break;
+            case 1 : res.status(200).send(JSON.stringify(ResponseEnums.LOGIN_SUCCESS)); break;
+            default : res.status(400).send(JSON.stringify({'blank' : 'blank'})); break;
         }
     }
     catch(err){
