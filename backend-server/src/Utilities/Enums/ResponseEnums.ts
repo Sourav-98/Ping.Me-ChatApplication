@@ -44,6 +44,10 @@ const AuthResponseEnums = {
         status_code: 3000,
         status_message: 'User Validation Successful'
     },
+    USER_VALIDATE_TOKEN_RESEND_SUCCESS : {
+        status_code : 3100,
+        status_message : 'User Validation Token Resend Success'
+    },
     USER_VALIDATE_FAIL: {
         status_code: 3001,
         status_message: 'User Validation Failed'

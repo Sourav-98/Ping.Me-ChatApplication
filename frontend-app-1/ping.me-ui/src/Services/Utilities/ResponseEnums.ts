@@ -28,6 +28,10 @@ const AuthResponseEnums = {
         status_code: 2002,
         status_message: 'User Login Failed - Password invalid'
     },
+    LOGIN_FAIL_USER_EMAIL_ID_NOT_VERIFIED : {
+        status_code : 2011,
+        status_message : 'User Login Failed - User Email Id not verified'
+    },
     LOGIN_FAIL_OTHER: {
         status_code: 2099,
         status_message: 'User Login Failed - Other'
@@ -36,13 +40,25 @@ const AuthResponseEnums = {
         status_code: 2400,
         status_message: 'User Login Failed - Client Side Error'
     },
-    USER_VALIDATE_SUCCESS: {
+    USER_EMAIL_ID_VERIFICATION_SUCCESS: {
         status_code: 3000,
-        status_message: 'User Validation Successful'
+        status_message: 'User Email Verification Successful'
     },
-    USER_VALIDATE_FAIL: {
+    USER_EMAIL_ID_VERIFICATION_FAIL_INVALID_TOKEN: {
         status_code: 3001,
-        status_message: 'User Validation Failed'
+        status_message: 'User Email Verification Failed - Invalid Token'
+    },
+    USER_EMAIL_ID_VERIFICATION_FAIL_EXPIRED_TOKEN: {
+        status_code : 3002,
+        status_message : 'User Email Verification Failed - Token Expired'
+    },
+    USER_EMAIL_ID_VERIFICATION_FAIL_OTHER : {
+        status_code : 3111,
+        status_message : 'User Email Verification Failed - Other Error'
+    },
+    USER_EMAIL_ID_VERIFICATION_FAIL_CLIENT_ERR: {
+        status_code: 2400,
+        status_message: 'User Login Failed - Client Side Error'
     },
     USER_PASSWORD_RESET_SUCCESS: {
         status_code: 4000,

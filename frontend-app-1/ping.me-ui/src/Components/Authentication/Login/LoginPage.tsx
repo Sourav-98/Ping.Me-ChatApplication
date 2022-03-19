@@ -121,25 +121,28 @@ export default function LoginPage({...props}){
                         alertsContext.pushAlert({message: 'Login Successful!', type: 'success'});
                         break;
                     case ResponseEnums.LOGIN_FAIL_INVALID_EMAIL_ID.status_code: 
-                        setUserEmailIdErrorStatus({ text: warningMessages.EMAIL_ID_INCORRECT, status: true});
+                        setUserEmailIdErrorStatus({ text: warningMessages.EMAIL_ID_INCORRECT, status : true});
                         break;
                     case ResponseEnums.LOGIN_FAIL_INVALID_PASSWORD.status_code: 
-                        setUserPasswordErrorStatus({ text: warningMessages.PASSWORD_INCORRECT, status: true});
+                        setUserPasswordErrorStatus({text : warningMessages.PASSWORD_INCORRECT, status : true});
                         break;
-                    case ResponseEnums.LOGIN_FAIL_OTHER.status_code: 
-                        alertsContext.pushAlert({message : 'Invalid Login Request made!', template: 'outlined', type: 'warning'});
+                    case ResponseEnums.LOGIN_FAIL_USER_EMAIL_ID_NOT_VERIFIED.status_code : 
+                        alertsContext.pushAlert({message : 'Please verify your email account before login', type : 'danger'});
+                        break;
+                    case ResponseEnums.LOGIN_FAIL_OTHER.status_code: // this error would not arise because proper login form parameters are always sent by the application
+                        alertsContext.pushAlert({message : 'Invalid Login Request made', template : 'outlined', type : 'warning'});
                         break;
                     case ResponseEnums.REQUEST_FAIL_INVALID_PARAMETERS.status_code:
                         alertsContext.pushAlert({message : 'Bad Request was made!', template: 'outlined', type: 'danger'});
                         break;
                     case ResponseEnums.SERVER_ERR.status_code:
-                        alertsContext.pushAlert({message: 'Server-side error! Please try after some time.', type: 'danger', autoClose: false});
+                        alertsContext.pushAlert({message : 'Server-side error! Please try after some time', type : 'danger', autoClose : false});
                         break;
                     case ResponseEnums.SERVER_CONN_ERR.status_code:
-                        alertsContext.pushAlert({message: 'Error communicating with the server.', type: 'danger', autoClose: false});
+                        alertsContext.pushAlert({message : 'Error communicating with the server', type : 'danger', autoClose : false});
                         break;
                     case 555555: 
-                    default: alertsContext.pushAlert({message: 'Unknown error occured', type: 'warning'}); break;
+                    default: alertsContext.pushAlert({message : 'Unknown error occured', type : 'warning'}); break;
                 }
                 setTimeout(() => {
                     setLoginFormSubmitLock(() => false);

@@ -1,10 +1,5 @@
 
-import jwt from 'jsonwebtoken';
-import nodemailer from 'nodemailer';
-import SMTP from 'Utilities/SMTP/SMTP.utility';
-
 import { Router, Request, Response } from 'express';
-const registerController = Router();
 
 import { RegisterFormBody } from 'Utilities/FormRequestTypes/FormRequestTypes';
 
@@ -13,6 +8,8 @@ import * as emailVerifierService from 'Services/Authentication/emailVerifier.ser
 
 import * as ControllerUtility from 'Utilities/Controllers/Authentication/authController.utility';
 import { ResponseEnums } from 'Utilities/Enums/ResponseEnums';
+
+const registerController = Router();
 
 let asyncDelay = async(time : number) => {
     return new Promise<void>(resolve => {
@@ -46,21 +43,13 @@ registerController.post('/register', async(req : Request<{}, {}, RegisterFormBod
             case 0 : res.send(JSON.stringify(ResponseEnums.REGISTER_FAIL_INVALID_EMAIL_ID)); break;
             case 1 :
                 // registration is successful - generate the email verification encrypted string
-                let emailVerificationTokenEncrypted = await emailVerifierService.generateEmailVerifierTokenV2(userData.emailId);
-
-                let emailMessage : nodemailer.SendMailOptions = {
-                    from : "Ping.Me",
-                    sender : "notifications@ping.me",
-                    to : userData.emailId,
-                    subject : "Your New Ping.Me Acount Verification",
-                    text : "Email verification token : http://localhost:8080/email-verify-v2/" + emailVerificationTokenEncrypted,
-                    html : `Email Verification link : <a href="http://localhost:8080/email-verify-v2/${emailVerificationTokenEncrypted}">http://localhost:8080/email-verify-v2/${emailVerificationTokenEncrypted}</a>`
+                let tokenGenerationStatus : number = await emailVerifierService.generateEmailVerifierTokenV2(userData.emailId);
+                switch(tokenGenerationStatus){
+                    case 1 : res.send(JSON.stringify(ResponseEnums.REGISETER_SUCCESS)); break;
+                    default : res.send(JSON.stringify({'err' : 'User not registered!'})); break;
                 }
-                // call smtp service to email the verification token link
-                SMTP.getEmailTransporter().sendMail(emailMessage);
-                res.send(JSON.stringify(ResponseEnums.REGISETER_SUCCESS));
                 break;
-            default: res.send(JSON.stringify({'blank' : 'blank'}));
+            default : res.send(JSON.stringify({'blank' : 'blank'}));
         }
     }
     catch(err){

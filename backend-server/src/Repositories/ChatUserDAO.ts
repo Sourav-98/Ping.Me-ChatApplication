@@ -32,10 +32,17 @@ export default class ChatUserDAO{
             let chatUsersDTO : Array<ChatUserDTO> = [];
             chatUsersDB.map( chatUserDB => {
                 chatUsersDTO.push(new ChatUserDTO({
-                    firstName : chatUserDB.firstName,
-                    lastName : chatUserDB.lastName,
-                    emailId : chatUserDB.emailId,
-                    password : chatUserDB.password
+                    firstName : chatUserDB._firstName,
+                    lastName : chatUserDB._lastName,
+                    phoneNo : chatUserDB._phoneNo,
+                    dateOfBirth : chatUserDB._dateOfBirth,
+                    emailId : chatUserDB._emailId,
+                    password : chatUserDB._password,
+                    accountCreationDate : chatUserDB._accountCreationDate,
+                    isVerified : chatUserDB._isVerified,
+                    lastLogin : chatUserDB._lastLogin,
+                    lastPasswordChange : chatUserDB._lastPasswordChage,
+                    userRolesList : chatUserDB._userRolesList
                 }));
             });
             return chatUsersDTO;
@@ -64,10 +71,17 @@ export default class ChatUserDAO{
                 return null;      
             }
             chatUserDTO = new ChatUserDTO({
-                firstName : chatUserDB.firstName,
-                lastName : chatUserDB.lastName,
-                emailId : chatUserDB.emailId,
-                password : chatUserDB.password
+                firstName : chatUserDB._firstName,
+                lastName : chatUserDB._lastName,
+                phoneNo : chatUserDB._phoneNo,
+                dateOfBirth : chatUserDB._dateOfBirth,
+                emailId : chatUserDB._emailId,
+                password : chatUserDB._password,
+                accountCreationDate : chatUserDB._accountCreationDate,
+                isVerified : chatUserDB._isVerified,
+                lastLogin : chatUserDB._lastLogin,
+                lastPasswordChange : chatUserDB._lastPasswordChage,
+                userRolesList : chatUserDB._userRolesList
             }); // or new ChatUserDTO(chatUserDB);
             console.log(chatUserDTO);
             return chatUserDTO;
@@ -166,6 +180,20 @@ export default class ChatUserDAO{
                 }
             });
             return true;
+        }
+        catch(err){
+            console.log("Error at updateUserIsVerifiedByEmailId() -> " + err);
+            throw err;
+        }
+    }
+
+    static async isUserVerified(chatUserEmailId : string) : Promise<boolean | null>{
+        try{
+            let chatUserDB = await this.findUserById(chatUserEmailId);
+            if(!chatUserDB){
+                return null;
+            }
+            return chatUserDB.getIsVerified();
         }
         catch(err){
             console.log("Error at updateUserIsVerifiedByEmailId() -> " + err);

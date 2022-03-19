@@ -1,7 +1,7 @@
 
 import { ResponseEnums } from 'Services/Utilities/ResponseEnums';
 
-async function formSubmit(url : string, formObject : any) : Promise<Response>{
+async function formPostSubmit(url : string, formObject : any) : Promise<Response>{
     let formBody = getUrlEncoded(formObject);
     return await fetch(url, {
         method: 'POST',
@@ -9,6 +9,12 @@ async function formSubmit(url : string, formObject : any) : Promise<Response>{
             'Content-type' : 'application/x-www-form-urlencoded; charset=UTF-8'
         },
         body: formBody
+    });
+}
+
+async function formGetSubmit(url : string) : Promise<Response>{
+    return await fetch(url, {
+        method : 'GET'
     });
 }
 
@@ -38,7 +44,7 @@ function getUrlEncoded(formObject : any) : string{
  *  @returns ResponseEnums, based on the specific responses from the backend
  */
 export async function registerFormSubmit(registerFormObject : { firstName?: string, lastName?: string, emailId?: string, password?: string}) : Promise<{ status_code : number, status_message : string }>{
-    let backendResponse = await formSubmit("/register", registerFormObject);
+    let backendResponse = await formPostSubmit("/register", registerFormObject);
     console.log(backendResponse);
     let responseText = undefined;
     let responseJson = undefined;
@@ -87,7 +93,7 @@ export async function registerFormSubmit(registerFormObject : { firstName?: stri
  *  @returns ResponseEnums, based on the specific response from the backend
  */
 export async function loginFormSubmit(loginFormObject : {emailId? : string, password? : string}) : Promise<{ status_code : number, status_message : string }>{
-    let backendResponse = await formSubmit("/login", loginFormObject);
+    let backendResponse = await formPostSubmit("/login", loginFormObject);
     console.log(backendResponse);
     let responseText = undefined;
     let responseJson = undefined;
@@ -100,6 +106,7 @@ export async function loginFormSubmit(loginFormObject : {emailId? : string, pass
             case 2000: return ResponseEnums.LOGIN_SUCCESS;
             case 2001: return ResponseEnums.LOGIN_FAIL_INVALID_EMAIL_ID;
             case 2002: return ResponseEnums.LOGIN_FAIL_INVALID_PASSWORD;
+            case 2011: return ResponseEnums.LOGIN_FAIL_USER_EMAIL_ID_NOT_VERIFIED;
             default: break;
         }
     }
@@ -133,4 +140,39 @@ export async function loginFormSubmit(loginFormObject : {emailId? : string, pass
 
 export function passwordResetFormSubmit(passwordResetFormObject : any){
 
+}
+
+export async function emailVerifySubmit(tokenStringEncrypted : string | undefined) : Promise<{ status_code : number, status_message : string }>{
+    let urlString = '/email-verify-v2/' + tokenStringEncrypted;
+    let backendResponse = await formGetSubmit(urlString);
+    console.log(backendResponse);
+    let responseText = undefined;
+    let responseJson = undefined;
+    responseText = await backendResponse.text();
+    if(isJSONString(responseText)){
+        responseJson = JSON.parse(responseText);
+    }
+    if(backendResponse.ok){ // if backend response is OK (200), then responseJson will never be null
+        switch(responseJson.status_code){
+            case 6600: return ResponseEnums.USER_EMAIL_ID_VERIFICATION_SUCCESS;
+            case 6601: return ResponseEnums.USER_EMAIL_ID_VERIFICATION_FAIL_INVALID_TOKEN;
+            case 6611: return ResponseEnums.USER_EMAIL_ID_VERIFICATION_FAIL_EXPIRED_TOKEN;
+            default: return ResponseEnums.USER_EMAIL_ID_VERIFICATION_FAIL_OTHER;
+        }
+    }
+    else if(backendResponse.status >= 400 && backendResponse.status < 500){
+        switch(backendResponse.status){
+            case 400: return ResponseEnums.REQUEST_FAIL_INVALID_PARAMETERS;
+            case 404: // insert -> invalid url hit
+            default: return ResponseEnums.USER_EMAIL_ID_VERIFICATION_FAIL_CLIENT_ERR;
+        }
+    }
+    else{
+        switch(backendResponse.status){
+            case 500: return ResponseEnums.SERVER_ERR;
+            case 502:
+            case 503:
+            default: return ResponseEnums.ANNONYMOUS_ERR; 
+        }
+    }
 }
