@@ -65,12 +65,10 @@ export default class ChatUserDAO{
         console.log('ChatUser DAO >> findUserById() -------------');
         try{
             let chatUserDB = await DBConnection.getDb().collection(this._collectionName).findOne({_emailId : chatUserEmailId});    // returns a single object
-            console.log('ChatUser Db result : ' + JSON.stringify(chatUserDB))
-            let chatUserDTO : ChatUserDTO;
             if(!chatUserDB){
                 return null;      
             }
-            chatUserDTO = new ChatUserDTO({
+            let chatUserDTO = new ChatUserDTO({
                 firstName : chatUserDB._firstName,
                 lastName : chatUserDB._lastName,
                 phoneNo : chatUserDB._phoneNo,
@@ -83,7 +81,6 @@ export default class ChatUserDAO{
                 lastPasswordChange : chatUserDB._lastPasswordChage,
                 userRolesList : chatUserDB._userRolesList
             }); // or new ChatUserDTO(chatUserDB);
-            console.log(chatUserDTO);
             return chatUserDTO;
         }
         catch(err){
@@ -134,7 +131,7 @@ export default class ChatUserDAO{
         }
         catch(err){
             console.log("Error at updateUserDetails() -> " + err);
-            throw err;
+            throw Errors.SERVER_DB_ERR;
         }
     }
 
@@ -151,7 +148,7 @@ export default class ChatUserDAO{
         }
         catch(err){
             console.log("Error at updateUserPasswordByEmailId() -> " + err);
-            throw err;
+            throw Errors.SERVER_DB_ERR;
         }
     }
 
@@ -167,23 +164,22 @@ export default class ChatUserDAO{
         }
         catch(err){
             console.log("Error at updateuserLastLoginByEmailId() -> " + err);
-            throw err;
+            throw Errors.SERVER_DB_ERR;
         }
     }
 
     // update Chat User's verification status by the givem Email Id
-    static async updateUserIsVerifiedByEmailId(chatUserEmailId : string) : Promise<boolean>{
+    static async updateUserIsVerifiedByEmailId(chatUserEmailId : string) : Promise<void>{
         try{
             await DBConnection.getDb().collection(this._collectionName).updateOne({_emailId : chatUserEmailId}, {
                 $set : {
                     "_isVerified" : true
                 }
             });
-            return true;
         }
         catch(err){
             console.log("Error at updateUserIsVerifiedByEmailId() -> " + err);
-            throw err;
+            throw Errors.SERVER_DB_ERR;
         }
     }
 
@@ -197,7 +193,7 @@ export default class ChatUserDAO{
         }
         catch(err){
             console.log("Error at updateUserIsVerifiedByEmailId() -> " + err);
-            throw err;
+            throw Errors.SERVER_DB_ERR;
         }
     }
 

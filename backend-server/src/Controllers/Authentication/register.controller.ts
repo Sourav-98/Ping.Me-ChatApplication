@@ -42,12 +42,9 @@ registerController.post('/register', async(req : Request<{}, {}, RegisterFormBod
             case -1 : res.send(JSON.stringify(ResponseEnums.REGISTER_FAIL_EMAIL_ID_TAKEN)); break;
             case 0 : res.send(JSON.stringify(ResponseEnums.REGISTER_FAIL_INVALID_EMAIL_ID)); break;
             case 1 :
-                // registration is successful - generate the email verification encrypted string
-                let tokenGenerationStatus : number = await emailVerifierService.generateEmailVerifierTokenV2(userData.emailId);
-                switch(tokenGenerationStatus){
-                    case 1 : res.send(JSON.stringify(ResponseEnums.REGISETER_SUCCESS)); break;
-                    default : res.send(JSON.stringify({'err' : 'User not registered!'})); break;
-                }
+                // registration is successful - generate the email verification asynchronously with the encrypted string
+                emailVerifierService.generateEmailVerifierTokenV2(userData.emailId);
+                res.send(JSON.stringify(ResponseEnums.REGISETER_SUCCESS));
                 break;
             default : res.send(JSON.stringify({'blank' : 'blank'}));
         }

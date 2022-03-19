@@ -40,18 +40,6 @@ const AuthResponseEnums = {
         status_code: 2400,
         status_message: 'User Login Failed - Client Side Error'
     },
-    USER_VALIDATE_SUCCESS: {
-        status_code: 3000,
-        status_message: 'User Validation Successful'
-    },
-    USER_VALIDATE_TOKEN_RESEND_SUCCESS : {
-        status_code : 3100,
-        status_message : 'User Validation Token Resend Success'
-    },
-    USER_VALIDATE_FAIL: {
-        status_code: 3001,
-        status_message: 'User Validation Failed'
-    },
     USER_PASSWORD_RESET_SUCCESS: {
         status_code: 4000,
         status_message: 'User Password Reset Successful'
@@ -60,17 +48,29 @@ const AuthResponseEnums = {
         status_code: 4001,
         status_message: 'User Password Reset Failed - Invalid Reset Token'
     },
-    EMAIL_VERIFY_SUCCESS : {
+    USER_EMAIL_VERIFY_SUCCESS : {
         status_code : 6600,
         status_message : "Email Verification Successful"
     },
-    EMAIL_VERIFY_FAIL_INVALID_TOKEN : {
+    USER_EMAIL_VERIFY_FAIL_INVALID_REQUEST : {
         status_code : 6601,
-        status_message : "Email Verification Failed - Invalid Token"
+        status_message : "Email Verification Failed - Invalid Request"
     },
-    EMAIL_VERIFY_FAIL_EXPIRED_TOKEN : {
+    USER_EMAIL_VERIFY_FAIL_EXPIRED_TOKEN : {
         status_code : 6611,
         status_message : "Email Verification Failed - Expired Token"
+    },
+    USER_EMAIL_VERIFY_FAIL_MALFORMED_TOKEN : {
+        status_code : 6621,
+        status_message : "Email Verification Failed - Tampered Token"
+    },
+    USER_EMAIL_VERIFY_TOKEN_REGENERATE_SUCCESS : {
+        status_code : 6640,
+        status_message : "Email Verification Regeneration Success"
+    },
+    USER_EMAIL_VERIFY_TOKEN_REGENERATE_FAIL : {
+        status_code : 6641,
+        status_message : "Email Verification Regeneration Failed"
     }
 
 }
