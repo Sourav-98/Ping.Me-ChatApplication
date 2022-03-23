@@ -1,5 +1,8 @@
-import { throws } from 'assert';
+
+import path from 'path';
 import nodemailer from 'nodemailer';
+import hbs from 'nodemailer-express-handlebars';
+// import {ExpressHandlebars} from 'express-handlebars';
 
 export default class SMTP{
 
@@ -11,14 +14,27 @@ export default class SMTP{
         try{
             this._testAccount = await nodemailer.createTestAccount();
             this._emailTransporter = nodemailer.createTransport({
-                host : "smtp.ethereal.email",
-                port : 587,
-                secure : false,
+                // host: 'smtp.ethereal.email',
+                // port: 587,
+                // auth: {
+                //     user: 'lvqz7lydu5wabb7s@ethereal.email',
+                //     pass: '1bZ1NjRenn24qsHJf9'
+                // }
+                service : 'gmail',
                 auth : {
-                    user : 'mqfv526u74riy4oh@ethereal.email',
-                    pass : 'xwHqqs7ApjMmSn87t8'
+                    user : 'tomar.chaurasia@gmail.com',
+                    pass : 'Sourav1998$'
                 }
-            })
+            });
+            // this._emailTransporter.use('compile', hbs({
+            //     viewEngine : {
+            //         extname : '.hbs',
+            //         'partialsDir' : path.join(__dirname , '..' , '..' , 'Views'),
+            //         layoutsDir : path.join(__dirname , '..' , '..' , 'Views')
+            //     },
+            //     viewPath : path.join(__dirname , '..',  '..'  ,'Views'),
+            //     extName : '.hbs'
+            // }));
         }
         catch(err){
             console.error("Failed to initialize SMTP service : " + JSON.stringify(err));

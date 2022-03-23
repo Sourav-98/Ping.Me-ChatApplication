@@ -6,6 +6,14 @@ import * as emailVerifierService from 'Services/Authentication/emailVerifier.ser
 
 const emailVerifierController = Router();
 
+let asyncDelay = async(time : number) : Promise<void> => {
+    return new Promise<void>(resolve => {
+        setTimeout(() => {
+            return resolve();
+        }, time);
+    })
+}
+
 /**
  * @deprecated - Obsolete >> email Id should not be sent as it is in the query parameter
  */
@@ -27,6 +35,7 @@ emailVerifierController.get('/email-verify-v2/:tokenStringEncoded', async(req: R
     // console.log('URL Hit');
     let tokenStringEncoded : string = req.params.tokenStringEncoded;
     let tokenValidityCheckResponse = await emailVerifierService.verifyEmailVerifierTokenV2(tokenStringEncoded);
+    await asyncDelay(2000);
     switch(tokenValidityCheckResponse){
         case -3 :
         case -2 : 

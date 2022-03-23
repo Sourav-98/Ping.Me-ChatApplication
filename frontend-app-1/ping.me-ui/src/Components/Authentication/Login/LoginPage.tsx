@@ -159,7 +159,6 @@ export default function LoginPage({...props}){
             <CheckboxGroupInput optionsList={loginCheckboxOptions} onChange={loginCheckboxOptionsHandler}></CheckboxGroupInput>
             <DefaultButton wide round primary onClick={alertsContext.toggleBackdropOn}>{ loginFormSubmitLock ? <SemiSpinner light></SemiSpinner> : `Login`}</DefaultButton>
             <hr></hr>
-            <DropDownButton right>Menu</DropDownButton>
             <div className='passport-login-options-div'>
                 <button className="passport-login-option">
                     <img src={GoogleSvg} alt="Google Login"></img>

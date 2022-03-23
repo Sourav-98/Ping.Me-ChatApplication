@@ -4,10 +4,17 @@ import SMTP from 'Utilities/SMTP/SMTP.utility';
 import jwt from 'jsonwebtoken';
 import { v4 as uuid } from 'uuid';
 
+import handlebars from 'handlebars';
+
+
+import path from 'path';
+
 import EmailVerifierDAO from "Repositories/EmailVerifierDAO";
 import EmailVerifierDTO from "Models/EmailVerifierDTO";
 
 import ChatUserDAO from 'Repositories/ChatUserDAO';
+
+import * as emailDispatcher from 'Services/SMTP/emailDispatcher.service';
 
 /** Token Generator method
  * @description temporary method for generating token
@@ -68,16 +75,25 @@ export const generateEmailVerifierToken = async function(userEmailId : string) :
         await EmailVerifierDAO.insertEmailVerificationTokenIntoStash(tokenObject);
     }
     let tokenEncrypted = jwt.sign({...tokenObject}, 'Fh432-dnwefwvr453-dvss0eg234-dvsevsjajnakngvskianeir4r5n235j2-9999akenage');
-    let emailMessage : nodemailer.SendMailOptions = {
-        from : "Ping.Me",
-        sender : "notifications@ping.me",
-        to : userEmailId,
-        subject : "Your New Ping.Me Acount Verification",
-        text : "Email verification token : http://localhost:8080/email-verify-v2/" + tokenEncrypted,
-        html : `Email Verification link : <a href="http://localhost:8080/email-verify-v2/${tokenEncrypted}">http://localhost:8080/email-verify-v2/${tokenEncrypted}</a>`
-    }
-        // call smtp service to email the verification token link
-    SMTP.getEmailTransporter().sendMail(emailMessage);
+    emailDispatcher.sendUserVerificationEmail(userEmailId, tokenEncrypted);
+
+    // let emailMessage : nodemailer.SendMailOptions = {
+    //     from : "Ping.Me",
+    //     sender : "notifications@ping.me",
+    //     to : userEmailId,
+    //     subject : "Your New Ping.Me Acount Verification",
+    //     text : "Email verification token : http://localhost:8080/email-verify-v2/" + tokenEncrypted,
+    //     attachments : [
+    //         {
+    //             filename : 'pingMeLogo.png',
+    //             path : path.join(__dirname, '..', '..', 'assets'),
+    //             cid : 'pingMeLogo'
+    //         }
+    //     ],
+    //     html : `Email Verification link : <a href="http://localhost:8080/email-verify-v2/${tokenEncrypted}">http://localhost:8080/email-verify-v2/${tokenEncrypted}</a>`
+    // }
+    //     // call smtp service to email the verification token link
+    // SMTP.getEmailTransporter().sendMail(emailMessage);
 }
 
 /**

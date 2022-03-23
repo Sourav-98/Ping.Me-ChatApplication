@@ -26,3 +26,21 @@
 .email-verify-status-logo.danger{
     color : rgb(220, 0, 0);
 }
+
+.email-verification-container-wrapper-fade-enter{
+    opacity: 0;
+}
+
+.email-verification-container-wrapper-fade-enter-active{
+    opacity: 1;
+    transition: 150ms ease-in-out;
+}
+
+.email-verification-container-wrapper-fade-exit{
+    opacity: 1;
+}
+
+.email-verification-container-wrapper-fade-exit-active{
+    opacity: 1;
+    transition: 150ms ease-in-out;
+}
