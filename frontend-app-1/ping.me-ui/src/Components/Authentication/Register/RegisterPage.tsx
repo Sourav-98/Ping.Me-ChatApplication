@@ -261,7 +261,7 @@ export default function RegisterPage(){
             <CheckboxGroupInput optionsList={registerCheckboxOptions} onChange={registerCheckboxOptionsHandler}></CheckboxGroupInput>
             <DefaultButton round primary wide disabled={isRegisterButtonDisabled} onMouseUp={onRegisterSubmit}>{ registerFormSubmitLock ? <SemiSpinner light></SemiSpinner> : 'Register'}</DefaultButton>
             <br/>
-            <div className="alert-popup-buttons-list">
+            {/* <div className="alert-popup-buttons-list">
                 <DefaultButton sm round  outlined onClick={newOutlinedPrimaryAlert}>Alert</DefaultButton>
                 <DefaultButton round secondary outlined sm onClick={newOutlinedSecondaryAlert}>Alert</DefaultButton>
                 <DefaultButton round success outlined sm onClick={newOutlinedSuccessAlert}>Alert</DefaultButton>
@@ -283,11 +283,9 @@ export default function RegisterPage(){
                 <DefaultButton lg round success onClick={newSuccessAlert}>Alert</DefaultButton>
                 <DefaultButton lg round danger  onClick={newDangerAlert}>Alert</DefaultButton>
                 <DefaultButton lg round warning onClick={newWarningAlert}>Alert</DefaultButton>
-            </div>
+            </div> */}
         </div>
     )
 
-    return(
-        <AuthPageTemplate>{RegisterForm}</AuthPageTemplate>
-    )
+    return RegisterForm;
 }

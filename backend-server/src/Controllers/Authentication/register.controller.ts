@@ -5,9 +5,10 @@ import { RegisterFormBody } from 'Utilities/FormRequestTypes/FormRequestTypes';
 
 import * as registerService from 'Services/Authentication/register.service';
 import * as emailVerifierService from 'Services/Authentication/emailVerifier.service';
-
 import * as ControllerUtility from 'Utilities/Controllers/Authentication/authController.utility';
+
 import { ResponseEnums } from 'Utilities/Enums/ResponseEnums';
+import * as AppStatusCodes from 'Utilities/Enums/StatusCodes/StatusCodes';
 
 const registerController = Router();
 
@@ -39,9 +40,9 @@ registerController.post('/register', async(req : Request<{}, {}, RegisterFormBod
         let registerServiceResult = await registerService.newUserRegistration(userData);
         await asyncDelay(1650);
         switch (registerServiceResult){
-            case -1 : res.send(JSON.stringify(ResponseEnums.REGISTER_FAIL_EMAIL_ID_TAKEN)); break;
-            case 0 : res.send(JSON.stringify(ResponseEnums.REGISTER_FAIL_INVALID_EMAIL_ID)); break;
-            case 1 :
+            case AppStatusCodes.NEW_USER_REGISTRATION_FAIL_USER_EXISTS : res.send(JSON.stringify(ResponseEnums.REGISTER_FAIL_EMAIL_ID_TAKEN)); break;
+            case AppStatusCodes.NEW_USER_REGISTRATION_FAIL_INVALID_EMAIL_ID : res.send(JSON.stringify(ResponseEnums.REGISTER_FAIL_INVALID_EMAIL_ID)); break;
+            case AppStatusCodes.NEW_USER_REGISTRATION_SUCCESS :
                 // registration is successful - generate the email verification asynchronously with the encrypted string
                 emailVerifierService.generateEmailVerifierTokenV2(userData.emailId);
                 res.send(JSON.stringify(ResponseEnums.REGISETER_SUCCESS));

@@ -181,7 +181,5 @@ export default function LoginPage({...props}){
         </div>
     );
 
-    return(
-        <AuthPageTemplate>{LoginForm}</AuthPageTemplate>
-    )
+    return LoginForm;
 }

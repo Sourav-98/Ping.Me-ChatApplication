@@ -1,7 +1,8 @@
 
 import ChatUserDAO from 'Repositories/ChatUserDAO';
-import ChatUserDTO from 'Models/ChatUserDTO'; 
-import { Request } from 'express'
+import ChatUserDTO from 'Models/ChatUserDTO';
+
+import * as AppStatusCodes from 'Utilities/Enums/StatusCodes/StatusCodes';
 
 // const bcrypt = require('bcrypt');
 import bcrypt from 'bcrypt';
@@ -20,26 +21,24 @@ export const defaultRegisterService = async function(){
 
 /** 
  * @description newUserRegistration service - called when a new user is being created
- * @returns {number} 1 if the user is successfully created in the db
- * @returns {number} 0 if the user email id already exists in the db
- * @returns {number} -1 if the user email id is an invalid email id
  * @throws any execution error, if any
  */
-export const newUserRegistration = async function(userData : any) : Promise<number>{
+export const newUserRegistration = async function(userData : any) : Promise<string>{
     let user = new ChatUserDTO({ firstName: userData.firstName, lastName: userData.lastName, emailId: userData.emailId, password: userData.password});
     try{
         // check if the user already exists
         let dbSearchUserResult = await ChatUserDAO.findUserById(user.getEmailId());
         if(dbSearchUserResult){
-            /** Password Recovery Option -> to be implemented
-             *  If the user email id exists, redirect to forgot password (or) account recovery
-             */
-            return -1;
+            return AppStatusCodes.NEW_USER_REGISTRATION_FAIL_USER_EXISTS;
         }
+        /**
+         * @todo check whether the email id is a valid email id
+         */
+
         /** User can now be inserted */
         user.setPassword(await bcrypt.hash(user.getPassword(), 10));
         await ChatUserDAO.insertNewUser(user);
-        return 1;
+        return AppStatusCodes.NEW_USER_REGISTRATION_SUCCESS;
     }
     catch(err){
         console.log("Error at newUserRegistration() service -> " + JSON.stringify(err));

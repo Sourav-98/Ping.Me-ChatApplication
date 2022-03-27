@@ -10,7 +10,8 @@ import { AlertObjectType } from 'Context/AlertsContext/AlertContextType';
 // import LoginPage from 'Components/Authentication/Login/LoginPage';
 // import RegisterPage from 'Components/Authentication/Register/RegisterPage';
 
-import AuthRoutes from 'Components/Authentication/auth.routes';
+// import AuthRoutes from 'Components/Authentication/auth.routes';
+import AppRoutes from 'app.routes';
 
 import { AlertGroup } from 'Components/Commons/AlertGroup/AlertGroup';
 import { BackDrop } from 'Components/Commons/BackDrop/BackDrop';
@@ -88,7 +89,7 @@ function App() {
 	return (
 		<AlertsContext.Provider value={alertUtil}>
 			<div className="app-root">
-				<AuthRoutes isAuthenticated={false}></AuthRoutes>
+				<AppRoutes></AppRoutes>
 				<AlertGroup max={6}/>
 				<BackDrop></BackDrop>
 			</div>

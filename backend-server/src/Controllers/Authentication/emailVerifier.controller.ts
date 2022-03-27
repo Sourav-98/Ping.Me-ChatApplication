@@ -3,6 +3,7 @@ import {Router, Request, Response} from 'express';
 import { ResponseEnums } from 'Utilities/Enums/ResponseEnums';
 
 import * as emailVerifierService from 'Services/Authentication/emailVerifier.service';
+import * as AppStatusCodes from 'Utilities/Enums/StatusCodes/StatusCodes';
 
 const emailVerifierController = Router();
 
@@ -37,11 +38,10 @@ emailVerifierController.get('/email-verify-v2/:tokenStringEncoded', async(req: R
     let tokenValidityCheckResponse = await emailVerifierService.verifyEmailVerifierTokenV2(tokenStringEncoded);
     await asyncDelay(2000);
     switch(tokenValidityCheckResponse){
-        case -3 :
-        case -2 : 
-        case -1 : res.send(JSON.stringify(ResponseEnums.USER_EMAIL_VERIFY_FAIL_INVALID_REQUEST)); break;
-        case 0 : res.send(JSON.stringify(ResponseEnums.USER_EMAIL_VERIFY_FAIL_EXPIRED_TOKEN)); break;
-        case 1 : res.send(JSON.stringify(ResponseEnums.USER_EMAIL_VERIFY_SUCCESS)); break;
+        case AppStatusCodes.EMAIL_VERIFY_FAIL_INVALID_TOKEN : 
+        case AppStatusCodes.EMAIL_VERIFY_FAIL_INVALID_REQUEST : res.send(JSON.stringify(ResponseEnums.USER_EMAIL_VERIFY_FAIL_INVALID_REQUEST)); break;
+        case AppStatusCodes.EMAIL_VERIFY_FAIL_EXPIRED_TOKEN : res.send(JSON.stringify(ResponseEnums.USER_EMAIL_VERIFY_FAIL_EXPIRED_TOKEN)); break;
+        case AppStatusCodes.EMAIL_VERIFY_SUCCESS : res.send(JSON.stringify(ResponseEnums.USER_EMAIL_VERIFY_SUCCESS)); break;
         default : res.send(JSON.stringify(ResponseEnums.USER_EMAIL_VERIFY_FAIL_MALFORMED_TOKEN)); break;
     }
 }); 
@@ -55,9 +55,8 @@ emailVerifierController.get('/token-resend/:previousTokenStringEncoded', async(r
     let previousTokenStringEncoded : string = req.params.previousTokenStringEncoded;
     let tokenRegenerationStatus = await emailVerifierService.resendVerificationToken(previousTokenStringEncoded);
     switch(tokenRegenerationStatus){
-        case -1 : 
-        case 0 : res.send(JSON.stringify(ResponseEnums.USER_EMAIL_VERIFY_TOKEN_REGENERATE_FAIL)); break;
-        case 1 : res.send(JSON.stringify(ResponseEnums.USER_EMAIL_VERIFY_TOKEN_REGENERATE_SUCCESS)); break;
+        case AppStatusCodes.EMAIL_VERIFY_REGENERATE_FAIL_INVALID_REQUEST : res.send(JSON.stringify(ResponseEnums.USER_EMAIL_VERIFY_TOKEN_REGENERATE_FAIL)); break;
+        case AppStatusCodes.EMAIL_VERIFY_REGENERATE_SUCCESS : res.send(JSON.stringify(ResponseEnums.USER_EMAIL_VERIFY_TOKEN_REGENERATE_SUCCESS)); break;
         default : res.send(JSON.stringify(ResponseEnums.USER_EMAIL_VERIFY_FAIL_MALFORMED_TOKEN)); break;
     }
 });

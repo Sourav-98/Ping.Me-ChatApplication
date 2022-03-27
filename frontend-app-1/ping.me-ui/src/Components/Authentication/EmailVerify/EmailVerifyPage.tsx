@@ -25,26 +25,29 @@ const EmailVerifyPage : React.FC = () => {
 
     const emailVerifySubmit = async(token : string | undefined) => {
         let response = await AuthService.emailVerifySubmit(token);
-        switch(response.status_code){
-            case ResponseEnums.USER_EMAIL_ID_VERIFICATION_SUCCESS.status_code :
-                setEmailVerified(() => 'VERIFIED');
-                break;
-            case ResponseEnums.USER_EMAIL_ID_VERIFICATION_FAIL_INVALID_TOKEN.status_code :
-                setEmailVerified(() => 'INVALID_TOKEN')
-                break;
-            case ResponseEnums.USER_EMAIL_ID_VERIFICATION_FAIL_EXPIRED_TOKEN.status_code :
-                setEmailVerified(() => 'EXPIRED_TOKEN');
-                break;
-            case ResponseEnums.REQUEST_FAIL_INVALID_PARAMETERS.status_code :
-                setEmailVerified(() => 'NOT_VERIFIED');
-                break;
-            case ResponseEnums.USER_EMAIL_ID_VERIFICATION_FAIL_CLIENT_ERR.status_code :
-                setEmailVerified(() => 'NOT_VERIFIED');
-                break;
-            case ResponseEnums.SERVER_ERR.status_code :
-                setEmailVerified(() => 'NOT_VERIFIED');
-                break;
-        }
+        setTimeout(() => {
+            switch(response.status_code){
+                case ResponseEnums.USER_EMAIL_ID_VERIFICATION_SUCCESS.status_code :
+                    setEmailVerified(() => 'VERIFIED');
+                    break;
+                case ResponseEnums.USER_EMAIL_ID_VERIFICATION_FAIL_INVALID_TOKEN.status_code :
+                    setEmailVerified(() => 'INVALID_TOKEN')
+                    break;
+                case ResponseEnums.USER_EMAIL_ID_VERIFICATION_FAIL_EXPIRED_TOKEN.status_code :
+                    setEmailVerified(() => 'EXPIRED_TOKEN');
+                    break;
+                case ResponseEnums.REQUEST_FAIL_INVALID_PARAMETERS.status_code :
+                    setEmailVerified(() => 'NOT_VERIFIED');
+                    break;
+                case ResponseEnums.USER_EMAIL_ID_VERIFICATION_FAIL_CLIENT_ERR.status_code :
+                    setEmailVerified(() => 'NOT_VERIFIED');
+                    break;
+                case ResponseEnums.SERVER_ERR.status_code :
+                    setEmailVerified(() => 'NOT_VERIFIED');
+                    break;
+            }
+        }, 2000);
+        
         console.log(response);
     }
 
@@ -74,30 +77,41 @@ const EmailVerifyPage : React.FC = () => {
     const emailVerifyFailedInvalidToken = (
         <div>
             <span className="email-verify-status-logo danger"><IoMdCloseCircle></IoMdCloseCircle></span>
-            <h4>Verification Failed - Invalid Token</h4>
+            <h4>The verification link is invalid!</h4>
             <a href="#">Send Email Verification Link again?</a>
         </div>
     );
 
-    const emailVerifyForm = (
+    const emailVerifyFailedExpiredToken = (
+        <div>
+            <span></span>
+            <h4>The verification link has expired!</h4>
+            <a href="#">Send Email Verification Link again?</a>
+        </div>
+    );
+
+    const emailVerifyNotVerified = (
+        <div>
+            <span></span>
+            <h4>Email Id not verified!</h4>
+        </div>
+    )
+
+    const EmailVerifyForm = (
         <div className="email-verify-container-wrapper">
             {
                 {
                     'VERIFYING' : emailVerifying,
                     'VERIFIED' : emailVerifySuccess,
-                    'NOT_VERIFIED' : <></>,
+                    'NOT_VERIFIED' : emailVerifyNotVerified,
                     'INVALID_TOKEN' : emailVerifyFailedInvalidToken,
-                    'EXPIRED_TOKEN' : <></>
+                    'EXPIRED_TOKEN' : emailVerifyFailedExpiredToken
                 }[isEmailVerified]
             }
         </div>
     )
 
-    return (
-        <AuthPageTemplate>
-            {emailVerifyForm}
-        </AuthPageTemplate>
-    )
+    return EmailVerifyForm;
 }
 
 export default EmailVerifyPage;

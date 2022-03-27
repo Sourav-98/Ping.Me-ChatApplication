@@ -1,20 +1,13 @@
 
-import nodemailer from 'nodemailer';
-import SMTP from 'Utilities/SMTP/SMTP.utility';
 import jwt from 'jsonwebtoken';
 import { v4 as uuid } from 'uuid';
 
-import handlebars from 'handlebars';
-
-
-import path from 'path';
-
 import EmailVerifierDAO from "Repositories/EmailVerifierDAO";
 import EmailVerifierDTO from "Models/EmailVerifierDTO";
-
 import ChatUserDAO from 'Repositories/ChatUserDAO';
 
 import * as emailDispatcher from 'Services/SMTP/emailDispatcher.service';
+import * as AppStatusCodes from 'Utilities/Enums/StatusCodes/StatusCodes';
 
 /** Token Generator method
  * @description temporary method for generating token
@@ -60,40 +53,25 @@ export const generateEmailVerifierToken = async function(userEmailId : string) :
 }
 
 /**
- * @description generates a email verification token for a newly reigstered user - called only when a new user is being created i.e. isVerified is always false
+ * @description generates a email verification token for a newly reigstered user - token is sent over email
  * @param {string} userEmailId - the user email id for which the token is to be generated
- * @returns {number} -1 if the user was not registered before generating the token
- * @returns {number} 0 if the user is already verified and is trying to generate a verification token
- * @returns {number} 1 if the user is not yet verified, and a new token or existing token (if present) is sent via email
+ * @returns {boolean} true - if the token is generated and email successfully
+ * @returns {boolean} false - otherwise
  */
  export const generateEmailVerifierTokenV2 = async function(userEmailId : string) : Promise<void>{
-
-    // check whether a verification token exists for the user or not
-    let tokenObject = await EmailVerifierDAO.getEmailVerificationToken(userEmailId);
-    if(!tokenObject){    // if token does not exist in the stash for the user -> generate a new token and insert into stash
-        tokenObject = new EmailVerifierDTO({emailId : userEmailId, token : await tokenGenerate(), tokenDate : new Date()});
-        await EmailVerifierDAO.insertEmailVerificationTokenIntoStash(tokenObject);
+    try{
+        // check whether a verification token exists for the user or not
+        let tokenObject = await EmailVerifierDAO.getEmailVerificationToken(userEmailId);
+        if(!tokenObject){    // if token does not exist in the stash for the user -> generate a new token and insert into stash
+            tokenObject = new EmailVerifierDTO({emailId : userEmailId, token : await tokenGenerate(), tokenDate : new Date()});
+            await EmailVerifierDAO.insertEmailVerificationTokenIntoStash(tokenObject);
+        }
+        let tokenEncrypted = jwt.sign({...tokenObject}, 'Fh432-dnwefwvr453-dvss0eg234-dvsevsjajnakngvskianeir4r5n235j2-9999akenage');
+        emailDispatcher.sendUserVerificationEmail(userEmailId, tokenEncrypted);
     }
-    let tokenEncrypted = jwt.sign({...tokenObject}, 'Fh432-dnwefwvr453-dvss0eg234-dvsevsjajnakngvskianeir4r5n235j2-9999akenage');
-    emailDispatcher.sendUserVerificationEmail(userEmailId, tokenEncrypted);
-
-    // let emailMessage : nodemailer.SendMailOptions = {
-    //     from : "Ping.Me",
-    //     sender : "notifications@ping.me",
-    //     to : userEmailId,
-    //     subject : "Your New Ping.Me Acount Verification",
-    //     text : "Email verification token : http://localhost:8080/email-verify-v2/" + tokenEncrypted,
-    //     attachments : [
-    //         {
-    //             filename : 'pingMeLogo.png',
-    //             path : path.join(__dirname, '..', '..', 'assets'),
-    //             cid : 'pingMeLogo'
-    //         }
-    //     ],
-    //     html : `Email Verification link : <a href="http://localhost:8080/email-verify-v2/${tokenEncrypted}">http://localhost:8080/email-verify-v2/${tokenEncrypted}</a>`
-    // }
-    //     // call smtp service to email the verification token link
-    // SMTP.getEmailTransporter().sendMail(emailMessage);
+    catch(err){
+        console.log('Error at generateEmailVerifierTokenV2() -> ' + err);
+    }
 }
 
 /**
@@ -105,31 +83,25 @@ export const generateEmailVerifierToken = async function(userEmailId : string) :
  * @returns {number} -1 - if the token doesnot match the token stored in the stash
  * @returns {number} 1 - if the token matches the token stored in the stash
  */
-export const verifyEmailVerifierToken = async function(userEmailId : string, token : string) : Promise<number>{
+export const verifyEmailVerifierToken = async function(userEmailId : string, token : string) : Promise<string>{
     let existingTokenObject = await EmailVerifierDAO.getEmailVerificationToken(userEmailId);
     if(!existingTokenObject){
         // if the token does not exist, that means the token has expired
-        return 0;
+        return AppStatusCodes.EMAIL_VERIFY_FAIL_EXPIRED_TOKEN;
     }
     if(await matchToken(token, existingTokenObject.getToken())){    // if the token matches, set the user isVerified flag as true, and delete the token from stash
         await ChatUserDAO.updateUserIsVerifiedByEmailId(userEmailId);
         await EmailVerifierDAO.deleteTokenFromStash(token);
-        return 1;
+        return AppStatusCodes.EMAIL_VERIFY_SUCCESS;
     }
-    return -1;
+    return AppStatusCodes.EMAIL_VERIFY_FAIL_INVALID_TOKEN;
 }
 
 /**
  * @description verifies the token sent back by the newly registered user
  * @param {string} tokenEncrypted the JSON string consisting of the data needed to verify the token
- * @returns {number} -3 if the user was not registered
- * @returns {number} -2 if the user is already verified, and trying to verify again
- * @returns {number} -1 if the token sent by the user does not match with the token stored in the stash
- * @returns {number} 0 if the verification token has expired
- * @returns {number} 1 if the token sent by the user matches the token stored in the stash
- * @returns {number} -99 if the JWT token is malformed
  */
- export const verifyEmailVerifierTokenV2 = async function(tokenEncrypted : string) : Promise<number>{
+ export const verifyEmailVerifierTokenV2 = async function(tokenEncrypted : string) : Promise<string>{
 
     try{
         let tokenDecrypted : any = jwt.verify(tokenEncrypted, 'Fh432-dnwefwvr453-dvss0eg234-dvsevsjajnakngvskianeir4r5n235j2-9999akenage');
@@ -138,30 +110,27 @@ export const verifyEmailVerifierToken = async function(userEmailId : string, tok
 
         // check if the user exists
         let chatUser = await ChatUserDAO.findUserById(userEmailId);
-        if(!chatUser){  // if chatUser does not exist, then the user was never registered
-            return -3;
-        }
-        if(chatUser.getIsVerified()){  // if the chatUser is already verified
-            return -2;
+        if( chatUser === null || chatUser.getIsVerified()){  // if chatUser does not exist, or the user is already verified, then the user was never registered
+            return AppStatusCodes.EMAIL_VERIFY_FAIL_INVALID_REQUEST;
         }
 
         let existingTokenObject = await EmailVerifierDAO.getEmailVerificationToken(userEmailId);
         if(!existingTokenObject){
             // if the token does not exist, that means the token has expired
-            return 0;
+            return AppStatusCodes.EMAIL_VERIFY_FAIL_EXPIRED_TOKEN;
         }
         if(await matchToken(token, existingTokenObject.getToken())){    // if the token matches, set the user isVerified flag as true, and delete the token from stash
             ChatUserDAO.updateUserIsVerifiedByEmailId(userEmailId);
             EmailVerifierDAO.deleteTokenFromStash(token);
-            return 1;
+            return AppStatusCodes.EMAIL_VERIFY_SUCCESS;
         }
         else{
-            return -1;
+            return AppStatusCodes.EMAIL_VERIFY_FAIL_INVALID_TOKEN;
         }
     }
     catch(err){
         console.log(err);
-        return -99;
+        return AppStatusCodes.EMAIL_VERIFY_FAIL_PROCESS_ERROR;
     }
 }
 
@@ -173,25 +142,20 @@ export const verifyEmailVerifierToken = async function(userEmailId : string, tok
  * @returns {number} 1 if the user is not yet verified, and a new token or existing token (if present) is sent via email
  * @returns {number} -99 if the JWT token is malformed
  */
-export const resendVerificationToken = async function(tokenEncrypted : string) : Promise<number>{
+export const resendVerificationToken = async function(tokenEncrypted : string) : Promise<string>{
     try{
         let tokenDecrypted : any = jwt.verify(tokenEncrypted, 'Fh432-dnwefwvr453-dvss0eg234-dvsevsjajnakngvskianeir4r5n235j2-9999akenage');
-        let userEmailId = tokenDecrypted._emailId;
+        let userEmailId : string = tokenDecrypted._emailId;
         let chatUser = await ChatUserDAO.findUserById(userEmailId);
-        if(!chatUser){
+        if(!chatUser || chatUser.getIsVerified()){
             // the chat user does not exist in the db
-            return -1;
+            return AppStatusCodes.EMAIL_VERIFY_REGENERATE_FAIL_INVALID_REQUEST;
         }
-        else if(chatUser.getIsVerified()){
-            return 0
-        }
-        else{
-            generateEmailVerifierTokenV2(userEmailId);
-            return 1;
-        }
+        generateEmailVerifierTokenV2(userEmailId);
+        return AppStatusCodes.EMAIL_VERIFY_REGENERATE_SUCCESS;
     }
     catch(err){
-        console.log(err);
-        return -99;
+        console.log('Error at resendVerificationToken() -> ' + err);
+        return AppStatusCodes.EMAIL_VERIFY_REGENERATE_FAIL_PROCESS_ERROR;
     }
 }
