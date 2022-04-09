@@ -1,8 +1,6 @@
 
 import React, { useState, useContext } from 'react';
 
-import AuthPageTemplate from '../templates/AuthPage.template';
-
 import AlertsContext from 'Context/AlertsContext/AlertsContext';
 
 import { ResponseEnums } from 'Services/Utilities/ResponseEnums';
@@ -16,11 +14,12 @@ import FacebookSvg from 'assets/facebook-color.svg';
 import TwitterSvg from 'assets/twitter-color.svg';
 
 import { TextInput1, PasswordInput1, CheckboxGroupInput, CheckboxOptionType } from 'UI/Input';
-import { DefaultButton, DropDownButton } from 'UI/Button';
+import { DefaultButton } from 'UI/Button';
 import { SemiSpinner } from 'UI/PreLoaders';
 
 
 import './LoginPage.css';
+import { Link } from 'react-router-dom';
 
 export default function LoginPage({...props}){
 
@@ -175,7 +174,7 @@ export default function LoginPage({...props}){
                     <a href="#">Forgot Password?</a>
                 </div>
                 <div className="create-account-option">
-                    <a href="#">Sign Up</a>
+                    <Link to="../register">Sign Up</Link>
                 </div>
             </div>
         </div>

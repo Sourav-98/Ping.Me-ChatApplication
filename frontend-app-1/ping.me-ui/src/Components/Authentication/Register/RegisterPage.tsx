@@ -259,7 +259,7 @@ export default function RegisterPage(){
             <PasswordInput round placeholder={'Password'} onChange={userPasswordInputHandler} onFocus={resetUserPasswordErrorStatus} onBlur={isUserPasswordValid} subLabelMessage={userPasswordErrorStatus.text} errorMark={userPasswordErrorStatus.status}/>
             <PasswordInput round placeholder={'Confirm Password'} onChange={userConfirmPasswordInputHandler} onBlur={isUserConfirmPasswordValid} subLabelMessage={userConfirmPasswordErrorStatus.text} errorMark={userConfirmPasswordErrorStatus.status}/>
             <CheckboxGroupInput optionsList={registerCheckboxOptions} onChange={registerCheckboxOptionsHandler}></CheckboxGroupInput>
-            <DefaultButton round primary wide disabled={isRegisterButtonDisabled} onMouseUp={onRegisterSubmit}>{ registerFormSubmitLock ? <SemiSpinner light></SemiSpinner> : 'Register'}</DefaultButton>
+            <DefaultButton round primary wide disabled={isRegisterButtonDisabled} onMouseUp={onRegisterSubmit}>{ registerFormSubmitLock ? <SemiSpinner light sm></SemiSpinner> : 'Register'}</DefaultButton>
             <br/>
             {/* <div className="alert-popup-buttons-list">
                 <DefaultButton sm round  outlined onClick={newOutlinedPrimaryAlert}>Alert</DefaultButton>

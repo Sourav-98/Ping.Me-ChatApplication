@@ -45,6 +45,7 @@ const EmailVerifyPage : React.FC = () => {
                 case ResponseEnums.SERVER_ERR.status_code :
                     setEmailVerified(() => 'NOT_VERIFIED');
                     break;
+                default : break;
             }
         }, 2000);
         

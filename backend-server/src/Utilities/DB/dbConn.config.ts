@@ -1,6 +1,6 @@
 
 const dbConfig = {
-    uri: 'mongodb://127.0.0.1:27017',
+    uri: 'mongodb+srv://sourav1998:Sourav1998$@pingme-cluster98516.12p2n.mongodb.net',
     options: {
         useNewUrlParser: true,
         useUnifiedTopology: true,

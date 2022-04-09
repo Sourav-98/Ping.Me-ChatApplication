@@ -32,17 +32,9 @@
 
 /* cm-button sizes */
 
-.cm-button, .cm-button.md{
-    font-size: 16px;
-    padding: 8px 16px 8px 16px;
-}
-
-.cm-button.wide, .cm-button.md.wide{
-    padding: 8px 45px 8px 45px;
-}
-
 .cm-button.sm{
     font-size: 14px;
+    /* height :  */
     padding: 6px 12px 6px 12px;
 }
 
@@ -57,6 +49,17 @@
 
 .cm-button.lg.wide{
     padding : 9px 60px 9px 60px;
+}
+
+.cm-button, .cm-button.md{
+    font-size: 16px;
+    height: 38px;
+    min-width : 170px;
+    padding: 8px 16px 8px 16px;
+}
+
+.cm-button.wide, .cm-button.md.wide{
+    padding: 8px 45px 8px 45px;
 }
 
 /* CM-BUTTON DEFAULT */

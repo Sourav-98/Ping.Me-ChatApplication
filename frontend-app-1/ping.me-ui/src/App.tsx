@@ -86,10 +86,14 @@ function App() {
 
 	/**---------------------------------------------------------- */
 
+	/**------------SESSION DATA------------------ */
+
+	const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+
 	return (
 		<AlertsContext.Provider value={alertUtil}>
 			<div className="app-root">
-				<AppRoutes></AppRoutes>
+				<AppRoutes isAuthenticated={isAuthenticated}></AppRoutes>
 				<AlertGroup max={6}/>
 				<BackDrop></BackDrop>
 			</div>
