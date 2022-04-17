@@ -11,7 +11,7 @@ import { AlertObjectType } from 'Context/AlertsContext/AlertContextType';
 // import RegisterPage from 'Components/Authentication/Register/RegisterPage';
 
 // import AuthRoutes from 'Components/Authentication/auth.routes';
-import AppRoutes from 'app.routes';
+import AppRoutes from 'App.routes';
 
 import { AlertGroup } from 'Components/Commons/AlertGroup/AlertGroup';
 import { BackDrop } from 'Components/Commons/BackDrop/BackDrop';
@@ -88,7 +88,7 @@ function App() {
 
 	/**------------SESSION DATA------------------ */
 
-	const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+	const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => true);
 
 	return (
 		<AlertsContext.Provider value={alertUtil}>

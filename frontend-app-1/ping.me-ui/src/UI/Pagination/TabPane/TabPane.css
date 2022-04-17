@@ -1,0 +1,38 @@
+.cm-tabpane-wrapper{
+    box-sizing : border-box;
+}
+
+.cm-tabpane-wrapper > .cm-tabpane-header-container{
+    box-sizing: border-box;
+    display: flex;
+    flex-direction : row;
+    align-items: center;
+    overflow-x: scroll;
+    background-color: rgb(0, 0, 0, 0.05);
+    border-radius: 999px;
+    padding : 2px;
+}
+
+.cm-tabpane-header-container > .cm-tabpane-header-label{
+    min-width: 50px;
+    width : 100%;
+    padding: 8px 10px 8px 10px;
+    cursor: pointer;
+    transition : 0.1s ease-in-out;
+    border-radius: 999px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.cm-tabpane-header-container > .cm-tabpane-header-label.active{
+    background-color: rgba(0, 0, 0, 0.09);
+}
+
+.cm-tabpane-wrapper > .cm-tabpane-content-container{
+    box-sizing: border-box;
+    display : flex;
+    flex-direction : column;
+    align-items: center;
+}

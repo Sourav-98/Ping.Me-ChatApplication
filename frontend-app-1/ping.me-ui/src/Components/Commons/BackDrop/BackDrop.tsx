@@ -6,8 +6,6 @@ import AlertsContext from 'Context/AlertsContext/AlertsContext';
 
 import { PingMeIconLoader } from 'UI/PreLoaders/PingMeIconLoader/PingMeIconLoader';
 
-import { InfinityPreloader } from 'UI/PreLoaders/InfinityPreloader/InfinityPreloader';
-
 import './BackDrop.css';
 
 export const BackDrop : React.FC = () => {

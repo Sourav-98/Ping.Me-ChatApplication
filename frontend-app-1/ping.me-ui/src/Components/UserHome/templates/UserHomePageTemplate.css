@@ -1,0 +1,19 @@
+.user-home-container{
+    box-sizing: border-box;
+    height : 100%;
+    width : 100%;
+    display: flex;
+    flex-direction : row;
+}
+
+.user-home-container > .user-home-navbar-container{
+    box-sizing: border-box;
+    display: flex;
+    flex-direction : column;
+    align-items: center;
+}
+
+.user-home-container > .user-home-content-container{
+    box-sizing: border-box;
+    width : 100%;
+}
