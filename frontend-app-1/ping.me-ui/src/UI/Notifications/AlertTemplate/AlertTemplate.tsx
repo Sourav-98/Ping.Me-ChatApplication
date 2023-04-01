@@ -6,13 +6,15 @@ import React, { useEffect, useRef } from 'react';
 import { IoMdCheckmarkCircleOutline, IoMdClose, IoMdCloseCircleOutline, IoMdInformationCircleOutline } from 'react-icons/io';
 import { IoWarningOutline, IoWarning } from 'react-icons/io5';
 
-const AlertTemplate : React.FC<AlertTemplateType> = ({outlined, closeFunc, autoClose, primary, secondary, success, danger, warning, children, ...props}) => {
+const AlertTemplate : React.FC<AlertTemplateType> = ({outlined, closeFunc, autoClose, autoCloseDuration, primary, secondary, success, danger, warning, children, ...props}) => {
 
-    const delayCloseTimer : React.MutableRefObject<NodeJS.Timeout>= useRef(setTimeout(() => {}, 0));
+    const delayCloseTimer = useRef(setTimeout(() => {}, 0));
+
+    const var1 = useRef(setTimeout(() => {}, 0));
 
     useEffect(() => {
         if(autoClose){
-            delayCloseTimer.current = setTimeout(closeFunc, 6500);
+            delayCloseTimer.current = setTimeout(closeFunc, autoCloseDuration);
         }
     }, []);
 

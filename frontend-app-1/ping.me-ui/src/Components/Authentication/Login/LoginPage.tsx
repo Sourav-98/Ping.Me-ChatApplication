@@ -113,6 +113,7 @@ export default function LoginPage({...props}){
                 clearAllSubLabelMessages();
                 setLoginFormSubmitLock(() => true);
                 let loginFormData = { emailId: userEmailId, password: userPassword };
+                alertsContext.toggleBackdropOn();
                 let response : { status_code : number, status_message : string} = await AuthServices.loginFormSubmit(loginFormData);
                 switch(response.status_code){
                     case ResponseEnums.LOGIN_SUCCESS.status_code: 
@@ -138,11 +139,12 @@ export default function LoginPage({...props}){
                         alertsContext.pushAlert({message : 'Server-side error! Please try after some time', type : 'danger', autoClose : false});
                         break;
                     case ResponseEnums.SERVER_CONN_ERR.status_code:
-                        alertsContext.pushAlert({message : 'Error communicating with the server', type : 'danger', autoClose : false});
+                        alertsContext.pushAlert({message : 'Error communicating with the server', type : 'danger', autoClose : true, autoCloseDuration: 4000});
                         break;
                     case 555555: 
                     default: alertsContext.pushAlert({message : 'Unknown error occured', type : 'warning'}); break;
                 }
+                alertsContext.toggleBackdropOff();
                 setTimeout(() => {
                     setLoginFormSubmitLock(() => false);
                 }, 500);

@@ -4,6 +4,7 @@ export interface AlertTemplateType {
     outlined? : boolean,
     closeFunc : () => void,
     autoClose? : boolean,
+    autoCloseDuration? : number,
     primary? : boolean,
     secondary? : boolean,
     success? : boolean,

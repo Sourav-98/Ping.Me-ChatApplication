@@ -30,7 +30,7 @@ const AlertGroupContainer : React.FC<{ max : number }> = ({max, ...props}) => {
                             exit: 1000
                         }}
                     >
-                        <AlertTemplate autoClose={alertItem.autoClose} outlined={alertItem.template === 'outlined'} secondary={alertItem.type === 'secondary'} success={alertItem.type === 'success'} danger={alertItem.type === 'danger'} warning={alertItem.type === 'warning'} closeFunc={() => {appContext.removeAlert(alertItem.id)}}>{alertItem.message}</AlertTemplate>
+                        <AlertTemplate autoClose={alertItem.autoClose} autoCloseDuration={alertItem.autoCloseDuration} outlined={alertItem.template === 'outlined'} secondary={alertItem.type === 'secondary'} success={alertItem.type === 'success'} danger={alertItem.type === 'danger'} warning={alertItem.type === 'warning'} closeFunc={() => {appContext.removeAlert(alertItem.id)}}>{alertItem.message}</AlertTemplate>
                     </CSSTransition>
                 )
             }

@@ -3,7 +3,8 @@ export type AlertObjectType = {
     message : string,
     template? : string, 
     type? : string,
-    autoClose ?: boolean
+    autoClose ?: boolean,
+    autoCloseDuration? : number
 };
 
 export type BackDropType = {

@@ -36,7 +36,7 @@ function App() {
 		return alertsList;
 	}
 	
-	const pushAlert = ({message = '', template = '', type = '', autoClose = true}) : void => {
+	const pushAlert = ({message = '', template = '', type = '', autoClose = true, autoCloseDuration = 6500}) : void => {
 		let id : string = uuid();
 		console.log('Alert pushed -> id: ' + id + + ' <->  message: ' + message + ' <-> type: ' + type);
 		setAlertsList( prevAlertsList => [
@@ -45,7 +45,8 @@ function App() {
 				message: message,
 				template: template,
 				type: type,
-				autoClose: autoClose
+				autoClose: autoClose,
+				autoCloseDuration: autoCloseDuration
 			}, ...prevAlertsList
 		]);
 	}
@@ -88,7 +89,7 @@ function App() {
 
 	/**------------SESSION DATA------------------ */
 
-	const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => true);
+	const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => false);
 
 	return (
 		<AlertsContext.Provider value={alertUtil}>

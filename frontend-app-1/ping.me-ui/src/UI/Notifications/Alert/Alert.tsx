@@ -7,7 +7,7 @@ import { AlertType } from './AlertType';
 
 import { AlertTemplate } from '..';
 
-const AlertElement : React.FC <AlertType> = ({message, isVisible, closeFunc, autoClose, delay, topLeft, topCenter, topRight, bottomRight, bottomCenter, bottomLeft, outlined, primary, secondary, success, danger, warning, children, ...props}) => {
+const AlertElement : React.FC <AlertType> = ({message, isVisible, closeFunc, autoClose, autoCloseDuration, delay, topLeft, topCenter, topRight, bottomRight, bottomCenter, bottomLeft, outlined, primary, secondary, success, danger, warning, children, ...props}) => {
 
     return(
         <div className={`alert-toaster-single-container-div${topLeft ? ' top-left' : topCenter ? ' top-center' : topRight ? ' top-right' : bottomRight ? ' bottom-right' : bottomLeft ? ' bottom-left' : ' bottom-center'}`}>
@@ -17,7 +17,7 @@ const AlertElement : React.FC <AlertType> = ({message, isVisible, closeFunc, aut
                 timeout={600}
                 unmountOnExit
             >
-                <AlertTemplate outlined={outlined} autoClose={autoClose} closeFunc={closeFunc} primary={primary} secondary={secondary} success={success} danger={danger} warning={warning}>{children}</AlertTemplate>
+                <AlertTemplate outlined={outlined} autoClose={autoClose} autoCloseDuration={autoCloseDuration} closeFunc={closeFunc} primary={primary} secondary={secondary} success={success} danger={danger} warning={warning}>{children}</AlertTemplate>
             </CSSTransition>
         </div>
     )
