@@ -4,7 +4,7 @@
   "description": "backend server logic for ChatterBox",
   "main": "app.js",
   "scripts": {
-    "dev": "NODE_PATH=./src nodemon src/app.ts",
+    "dev": "set NODE_ENV=dev && NODE_PATH=./src nodemon src/app.ts",
     "build:tsc": "tsc",
     "build:babel": "babel dist --out-dir dist",
     "build:final": "npm run build:tsc && npm run build:babel",
@@ -25,6 +25,7 @@
     "handlebars": "^4.7.7",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.4.0",
+    "mongoose": "^7.0.3",
     "nodemailer": "^6.7.2",
     "nodemailer-express-handlebars": "^5.0.0",
     "passport": "^0.4.1",

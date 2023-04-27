@@ -3,16 +3,16 @@ import http from 'http';
 import server from './server';
 import DBConnection from 'Utilities/DB/dbConn.utility';
 import SMTP from 'Utilities/SMTP/SMTP.utility';
-
+import path from 'path';
 import SocketServer from 'SocketServer/server';
+import dotenv from 'dotenv';
 
-// const dotenv = require('dotenv');
-// const path = require('path');
+console.log(path.join(__dirname, '.env'));
 
-// dotenv.config({path: path.join(__dirname, '.env')});
+dotenv.config({path: path.join(__dirname, '.env')});
 
-const host : string = 'localhost';
-const port : number = 8080;
+const host : string = process.env.SERVER_HOST || 'localhost';
+const port : number = parseInt(process.env.SERVER_PORT || '8080') || 8080;
 
 const httpServer = http.createServer(server);
 
