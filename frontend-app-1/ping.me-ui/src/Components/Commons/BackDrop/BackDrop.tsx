@@ -2,7 +2,7 @@
 import React, { useContext } from 'react';
 
 import {CSSTransition} from 'react-transition-group';
-import AlertsContext from 'Context/AlertsContext/AlertsContext';
+import AlertContext from 'Context/AlertContext/AlertContext';
 
 import { PingMeIconLoader } from 'UI/PreLoaders/PingMeIconLoader/PingMeIconLoader';
 
@@ -10,15 +10,15 @@ import './BackDrop.css';
 
 export const BackDrop : React.FC = () => {
 
-    const alertsContext = useContext(AlertsContext);
+    const alertContext = useContext(AlertContext);
 
     return(
             <CSSTransition
-                in={alertsContext.getBackdropStatus()}
+                in={alertContext.getBackdropStatus()}
                 classNames='backdrop-container-fade'
                 timeout={200}
                 unmountOnExit
-                onClick={alertsContext.toggleBackdropOff}
+                onClick={alertContext.toggleBackdropOff}
             >
                 <div className="backdrop-container">
                     <div className="backdrop-loader">

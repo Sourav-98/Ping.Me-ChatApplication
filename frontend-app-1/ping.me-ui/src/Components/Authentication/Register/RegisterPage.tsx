@@ -5,18 +5,17 @@ import * as AuthServices from 'Services/AuthServices/Auth.service';
 import * as AuthUtilities from './../AuthUtils/AuthUtilities';
 import { AuthWarningConstants as warningMessages } from '../AuthUtils/AuthWarningMessages';
 import { ResponseEnums } from 'Services/Utilities/ResponseEnums';
-import AuthPageTemplate from "./../templates/AuthPage.template";
 import './RegisterPage.css';
 
 import { TextInput1 as TextInput, PasswordInput1 as PasswordInput, CheckboxGroupInput, CheckboxOptionType } from 'UI/Input';
 import { DefaultButton } from 'UI/Button';
 import { SemiSpinner } from 'UI/PreLoaders';
 
-import AlertsContext from 'Context/AlertsContext/AlertsContext';
+import AlertContext from 'Context/AlertContext/AlertContext';
 
 export default function RegisterPage(){
 
-    const appContext = useContext(AlertsContext);
+    const appContext = useContext(AlertContext);
 
     type SubLabelContent = {
         text : string | undefined,

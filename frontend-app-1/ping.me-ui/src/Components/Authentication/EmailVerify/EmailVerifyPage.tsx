@@ -6,7 +6,6 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 import { ResponseEnums } from 'Services/Utilities/ResponseEnums';
 
-import AuthPageTemplate from '../templates/AuthPage.template';
 import { useParams } from 'react-router';
 
 import * as AuthService from 'Services/AuthServices/Auth.service';

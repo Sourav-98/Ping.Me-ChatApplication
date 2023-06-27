@@ -1,6 +1,6 @@
 
 import React, { useContext } from 'react';
-import AlertsContext from 'Context/AlertsContext/AlertsContext';
+import AlertContext from 'Context/AlertContext/AlertContext';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import './AlertGroup.css';
 
@@ -9,7 +9,7 @@ import { useEffect } from 'react';
 
 const AlertGroupContainer : React.FC<{ max : number }> = ({max, ...props}) => {
 
-    const appContext = useContext(AlertsContext);
+    const appContext = useContext(AlertContext);
 
     useEffect(() => {
         /** To restrict the number of alerts displated to the max limit set */

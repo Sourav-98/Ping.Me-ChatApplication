@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { AlertObjectType, AlertsContextInterface } from './AlertContextType';
 import { v4 as uuid } from 'uuid';
 
-let AlertsContextInterfaceDefault = {
+let AlertsContextDefault = {
     getAlerts : () : Array<AlertObjectType> => {return []},
     pushAlert : (alert : AlertObjectType) : void => {},
     removeAlert : (alertId?: string) : void => {},
@@ -14,9 +14,9 @@ let AlertsContextInterfaceDefault = {
     getBackdropStatus : () : boolean => false
 }
 
-const AlertsContext : React.Context<AlertsContextInterface> = React.createContext<AlertsContextInterface>(AlertsContextInterfaceDefault);
+const AlertContext : React.Context<AlertsContextInterface> = React.createContext<AlertsContextInterface>(AlertsContextDefault);
 
-export const AlertsContextContainer = (props : any) => {
+export const AlertContextProvider: React.FC<{children: React.ReactNode}> = ({...props}): JSX.Element => {
 
     const [alertsList, setAlertsList] = useState<Array<AlertObjectType>>([]);
 	const [isBackDropOn, setBackdrop] = useState<boolean>(() => false);
@@ -27,7 +27,6 @@ export const AlertsContextContainer = (props : any) => {
 	
 	const pushAlert = ({message = '', template = '', type = '', autoClose = true, autoCloseDuration = 6500}) : void => {
 		let id : string = uuid();
-		console.log('Alert pushed -> id: ' + id + + ' <->  message: ' + message + ' <-> type: ' + type);
 		setAlertsList( prevAlertsList => [
 			{
 				id: id,
@@ -65,7 +64,7 @@ export const AlertsContextContainer = (props : any) => {
 	}
 
     return (
-        <AlertsContext.Provider value={{
+        <AlertContext.Provider value={{
             getAlerts: getAlerts,
             pushAlert: pushAlert,
             removeAlert: removeAlert,
@@ -75,8 +74,8 @@ export const AlertsContextContainer = (props : any) => {
             getBackdropStatus: getBackdropStatus
         }}>
             {props.children}
-        </AlertsContext.Provider>
+        </AlertContext.Provider>
     );
 };
 
-export default AlertsContext;
+export default AlertContext;

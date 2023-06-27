@@ -1,7 +1,7 @@
 
 import React, { useState, useContext } from 'react';
 
-import AlertsContext from 'Context/AlertsContext/AlertsContext';
+import AlertContext from 'Context/AlertContext/AlertContext';
 
 import { ResponseEnums } from 'Services/Utilities/ResponseEnums';
 
@@ -25,7 +25,7 @@ export default function LoginPage({...props}){
 
     //---------------------Alert Context setup------------------------
 
-    const alertsContext = useContext(AlertsContext);
+    const alertContext = useContext(AlertContext);
 
     type SubLabelContent = {
         text : string | undefined,
@@ -113,12 +113,12 @@ export default function LoginPage({...props}){
                 clearAllSubLabelMessages();
                 setLoginFormSubmitLock(() => true);
                 let loginFormData = { emailId: userEmailId, password: userPassword };
-                // alertsContext.toggleBackdropOn();
+                // alertContext.toggleBackdropOn();
                 let response : { status_code : number, status_message : string} = await AuthServices.loginFormSubmit(loginFormData);
                 switch(response.status_code){
                     case ResponseEnums.LOGIN_SUCCESS.status_code: 
                         console.log(response.status_message);
-                        alertsContext.pushAlert({message: 'Login Successful!', type: 'success'});
+                        alertContext.pushAlert({message: 'Login Successful!', type: 'success'});
                         break;
                     case ResponseEnums.LOGIN_FAIL_INVALID_EMAIL_ID.status_code: 
                         setUserEmailIdErrorStatus({ text: warningMessages.EMAIL_ID_INCORRECT, status : true});
@@ -127,24 +127,24 @@ export default function LoginPage({...props}){
                         setUserPasswordErrorStatus({text : warningMessages.PASSWORD_INCORRECT, status : true});
                         break;
                     case ResponseEnums.LOGIN_FAIL_USER_EMAIL_ID_NOT_VERIFIED.status_code : 
-                        alertsContext.pushAlert({message : 'Please verify your email account before login', type : 'danger'});
+                        alertContext.pushAlert({message : 'Please verify your email account before login', type : 'danger'});
                         break;
                     case ResponseEnums.LOGIN_FAIL_OTHER.status_code: // this error would not arise because proper login form parameters are always sent by the application
-                        alertsContext.pushAlert({message : 'Invalid Login Request made', template : 'outlined', type : 'warning'});
+                        alertContext.pushAlert({message : 'Invalid Login Request made', template : 'outlined', type : 'warning'});
                         break;
                     case ResponseEnums.REQUEST_FAIL_INVALID_PARAMETERS.status_code:
-                        alertsContext.pushAlert({message : 'Bad Request was made!', template: 'outlined', type: 'danger'});
+                        alertContext.pushAlert({message : 'Bad Request was made!', template: 'outlined', type: 'danger'});
                         break;
                     case ResponseEnums.SERVER_ERR.status_code:
-                        alertsContext.pushAlert({message : 'Server-side error! Please try after some time', type : 'danger', autoClose : false});
+                        alertContext.pushAlert({message : 'Server-side error! Please try after some time', type : 'danger', autoClose : false});
                         break;
                     case ResponseEnums.SERVER_CONN_ERR.status_code:
-                        alertsContext.pushAlert({message : 'Error communicating with the server', type : 'danger', autoClose : true, autoCloseDuration: 4000});
+                        alertContext.pushAlert({message : 'Error communicating with the server', type : 'danger', autoClose : true, autoCloseDuration: 4000});
                         break;
                     case 555555: 
-                    default: alertsContext.pushAlert({message : 'Unknown error occured', type : 'warning'}); break;
+                    default: alertContext.pushAlert({message : 'Unknown error occured', type : 'warning'}); break;
                 }
-                alertsContext.toggleBackdropOff();
+                alertContext.toggleBackdropOff();
                 setTimeout(() => {
                     setLoginFormSubmitLock(() => false);
                 }, 500);
