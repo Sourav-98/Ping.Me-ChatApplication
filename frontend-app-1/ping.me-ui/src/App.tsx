@@ -5,8 +5,6 @@ import { AlertContextProvider } from 'Context/AlertContext/AlertContext';
 import AppRoutes from 'App.routes';
 import { AlertGroup } from 'Components/Commons/AlertGroup/AlertGroup';
 import { BackDrop } from 'Components/Commons/BackDrop/BackDrop';
-import { ThemeProvider } from '@mui/material';
-import { theme } from 'Theme/App.theme';
 
 function App() {
 
@@ -15,15 +13,13 @@ function App() {
 	const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => true);
 
 	return (
-		<ThemeProvider theme={theme}>
-			<AlertContextProvider>
-				<div className="app-root">
-					<AppRoutes isAuthenticated={isAuthenticated}></AppRoutes>
-					<AlertGroup max={6} />
-					<BackDrop></BackDrop>
-				</div>
-			</AlertContextProvider>
-		</ThemeProvider>
+		<AlertContextProvider>
+			<div className="app-root">
+				<AppRoutes isAuthenticated={isAuthenticated}></AppRoutes>
+				<AlertGroup max={6} />
+				<BackDrop></BackDrop>
+			</div>
+		</AlertContextProvider>
 
 	);
 }

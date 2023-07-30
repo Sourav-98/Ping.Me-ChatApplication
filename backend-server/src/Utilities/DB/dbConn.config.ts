@@ -1,6 +1,6 @@
 
 const dbConfig = {
-    uri: 'mongodb://127.0.0.1:27017',
+    uri: 'mongodb://mongodb:27017',
     options: {
         useNewUrlParser: true,
         useUnifiedTopology: true,

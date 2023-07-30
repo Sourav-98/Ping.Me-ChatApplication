@@ -1,8 +1,8 @@
 
-import ChatUserDTO from 'Models/ChatUserDTO';
-import DBConnection from 'Utilities/DB/dbConn.utility';
+import ChatUserDTO from '../Models/ChatUserDTO';
+import DBConnection from '../Utilities/DB/dbConn.utility';
 
-import { Errors } from 'Utilities/Enums/errorCodes/errorCodes';
+import { Errors } from '../Utilities/Enums/errorCodes/errorCodes';
 
 // Basic Chat User CRUD Operation + Additional user fetches operations
 

@@ -4,11 +4,9 @@
   "description": "backend server logic for ChatterBox",
   "main": "app.js",
   "scripts": {
-    "dev": "set NODE_ENV=dev && NODE_PATH=./src nodemon src/app.ts",
-    "build:tsc": "tsc",
-    "build:babel": "babel dist --out-dir dist",
-    "build:final": "npm run build:tsc && npm run build:babel",
-    "start": "node dist/app.js",
+    "start": "NODE_PATH=./dist node dist/index.js",
+    "build": "tsc -p .",
+    "dev": "nodemon --config ./nodemonConfig.json src/app.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "SRC",
@@ -33,19 +31,15 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "@babel/cli": "^7.17.3",
-    "@babel/core": "^7.17.5",
     "@types/bcrypt": "^5.0.0",
     "@types/express": "^4.17.13",
     "@types/jsonwebtoken": "^8.5.8",
     "@types/node": "^17.0.19",
     "@types/nodemailer": "^6.4.4",
     "@types/socket.io": "^3.0.2",
-    "babel-plugin-module-resolver": "^4.1.0",
-    "babel-preset-minify": "^0.5.1",
-    "nodemon": "^2.0.15",
-    "ts-node": "^10.5.0",
+    "nodemon": "^2.0.22",
+    "ts-node": "^10.8.1",
     "tslib": "^2.3.1",
-    "typescript": "^4.5.5"
+    "typescript": "^4.9.5"
   }
 }

@@ -2,6 +2,7 @@ import React from "react";
 
 export interface DefaultButtonType {
     // disabled, onClick, onMouseUp, wide, round, outlined, primary, secondary, success, danger, alert, text, block, sm, md, lg,
+    ariaLabel?: string,
     disabled? : boolean,
     wide? : boolean,
     block? : boolean,

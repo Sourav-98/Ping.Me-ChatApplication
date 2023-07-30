@@ -1,8 +1,8 @@
 
-import ChatUserDAO from 'Repositories/ChatUserDAO';
-import ChatUserDTO from 'Models/ChatUserDTO';
+import ChatUserDAO from '../../Repositories/ChatUserDAO';
+import ChatUserDTO from '../../Models/ChatUserDTO';
 
-import * as AppStatusCodes from 'Utilities/Enums/StatusCodes/StatusCodes';
+import * as AppStatusCodes from '../../Utilities/Enums/StatusCodes/StatusCodes';
 
 // const bcrypt = require('bcrypt');
 import bcrypt from 'bcrypt';

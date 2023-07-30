@@ -1,5 +1,5 @@
 import path from 'path';
-import SMTP from "Utilities/SMTP/SMTP.utility";
+import SMTP from "../../Utilities/SMTP/SMTP.utility";
 
 import handlebars from 'handlebars';
 

@@ -5,13 +5,14 @@
       	"pretty": true,
       	"module": "commonjs",
       	"esModuleInterop": true,
-      	"target": "es2017",
+      	"target": "ESNext",
       	"moduleResolution": "node",
       	"resolveJsonModule": true,
       	"sourceMap": true,
-      	"outDir": "dist",
+      	"outDir": "./dist",
       	"rootDir": "src",
-      	"baseUrl": "src"
+      	"baseUrl": "src",
+		"typeRoots": ["node_modules/@types", "src/environment.d.ts"]
     },
     "include": ["src/**/*"]
   }

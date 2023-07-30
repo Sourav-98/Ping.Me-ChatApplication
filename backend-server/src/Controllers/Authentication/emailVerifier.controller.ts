@@ -1,9 +1,9 @@
 
 import {Router, Request, Response} from 'express';
-import { ResponseEnums } from 'Utilities/Enums/ResponseEnums';
+import { ResponseEnums } from '../../Utilities/Enums/ResponseEnums';
 
-import * as emailVerifierService from 'Services/Authentication/emailVerifier.service';
-import * as AppStatusCodes from 'Utilities/Enums/StatusCodes/StatusCodes';
+import * as emailVerifierService from '../../Services/Authentication/emailVerifier.service';
+import * as AppStatusCodes from '../../Utilities/Enums/StatusCodes/StatusCodes';
 
 const emailVerifierController = Router();
 

@@ -1,14 +1,14 @@
 
 import { Router, Request, Response } from 'express';
 
-import { RegisterFormBody } from 'Utilities/FormRequestTypes/FormRequestTypes';
+import { RegisterFormBody } from '../../Utilities/FormRequestTypes/FormRequestTypes';
 
-import * as registerService from 'Services/Authentication/register.service';
-import * as emailVerifierService from 'Services/Authentication/emailVerifier.service';
-import * as ControllerUtility from 'Utilities/Controllers/Authentication/authController.utility';
+import * as registerService from '../../Services/Authentication/register.service';
+import * as emailVerifierService from '../../Services/Authentication/emailVerifier.service';
+import * as ControllerUtility from '../../Utilities/Controllers/Authentication/authController.utility';
 
-import { ResponseEnums } from 'Utilities/Enums/ResponseEnums';
-import * as AppStatusCodes from 'Utilities/Enums/StatusCodes/StatusCodes';
+import { ResponseEnums } from '../../Utilities/Enums/ResponseEnums';
+import * as AppStatusCodes from '../../Utilities/Enums/StatusCodes/StatusCodes';
 
 const registerController = Router();
 

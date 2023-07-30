@@ -1,0 +1,18 @@
+version: '3'
+services:
+  mongodb:
+    container_name: mongodb
+    image: mongo:latest
+    # volumes:
+    #   - /data/db:./data/db
+    ports:
+      - "27018:27017"
+  pingme-backend:
+    container_name: pingme-api
+    build: .
+    volumes:
+      - ./:/usr/src/pingme/
+    ports:
+      - "8080:8080"
+    links:
+      - mongodb

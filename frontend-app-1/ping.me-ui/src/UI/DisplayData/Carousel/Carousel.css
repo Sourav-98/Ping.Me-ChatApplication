@@ -1,0 +1,65 @@
+div.cps_carousel_wrapper {
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    user-select: none;
+}
+
+div.cps_carousel_wrapper > div {
+    width: 100%;
+    user-select: none;
+}
+
+div.cps_carousel_wrapper > div.cps_carousel_content_container {
+    /* position: absolute;
+    top: 0px;
+    left: 0px; */
+    display: flex;
+    flex-direction: row;
+    overflow-x: scroll;
+}
+
+div.cps_carousel_content_container > div.cps_carousel_content {
+    display: flex;
+    flex-direction: row;
+    user-select: none;
+}
+
+div.div.cps_carousel_content > div.cps_carousel_element_wrapper {
+    float: left;
+    user-select: none;
+}
+
+div.cps_carousel_wrapper > div.cps_carousel_scrollbar_container {
+    height: 10px;
+    padding-top: 6px;
+    display: flex;
+    flex-direction: row;
+}
+
+div.cps_carousel_scrollbar_container > div.cps_carousel_scrollbar {
+    flex-grow: 1;
+    width: 100%;
+    height: 100%;
+    border-radius: 999px;
+    background-color: rgba(190, 190, 190, 0.5);
+    position: relative;
+    user-select: none;
+}
+
+div.cps_carousel_scrollbar > div.cps_carousel_scroll_thumb {
+    position: absolute;
+    user-select: none;
+    height: 100%;
+    border-radius: 999px;
+    cursor: pointer;
+    background-color: rgba(150, 120, 225, 0.6);
+    transition: 0.1ms linear;
+}
+
+div.cps_carousel_scrollbar_container > div.cps_scrollbar_controller {
+    width: 60px;
+    height: 100%;
+    user-select: none;
+}

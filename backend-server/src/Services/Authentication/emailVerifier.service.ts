@@ -2,12 +2,12 @@
 import jwt from 'jsonwebtoken';
 import { v4 as uuid } from 'uuid';
 
-import EmailVerifierDAO from "Repositories/EmailVerifierDAO";
-import EmailVerifierDTO from "Models/EmailVerifierDTO";
-import ChatUserDAO from 'Repositories/ChatUserDAO';
+import EmailVerifierDAO from "../../Repositories/EmailVerifierDAO";
+import EmailVerifierDTO from "../../Models/EmailVerifierDTO";
+import ChatUserDAO from '../../Repositories/ChatUserDAO';
 
-import * as emailDispatcher from 'Services/SMTP/emailDispatcher.service';
-import * as AppStatusCodes from 'Utilities/Enums/StatusCodes/StatusCodes';
+import * as emailDispatcher from '../../Services/SMTP/emailDispatcher.service';
+import * as AppStatusCodes from '../../Utilities/Enums/StatusCodes/StatusCodes';
 
 /** Token Generator method
  * @description temporary method for generating token

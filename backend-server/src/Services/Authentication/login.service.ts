@@ -1,10 +1,10 @@
 // login service - provides authentication service for a Chat User Login
 import bcrypt from "bcrypt";
 
-import ChatUserDAO from "Repositories/ChatUserDAO";
-import ChatUserDTO from "Models/ChatUserDTO";
+import ChatUserDAO from "../../Repositories/ChatUserDAO";
+import ChatUserDTO from "../../Models/ChatUserDTO";
 
-import * as AppStatusCodes from "Utilities/Enums/StatusCodes/StatusCodes";
+import * as AppStatusCodes from "../../Utilities/Enums/StatusCodes/StatusCodes";
 
 const defaultMessage = {
   service: "Login Service",

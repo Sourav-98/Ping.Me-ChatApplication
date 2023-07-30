@@ -1,6 +1,6 @@
 
-import DBConnection from "Utilities/DB/dbConn.utility";
-import EmailVerifierDTO from "Models/EmailVerifierDTO";
+import DBConnection from "../Utilities/DB/dbConn.utility";
+import EmailVerifierDTO from "../Models/EmailVerifierDTO";
 
 export default class EmailVerifierDAO{
     

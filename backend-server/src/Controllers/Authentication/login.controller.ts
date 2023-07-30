@@ -1,16 +1,16 @@
 
 import { Router, Request, Response } from 'express';
 
-import { LoginFormBody } from 'Utilities/FormRequestTypes/FormRequestTypes';
+import { LoginFormBody } from '../../Utilities/FormRequestTypes/FormRequestTypes';
 
 const loginController = Router();
 
-import * as loginService from 'Services/Authentication/login.service';
+import * as loginService from '../../Services/Authentication/login.service';
 
-import * as ControllerUtility from 'Utilities/Controllers/Authentication/authController.utility';
+import * as ControllerUtility from '../../Utilities/Controllers/Authentication/authController.utility';
 
-import { ResponseEnums } from 'Utilities/Enums/ResponseEnums';
-import * as AppStatusCodes from 'Utilities/Enums/StatusCodes/StatusCodes';
+import { ResponseEnums } from '../../Utilities/Enums/ResponseEnums';
+import * as AppStatusCodes from '../../Utilities/Enums/StatusCodes/StatusCodes';
 
 let asyncDelay = async(time : number) : Promise<void> => {
     return new Promise<void>(resolve => {
